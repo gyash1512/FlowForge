@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-integration
+  labels:
+    app.kubernetes.io/name: flowforge-integration
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.integrationService.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: flowforge-integration
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: flowforge-integration
+        app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+        autoscaling.alpha.kubernetes.io/metrics: '[{"type":"Resource","resource":{"name":"cpu","targetAverageUtilization":70}}]'
+    spec:
+      containers:
+        - name: integration
+          image: {{ .Values.integrationService.image }}
+          ports:
+            - containerPort: {{ .Values.integrationService.port }}
+              protocol: TCP
+          env:
+            - name: PORT
+              value: {{ .Values.integrationService.port | quote }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.integrationService.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.integrationService.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: {{ .Values.integrationService.resources.requests.cpu }}
+              memory: {{ .Values.integrationService.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.integrationService.resources.limits.cpu }}
+              memory: {{ .Values.integrationService.resources.limits.memory }}

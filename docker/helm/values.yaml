@@ -1,0 +1,40 @@
+worker:
+  replicas: 2
+  image: flowforge/worker:latest
+  port: 4000
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: "1"
+      memory: 512Mi
+  env:
+    REDIS_HOST: redis
+    POSTGRES_URL: postgresql://postgres:postgres@postgres:5432/flowforge
+
+integrationService:
+  replicas: 2
+  image: flowforge/integration:latest
+  port: 4001
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: "1"
+      memory: 512Mi
+
+dashboard:
+  replicas: 1
+  image: flowforge/dashboard:latest
+  port: 3000
+
+redis:
+  enabled: true
+  image: redis:7-alpine
+
+postgres:
+  enabled: true
+  image: postgres:16-alpine
+  storage: 10Gi

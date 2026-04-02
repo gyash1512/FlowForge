@@ -1,0 +1,112 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-conduit}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-conduit}
+      POSTGRES_DB: ${POSTGRES_DB:-conduit}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-conduit}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    command: redis-server --requirepass ${REDIS_PASSWORD:-conduit}
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-conduit}", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  nango:
+    image: nangohq/nango:latest
+    restart: unless-stopped
+    ports:
+      - "${NANGO_PORT:-3003}:3003"
+    environment:
+      NANGO_SECRET_KEY: ${NANGO_SECRET_KEY:-nango-secret}
+      NANGO_DB_HOST: postgres
+      NANGO_DB_PORT: 5432
+      NANGO_DB_USER: ${POSTGRES_USER:-conduit}
+      NANGO_DB_PASSWORD: ${POSTGRES_PASSWORD:-conduit}
+      NANGO_DB_NAME: ${NANGO_DB_NAME:-nango}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.worker
+    restart: unless-stopped
+    ports:
+      - "${WORKER_PORT:-4000}:4000"
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-conduit}
+      POSTGRES_URL: postgresql://${POSTGRES_USER:-conduit}:${POSTGRES_PASSWORD:-conduit}@postgres:5432/${POSTGRES_DB:-conduit}
+      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-10}
+      WORKER_PORT: 4000
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  integration-service:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.integration
+    restart: unless-stopped
+    ports:
+      - "${INTEGRATION_PORT:-4001}:4001"
+      - "${GRPC_PORT:-50051}:50051"
+    environment:
+      NANGO_URL: http://nango:3003
+      NANGO_SECRET_KEY: ${NANGO_SECRET_KEY:-nango-secret}
+      INTEGRATION_PORT: 4001
+      GRPC_PORT: 50051
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    depends_on:
+      - nango
+
+  dashboard:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.dashboard
+    restart: unless-stopped
+    ports:
+      - "${DASHBOARD_PORT:-3000}:3000"
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-conduit}
+      POSTGRES_URL: postgresql://${POSTGRES_USER:-conduit}:${POSTGRES_PASSWORD:-conduit}@postgres:5432/${POSTGRES_DB:-conduit}
+      CONDUIT_API_KEY: ${CONDUIT_API_KEY:-}
+      DASHBOARD_PORT: 3000
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  redis_data:

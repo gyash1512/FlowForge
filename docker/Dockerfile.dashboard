@@ -1,0 +1,38 @@
+# ── Stage 1: Install dependencies ──
+FROM node:20-alpine AS deps
+WORKDIR /app
+
+RUN corepack enable && corepack prepare pnpm@9.15.4 --activate
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY packages/shared/package.json ./packages/shared/
+COPY packages/dashboard/package.json ./packages/dashboard/
+
+RUN pnpm install --frozen-lockfile --prod=false
+
+# ── Stage 2: Build ──
+FROM deps AS build
+WORKDIR /app
+
+COPY tsconfig.json turbo.json ./
+COPY packages/shared/ ./packages/shared/
+COPY packages/dashboard/ ./packages/dashboard/
+
+RUN pnpm run build --filter=@conduit/dashboard...
+
+# ── Stage 3: Production image ──
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+RUN corepack enable && corepack prepare pnpm@9.15.4 --activate
+
+COPY --from=build /app/package.json /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./
+COPY --from=build /app/packages/shared/package.json /app/packages/shared/dist/ ./packages/shared/
+COPY --from=build /app/packages/dashboard/package.json /app/packages/dashboard/dist/ ./packages/dashboard/
+
+RUN pnpm install --frozen-lockfile --prod
+
+ENV NODE_ENV=production
+EXPOSE 3000
+
+CMD ["node", "packages/dashboard/dist/index.js"]

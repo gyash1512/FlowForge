@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-worker
+  labels:
+    app.kubernetes.io/name: flowforge-worker
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.worker.port }}
+      targetPort: {{ .Values.worker.port }}
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: flowforge-worker
+    app.kubernetes.io/instance: {{ .Release.Name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-integration
+  labels:
+    app.kubernetes.io/name: flowforge-integration
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.integrationService.port }}
+      targetPort: {{ .Values.integrationService.port }}
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: flowforge-integration
+    app.kubernetes.io/instance: {{ .Release.Name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-dashboard
+  labels:
+    app.kubernetes.io/name: flowforge-dashboard
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.dashboard.port }}
+      targetPort: {{ .Values.dashboard.port }}
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: flowforge-dashboard
+    app.kubernetes.io/instance: {{ .Release.Name }}

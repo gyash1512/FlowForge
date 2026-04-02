@@ -1,0 +1,25 @@
+{
+  "name": "@flowforge/example-basic",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Basic example of FlowForge workflow definitions",
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:ci": "vitest run --coverage",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@flowforge/sdk": "workspace:*",
+    "@flowforge/engine": "workspace:*",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.1.0"
+  }
+}
