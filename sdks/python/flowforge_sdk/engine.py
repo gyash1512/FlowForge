@@ -8,17 +8,17 @@ from datetime import datetime
 from typing import Any
 from uuid import uuid4
 
-from conduit_sdk.errors import (
+from flowforge_sdk.errors import (
     NodeExecutionError,
     NodeTimeoutError,
     RetryExhaustedError,
     WorkflowNotFoundError,
 )
-from conduit_sdk.node import Node
-from conduit_sdk.types import NodeContext, RunRecord, RunStatus, StepRecord, StepStatus
-from conduit_sdk.workflow import Workflow
+from flowforge_sdk.node import Node
+from flowforge_sdk.types import NodeContext, RunRecord, RunStatus, StepRecord, StepStatus
+from flowforge_sdk.workflow import Workflow
 
-logger = logging.getLogger("conduit")
+logger = logging.getLogger("flowforge")
 
 
 def _make_id(prefix: str) -> str:

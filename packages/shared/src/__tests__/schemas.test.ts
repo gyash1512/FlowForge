@@ -54,7 +54,7 @@ describe('workerConfigSchema', () => {
   it('applies defaults', () => {
     const result = workerConfigSchema.parse({
       redis: {},
-      postgres: { connectionString: 'postgresql://localhost:5432/conduit' },
+      postgres: { connectionString: 'postgresql://localhost:5432/flowforge' },
     });
     expect(result.redis.host).toBe('localhost');
     expect(result.redis.port).toBe(6379);

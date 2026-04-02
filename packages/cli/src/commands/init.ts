@@ -18,9 +18,9 @@ export function generateProjectFiles(projectName: string): Record<string, string
         private: true,
         type: 'module',
         scripts: {
-          dev: 'conduit dev',
+          dev: 'flowforge dev',
           build: 'tsc',
-          deploy: 'conduit deploy',
+          deploy: 'flowforge deploy',
           test: 'vitest run',
         },
         dependencies: {
@@ -58,7 +58,7 @@ export function generateProjectFiles(projectName: string): Record<string, string
     ),
 
     '.env.example': [
-      '# Conduit Environment Configuration',
+      '# FlowForge Environment Configuration',
       '',
       '# Worker',
       'CONDUIT_WORKER_PORT=4000',
@@ -69,7 +69,7 @@ export function generateProjectFiles(projectName: string): Record<string, string
       'REDIS_PASSWORD=',
       '',
       '# Postgres',
-      'DATABASE_URL=postgresql://localhost:5432/conduit',
+      'DATABASE_URL=postgresql://localhost:5432/flowforge',
       '',
       '# Integrations',
       'NANGO_URL=',
@@ -119,7 +119,7 @@ export function generateProjectFiles(projectName: string): Record<string, string
 }
 
 export const initCommand = new Command('init')
-  .description('Scaffold a new Conduit project')
+  .description('Scaffold a new FlowForge project')
   .option('-n, --name <name>', 'Project name')
   .option('-d, --dir <directory>', 'Target directory')
   .action(async (options: InitOptions) => {
@@ -127,7 +127,7 @@ export const initCommand = new Command('init')
     const targetDir = path.resolve(options.dir ?? '.');
 
     console.log(
-      chalk.bold.blue('\n  Conduit') + chalk.dim(' — Scaffolding new project\n'),
+      chalk.bold.blue('\n  FlowForge') + chalk.dim(' — Scaffolding new project\n'),
     );
 
     const spinner = ora('Generating project files...').start();
@@ -158,7 +158,7 @@ export const initCommand = new Command('init')
         console.log(chalk.cyan(`    cd ${options.dir}`));
       }
       console.log(chalk.cyan('    pnpm install'));
-      console.log(chalk.cyan('    conduit dev'));
+      console.log(chalk.cyan('    flowforge dev'));
       console.log('');
     } catch (error) {
       spinner.fail('Failed to scaffold project');

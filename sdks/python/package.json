@@ -8,7 +8,7 @@
     "test:ci": "python3 -m pytest --tb=short",
     "lint": "ruff check . || echo 'ruff not installed, skipping'",
     "lint:fix": "ruff check --fix . || echo 'ruff not installed, skipping'",
-    "typecheck": "mypy conduit_sdk || echo 'mypy not installed, skipping'",
+    "typecheck": "mypy flowforge_sdk || echo 'mypy not installed, skipping'",
     "clean": "rm -rf dist .mypy_cache .pytest_cache .ruff_cache *.egg-info"
   }
 }

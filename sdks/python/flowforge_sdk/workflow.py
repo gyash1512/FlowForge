@@ -6,8 +6,8 @@ from typing import Any
 
 from pydantic import BaseModel
 
-from conduit_sdk.node import Node
-from conduit_sdk.types import RetryConfig, TriggerDefinition, TriggerType, WebhookConfig
+from flowforge_sdk.node import Node
+from flowforge_sdk.types import RetryConfig, TriggerDefinition, TriggerType, WebhookConfig
 
 
 class WorkflowDefinition(BaseModel):

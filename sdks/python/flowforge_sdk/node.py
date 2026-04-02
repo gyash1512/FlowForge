@@ -6,7 +6,7 @@ from typing import Any, Callable, Coroutine
 
 from pydantic import BaseModel
 
-from conduit_sdk.types import NodeContext, NodeType, RetryConfig
+from flowforge_sdk.types import NodeContext, NodeType, RetryConfig
 
 
 class NodeDefinition(BaseModel):

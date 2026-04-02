@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import Any
 
 
-class ConduitError(Exception):
-    """Base error for all Conduit errors."""
+class FlowForgeError(Exception):
+    """Base error for all FlowForge errors."""
 
     def __init__(
         self,
@@ -21,12 +21,12 @@ class ConduitError(Exception):
         self.details = details or {}
 
 
-class WorkflowNotFoundError(ConduitError):
+class WorkflowNotFoundError(FlowForgeError):
     def __init__(self, workflow_id: str) -> None:
         super().__init__(f"Workflow not found: {workflow_id}", "WORKFLOW_NOT_FOUND", 404)
 
 
-class NodeExecutionError(ConduitError):
+class NodeExecutionError(FlowForgeError):
     def __init__(self, node_id: str, cause: Exception | None = None) -> None:
         msg = f"Node execution failed: {node_id}"
         if cause:
@@ -35,7 +35,7 @@ class NodeExecutionError(ConduitError):
         self.__cause__ = cause
 
 
-class NodeTimeoutError(ConduitError):
+class NodeTimeoutError(FlowForgeError):
     def __init__(self, node_id: str, timeout_ms: int) -> None:
         super().__init__(
             f"Node {node_id} timed out after {timeout_ms}ms",
@@ -45,12 +45,12 @@ class NodeTimeoutError(ConduitError):
         )
 
 
-class ValidationError(ConduitError):
+class ValidationError(FlowForgeError):
     def __init__(self, message: str, details: dict[str, Any] | None = None) -> None:
         super().__init__(message, "VALIDATION_ERROR", 400, details)
 
 
-class RetryExhaustedError(ConduitError):
+class RetryExhaustedError(FlowForgeError):
     def __init__(self, node_id: str, max_attempts: int) -> None:
         super().__init__(
             f"Node {node_id} exhausted all {max_attempts} retry attempts",
@@ -60,7 +60,7 @@ class RetryExhaustedError(ConduitError):
         )
 
 
-class WorkflowTimeoutError(ConduitError):
+class WorkflowTimeoutError(FlowForgeError):
     def __init__(self, workflow_id: str, timeout_ms: int) -> None:
         super().__init__(
             f"Workflow {workflow_id} timed out after {timeout_ms}ms",

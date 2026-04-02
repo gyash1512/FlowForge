@@ -1,4 +1,4 @@
-export class ConduitError extends Error {
+export class FlowForgeError extends Error {
   public readonly code: string;
   public readonly statusCode: number;
   public readonly details?: Record<string, unknown>;
@@ -10,7 +10,7 @@ export class ConduitError extends Error {
     details?: Record<string, unknown>,
   ) {
     super(message);
-    this.name = 'ConduitError';
+    this.name = 'FlowForgeError';
     this.code = code;
     this.statusCode = statusCode;
     this.details = details;
@@ -18,19 +18,19 @@ export class ConduitError extends Error {
   }
 }
 
-export class WorkflowNotFoundError extends ConduitError {
+export class WorkflowNotFoundError extends FlowForgeError {
   constructor(workflowId: string) {
     super(`Workflow not found: ${workflowId}`, 'WORKFLOW_NOT_FOUND', 404);
   }
 }
 
-export class RunNotFoundError extends ConduitError {
+export class RunNotFoundError extends FlowForgeError {
   constructor(runId: string) {
     super(`Run not found: ${runId}`, 'RUN_NOT_FOUND', 404);
   }
 }
 
-export class NodeExecutionError extends ConduitError {
+export class NodeExecutionError extends FlowForgeError {
   constructor(nodeName: string, cause?: Error) {
     super(
       `Node execution failed: ${nodeName}${cause ? ` — ${cause.message}` : ''}`,
@@ -42,7 +42,7 @@ export class NodeExecutionError extends ConduitError {
   }
 }
 
-export class NodeTimeoutError extends ConduitError {
+export class NodeTimeoutError extends FlowForgeError {
   constructor(nodeName: string, timeoutMs: number) {
     super(
       `Node ${nodeName} timed out after ${timeoutMs}ms`,
@@ -53,13 +53,13 @@ export class NodeTimeoutError extends ConduitError {
   }
 }
 
-export class ValidationError extends ConduitError {
+export class ValidationError extends FlowForgeError {
   constructor(message: string, details?: Record<string, unknown>) {
     super(message, 'VALIDATION_ERROR', 400, details);
   }
 }
 
-export class RetryExhaustedError extends ConduitError {
+export class RetryExhaustedError extends FlowForgeError {
   constructor(nodeName: string, maxAttempts: number) {
     super(
       `Node ${nodeName} exhausted all ${maxAttempts} retry attempts`,
@@ -70,7 +70,7 @@ export class RetryExhaustedError extends ConduitError {
   }
 }
 
-export class WorkflowTimeoutError extends ConduitError {
+export class WorkflowTimeoutError extends FlowForgeError {
   constructor(workflowId: string, timeoutMs: number) {
     super(
       `Workflow ${workflowId} timed out after ${timeoutMs}ms`,
@@ -81,7 +81,7 @@ export class WorkflowTimeoutError extends ConduitError {
   }
 }
 
-export class IntegrationError extends ConduitError {
+export class IntegrationError extends FlowForgeError {
   constructor(integration: string, message: string) {
     super(
       `Integration error (${integration}): ${message}`,
@@ -92,7 +92,7 @@ export class IntegrationError extends ConduitError {
   }
 }
 
-export class CircuitBreakerOpenError extends ConduitError {
+export class CircuitBreakerOpenError extends FlowForgeError {
   constructor(integration: string) {
     super(
       `Circuit breaker open for integration: ${integration}`,
@@ -103,7 +103,7 @@ export class CircuitBreakerOpenError extends ConduitError {
   }
 }
 
-export class RateLimitError extends ConduitError {
+export class RateLimitError extends FlowForgeError {
   constructor(integration: string, retryAfterMs?: number) {
     super(
       `Rate limit exceeded for integration: ${integration}`,
@@ -114,7 +114,7 @@ export class RateLimitError extends ConduitError {
   }
 }
 
-export class CheckpointError extends ConduitError {
+export class CheckpointError extends FlowForgeError {
   constructor(runId: string, message: string) {
     super(
       `Checkpoint error for run ${runId}: ${message}`,

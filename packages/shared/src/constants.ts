@@ -27,11 +27,11 @@ export const MAX_FOREACH_ITEMS = 10_000;
 export const MAX_WHILE_ITERATIONS = 1_000;
 
 // Queue names
-export const QUEUE_PREFIX = 'conduit';
-export const WORKFLOW_QUEUE = 'conduit:workflows';
-export const CHECKPOINT_QUEUE = 'conduit:checkpoints';
-export const EVENT_QUEUE = 'conduit:events';
-export const DLQ_QUEUE = 'conduit:dlq';
+export const QUEUE_PREFIX = 'flowforge';
+export const WORKFLOW_QUEUE = 'flowforge:workflows';
+export const CHECKPOINT_QUEUE = 'flowforge:checkpoints';
+export const EVENT_QUEUE = 'flowforge:events';
+export const DLQ_QUEUE = 'flowforge:dlq';
 
 // Circuit breaker
 export const CIRCUIT_BREAKER_THRESHOLD = 5;

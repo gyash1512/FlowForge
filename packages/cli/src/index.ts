@@ -11,8 +11,8 @@ import { connectionsCommand } from './commands/connections.js';
 const program = new Command();
 
 program
-  .name('conduit')
-  .description('Conduit CLI — Developer tools for building and managing workflows')
+  .name('flowforge')
+  .description('FlowForge CLI — Developer tools for building and managing workflows')
   .version('0.1.0');
 
 program.addCommand(initCommand);

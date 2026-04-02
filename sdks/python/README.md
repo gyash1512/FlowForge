@@ -1,18 +1,18 @@
-# Conduit Python SDK
+# FlowForge Python SDK
 
 Code-first workflow engine — Python SDK.
 
 ## Installation
 
 ```bash
-pip install conduit-sdk
+pip install flowforge-sdk
 ```
 
 ## Quick Start
 
 ```python
-from conduit_sdk import node, workflow
-from conduit_sdk.engine import Engine
+from flowforge_sdk import node, workflow
+from flowforge_sdk.engine import Engine
 
 # Define nodes
 greet = node("greet").handler(lambda ctx: f"Hello, {ctx.input}!")

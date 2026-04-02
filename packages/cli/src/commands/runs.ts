@@ -99,7 +99,7 @@ const listSubcommand = new Command('list')
       const message = error instanceof Error ? error.message : String(error);
       if (message.includes('ECONNREFUSED')) {
         console.error(chalk.red(`\n  Could not connect to worker at localhost:${port}`));
-        console.error(chalk.dim('  Is the dev worker running? Try: conduit dev'));
+        console.error(chalk.dim('  Is the dev worker running? Try: flowforge dev'));
       } else {
         console.error(chalk.red(`\n  Error: ${message}`));
       }
@@ -176,7 +176,7 @@ const inspectSubcommand = new Command('inspect')
       const message = error instanceof Error ? error.message : String(error);
       if (message.includes('ECONNREFUSED')) {
         console.error(chalk.red(`\n  Could not connect to worker at localhost:${port}`));
-        console.error(chalk.dim('  Is the dev worker running? Try: conduit dev'));
+        console.error(chalk.dim('  Is the dev worker running? Try: flowforge dev'));
       } else {
         console.error(chalk.red(`\n  Error: ${message}`));
       }

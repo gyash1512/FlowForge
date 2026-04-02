@@ -2,9 +2,9 @@
 
 import pytest
 
-from conduit_sdk import node, workflow, RunStatus
-from conduit_sdk.engine import Engine
-from conduit_sdk.errors import WorkflowNotFoundError
+from flowforge_sdk import node, workflow, RunStatus
+from flowforge_sdk.engine import Engine
+from flowforge_sdk.errors import WorkflowNotFoundError
 
 
 @pytest.fixture

@@ -40,7 +40,7 @@ const testSubcommand = new Command('test')
       const message = error instanceof Error ? error.message : String(error);
       console.error(chalk.red(`\n  Error: ${message}`));
       console.log(
-        chalk.dim('\n  Make sure the Conduit server is running (conduit dev).\n'),
+        chalk.dim('\n  Make sure the FlowForge server is running (flowforge dev).\n'),
       );
       process.exitCode = 1;
     }

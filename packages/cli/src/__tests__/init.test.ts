@@ -8,7 +8,7 @@ describe('init command', () => {
   let tmpDir: string;
 
   beforeEach(() => {
-    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'conduit-test-'));
+    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'flowforge-test-'));
   });
 
   afterEach(() => {
@@ -40,8 +40,8 @@ describe('init command', () => {
       expect(pkg.version).toBe('0.1.0');
       expect(pkg.type).toBe('module');
       expect(pkg.scripts).toBeDefined();
-      expect(pkg.scripts.dev).toBe('conduit dev');
-      expect(pkg.scripts.deploy).toBe('conduit deploy');
+      expect(pkg.scripts.dev).toBe('flowforge dev');
+      expect(pkg.scripts.deploy).toBe('flowforge deploy');
       expect(pkg.dependencies).toHaveProperty('@flowforge/sdk');
       expect(pkg.dependencies).toHaveProperty('@flowforge/shared');
     });

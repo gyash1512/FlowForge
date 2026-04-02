@@ -1,7 +1,7 @@
 """Tests for error types."""
 
-from conduit_sdk.errors import (
-    ConduitError,
+from flowforge_sdk.errors import (
+    FlowForgeError,
     NodeExecutionError,
     NodeTimeoutError,
     RetryExhaustedError,
@@ -12,8 +12,8 @@ from conduit_sdk.errors import (
 
 
 class TestErrors:
-    def test_conduit_error(self):
-        err = ConduitError("test", "TEST", 400)
+    def test_flowforge_error(self):
+        err = FlowForgeError("test", "TEST", 400)
         assert str(err) == "test"
         assert err.code == "TEST"
         assert err.status_code == 400

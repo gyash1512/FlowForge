@@ -1,7 +1,7 @@
 """FlowForge SDK — Code-First Workflow Engine (Python)."""
 
-from conduit_sdk.errors import (
-    ConduitError,
+from flowforge_sdk.errors import (
+    FlowForgeError,
     NodeExecutionError,
     NodeTimeoutError,
     RetryExhaustedError,
@@ -9,8 +9,8 @@ from conduit_sdk.errors import (
     WorkflowNotFoundError,
     WorkflowTimeoutError,
 )
-from conduit_sdk.node import Node, node
-from conduit_sdk.types import (
+from flowforge_sdk.node import Node, node
+from flowforge_sdk.types import (
     NodeCategory,
     NodeContext,
     NodeType,
@@ -24,10 +24,10 @@ from conduit_sdk.types import (
     WorkflowEventModel,
     WorkflowMetadata,
 )
-from conduit_sdk.workflow import Workflow, workflow
+from flowforge_sdk.workflow import Workflow, workflow
 
 __all__ = [
-    "ConduitError",
+    "FlowForgeError",
     "Node",
     "NodeCategory",
     "NodeContext",

@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import type { IntegrationRequest, IntegrationResponse } from '@flowforge/shared';
-import { ConduitError } from '@flowforge/shared';
+import { FlowForgeError } from '@flowforge/shared';
 import { AdaptorRegistry } from './adaptor-registry.js';
 import { RateLimiter } from './rate-limiter.js';
 import { CircuitBreaker } from './circuit-breaker.js';
@@ -87,7 +87,7 @@ export function createApp(deps: ServerDeps): Hono {
       return c.json(response, 200);
     } catch (error) {
       const statusCode =
-        error instanceof ConduitError ? error.statusCode : 500;
+        error instanceof FlowForgeError ? error.statusCode : 500;
       const errorMessage =
         error instanceof Error ? error.message : 'Unknown error';
 

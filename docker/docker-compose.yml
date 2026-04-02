@@ -7,13 +7,13 @@ services:
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-conduit}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-conduit}
-      POSTGRES_DB: ${POSTGRES_DB:-conduit}
+      POSTGRES_USER: ${POSTGRES_USER:-flowforge}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-flowforge}
+      POSTGRES_DB: ${POSTGRES_DB:-flowforge}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-conduit}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-flowforge}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -23,11 +23,11 @@ services:
     restart: unless-stopped
     ports:
       - "${REDIS_PORT:-6379}:6379"
-    command: redis-server --requirepass ${REDIS_PASSWORD:-conduit}
+    command: redis-server --requirepass ${REDIS_PASSWORD:-flowforge}
     volumes:
       - redis_data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-conduit}", "ping"]
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-flowforge}", "ping"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -41,8 +41,8 @@ services:
       NANGO_SECRET_KEY: ${NANGO_SECRET_KEY:-nango-secret}
       NANGO_DB_HOST: postgres
       NANGO_DB_PORT: 5432
-      NANGO_DB_USER: ${POSTGRES_USER:-conduit}
-      NANGO_DB_PASSWORD: ${POSTGRES_PASSWORD:-conduit}
+      NANGO_DB_USER: ${POSTGRES_USER:-flowforge}
+      NANGO_DB_PASSWORD: ${POSTGRES_PASSWORD:-flowforge}
       NANGO_DB_NAME: ${NANGO_DB_NAME:-nango}
     depends_on:
       postgres:
@@ -58,8 +58,8 @@ services:
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      REDIS_PASSWORD: ${REDIS_PASSWORD:-conduit}
-      POSTGRES_URL: postgresql://${POSTGRES_USER:-conduit}:${POSTGRES_PASSWORD:-conduit}@postgres:5432/${POSTGRES_DB:-conduit}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-flowforge}
+      POSTGRES_URL: postgresql://${POSTGRES_USER:-flowforge}:${POSTGRES_PASSWORD:-flowforge}@postgres:5432/${POSTGRES_DB:-flowforge}
       WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-10}
       WORKER_PORT: 4000
       LOG_LEVEL: ${LOG_LEVEL:-info}
@@ -96,8 +96,8 @@ services:
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      REDIS_PASSWORD: ${REDIS_PASSWORD:-conduit}
-      POSTGRES_URL: postgresql://${POSTGRES_USER:-conduit}:${POSTGRES_PASSWORD:-conduit}@postgres:5432/${POSTGRES_DB:-conduit}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-flowforge}
+      POSTGRES_URL: postgresql://${POSTGRES_USER:-flowforge}:${POSTGRES_PASSWORD:-flowforge}@postgres:5432/${POSTGRES_DB:-flowforge}
       CONDUIT_API_KEY: ${CONDUIT_API_KEY:-}
       DASHBOARD_PORT: 3000
       LOG_LEVEL: ${LOG_LEVEL:-info}

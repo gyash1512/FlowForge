@@ -18,7 +18,7 @@ export const deployCommand = new Command('deploy')
     const target = options.target ?? 'local';
     const dryRun = options.dryRun ?? false;
 
-    console.log(chalk.bold.blue('\n  Conduit Deploy\n'));
+    console.log(chalk.bold.blue('\n  FlowForge Deploy\n'));
     console.log(chalk.dim(`  Target:   ${target}`));
     console.log(chalk.dim(`  Dry run:  ${dryRun ? 'yes' : 'no'}`));
     console.log('');
@@ -29,13 +29,13 @@ export const deployCommand = new Command('deploy')
     const workflowDir = path.resolve('src/workflows');
 
     if (!fs.existsSync(srcDir)) {
-      verifySpinner.fail('No src/ directory found. Is this a Conduit project?');
+      verifySpinner.fail('No src/ directory found. Is this a FlowForge project?');
       process.exitCode = 1;
       return;
     }
 
     if (!fs.existsSync(workflowDir)) {
-      verifySpinner.fail('No src/workflows/ directory found. Run `conduit init` first.');
+      verifySpinner.fail('No src/workflows/ directory found. Run `flowforge init` first.');
       process.exitCode = 1;
       return;
     }
@@ -102,7 +102,7 @@ export const deployCommand = new Command('deploy')
       case 'local':
         deploySpinner.succeed('Deployed to local environment');
         console.log(chalk.dim('\n  Workflows are available in your local dev worker.'));
-        console.log(chalk.dim('  Start the worker with: conduit dev\n'));
+        console.log(chalk.dim('  Start the worker with: flowforge dev\n'));
         break;
 
       default:

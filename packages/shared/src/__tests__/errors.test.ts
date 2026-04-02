@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  ConduitError,
+  FlowForgeError,
   WorkflowNotFoundError,
   RunNotFoundError,
   NodeExecutionError,
@@ -14,9 +14,9 @@ import {
   CycleDetectedError,
 } from '../errors.js';
 
-describe('ConduitError', () => {
+describe('FlowForgeError', () => {
   it('creates error with code and status', () => {
-    const err = new ConduitError('test', 'TEST', 400);
+    const err = new FlowForgeError('test', 'TEST', 400);
     expect(err.message).toBe('test');
     expect(err.code).toBe('TEST');
     expect(err.statusCode).toBe(400);

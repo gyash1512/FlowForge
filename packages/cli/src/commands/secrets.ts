@@ -66,7 +66,7 @@ function writeEnvFile(envPath: string, entries: Map<string, string>): void {
       }
     }
   } else {
-    content = '# Conduit Secrets\n\n';
+    content = '# FlowForge Secrets\n\n';
     for (const [key, value] of entries) {
       content += `${key}=${value}\n`;
     }
@@ -120,7 +120,7 @@ const listSubcommand = new Command('list')
 
       if (entries.size === 0) {
         console.log(chalk.dim('\n  No secrets found.\n'));
-        console.log(chalk.dim('  Store a secret with: conduit secrets set <key> <value>\n'));
+        console.log(chalk.dim('  Store a secret with: flowforge secrets set <key> <value>\n'));
         return;
       }
 

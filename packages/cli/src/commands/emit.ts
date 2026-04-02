@@ -67,7 +67,7 @@ export const emitCommand = new Command('emit')
         console.error(
           chalk.red(`\n  Could not connect to dev worker at ${url}`),
         );
-        console.error(chalk.dim('  Is the dev worker running? Try: conduit dev'));
+        console.error(chalk.dim('  Is the dev worker running? Try: flowforge dev'));
       } else {
         console.error(chalk.red(`\n  Error: ${message}`));
       }

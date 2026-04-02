@@ -4,7 +4,7 @@
   "description": "FlowForge CLI — Developer tools for building and managing workflows",
   "type": "module",
   "bin": {
-    "conduit": "./dist/index.js"
+    "flowforge": "./dist/index.js"
   },
   "exports": {
     ".": { "import": "./dist/index.js", "types": "./dist/index.d.ts" }
