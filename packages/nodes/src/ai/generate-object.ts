@@ -37,8 +37,8 @@ export const generateObjectNode = defineNode({
   tags: ['ai', 'llm', 'structured-output'],
 
   handler: async (ctx) => {
-    const { prompt, messages, system, schema } = ctx.input;
-    const { model, maxTokens, temperature } = ctx.config;
+    const { prompt, messages, system, schema } = ctx.input as z.infer<typeof inputSchema>;
+    const { model, maxTokens, temperature } = ctx.config as z.infer<typeof configSchema>;
 
     if (!prompt && !messages?.length) {
       throw new Error('Either prompt or messages is required');

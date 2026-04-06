@@ -5,7 +5,7 @@ import { addRun } from '../routes/runs.js';
 import type { WorkflowSummary, RunRecord } from '@flowforge/shared';
 import { RunStatus } from '@flowforge/shared';
 
-function makeRequest(app: ReturnType<typeof createApp>, path: string, init?: RequestInit) {
+async function makeRequest(app: ReturnType<typeof createApp>, path: string, init?: RequestInit) {
   return app.request(path, init);
 }
 
@@ -21,7 +21,7 @@ describe('dashboard routes', () => {
       const res = await makeRequest(app, '/health');
       expect(res.status).toBe(200);
 
-      const body = await res.json();
+      const body = await res.json() as Record<string, unknown>;
       expect(body).toHaveProperty('status', 'ok');
       expect(body).toHaveProperty('timestamp');
     });
@@ -41,13 +41,13 @@ describe('dashboard routes', () => {
       const res = await makeRequest(app, '/api/workflows');
       expect(res.status).toBe(200);
 
-      const body = await res.json();
+      const body = await res.json() as Record<string, unknown>[];
       expect(Array.isArray(body)).toBe(true);
 
-      const found = body.find((w: WorkflowSummary) => w.id === 'test-wf');
+      const found = body.find((w) => w['id'] === 'test-wf');
       expect(found).toBeDefined();
-      expect(found.name).toBe('Test Workflow');
-      expect(found.nodeCount).toBe(3);
+      expect(found!.name).toBe('Test Workflow');
+      expect(found!.nodeCount).toBe(3);
     });
   });
 
@@ -68,12 +68,12 @@ describe('dashboard routes', () => {
       const res = await makeRequest(app, '/api/runs');
       expect(res.status).toBe(200);
 
-      const body = await res.json();
+      const body = await res.json() as Record<string, unknown>[];
       expect(Array.isArray(body)).toBe(true);
 
-      const found = body.find((r: RunRecord) => r.id === 'run_test123');
+      const found = body.find((r) => r['id'] === 'run_test123');
       expect(found).toBeDefined();
-      expect(found.status).toBe('completed');
+      expect(found!.status).toBe('completed');
     });
   });
 
@@ -93,7 +93,7 @@ describe('dashboard routes', () => {
       const res = await makeRequest(app, '/api/runs/run_detail1');
       expect(res.status).toBe(200);
 
-      const body = await res.json();
+      const body = await res.json() as Record<string, unknown>;
       expect(body.id).toBe('run_detail1');
       expect(body).toHaveProperty('steps');
     });
@@ -121,7 +121,7 @@ describe('dashboard routes', () => {
       const res = await makeRequest(app, '/api/runs/run_replay1/replay', { method: 'POST' });
       expect(res.status).toBe(201);
 
-      const body = await res.json();
+      const body = await res.json() as Record<string, unknown>;
       expect(body.status).toBe('pending');
       expect(body.id).toContain('replay');
     });
@@ -159,7 +159,7 @@ describe('dashboard routes', () => {
       const res = await makeRequest(app, '/api/runs/run_cancel1/cancel', { method: 'POST' });
       expect(res.status).toBe(200);
 
-      const body = await res.json();
+      const body = await res.json() as Record<string, unknown>;
       expect(body.status).toBe('cancelled');
     });
   });
@@ -173,7 +173,7 @@ describe('dashboard routes', () => {
       });
       expect(res.status).toBe(201);
 
-      const body = await res.json();
+      const body = await res.json() as Record<string, unknown>;
       expect(body).toHaveProperty('id');
       expect(body.type).toBe('user.created');
     });
@@ -193,7 +193,7 @@ describe('dashboard routes', () => {
       const res = await makeRequest(app, '/api/events');
       expect(res.status).toBe(200);
 
-      const body = await res.json();
+      const body = await res.json() as Record<string, unknown>[];
       expect(Array.isArray(body)).toBe(true);
     });
   });
@@ -203,7 +203,7 @@ describe('dashboard routes', () => {
       const res = await makeRequest(app, '/api/integrations');
       expect(res.status).toBe(200);
 
-      const body = await res.json();
+      const body = await res.json() as Record<string, unknown>[];
       expect(Array.isArray(body)).toBe(true);
     });
   });
@@ -221,13 +221,13 @@ describe('dashboard routes', () => {
       // List
       const listRes = await makeRequest(app, '/api/secrets');
       expect(listRes.status).toBe(200);
-      const secrets = await listRes.json();
-      expect(secrets.some((s: { key: string }) => s.key === 'MY_SECRET')).toBe(true);
+      const secrets = await listRes.json() as Record<string, unknown>[];
+      expect(secrets.some((s) => s['key'] === 'MY_SECRET')).toBe(true);
 
       // Delete
       const delRes = await makeRequest(app, '/api/secrets/MY_SECRET', { method: 'DELETE' });
       expect(delRes.status).toBe(200);
-      const delBody = await delRes.json();
+      const delBody = await delRes.json() as Record<string, unknown>;
       expect(delBody.deleted).toBe(true);
     });
 
@@ -242,7 +242,7 @@ describe('dashboard routes', () => {
       const res = await makeRequest(app, '/api/metrics');
       expect(res.status).toBe(200);
 
-      const body = await res.json();
+      const body = await res.json() as Record<string, unknown>;
       expect(body).toHaveProperty('totalRuns');
       expect(body).toHaveProperty('successCount');
       expect(body).toHaveProperty('failureCount');

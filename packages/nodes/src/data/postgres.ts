@@ -33,8 +33,8 @@ export const postgresNode = defineNode({
   tags: ['database', 'sql', 'postgres'],
 
   handler: async (ctx) => {
-    const { action, table, query, params, data, where, conflictColumns, returning } = ctx.input;
-    const { connectionId } = ctx.config;
+    const { action, table, query, params, data, where, conflictColumns, returning } = ctx.input as z.infer<typeof inputSchema>;
+    const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'query': {

@@ -40,8 +40,8 @@ export const emailSmtpNode = defineNode({
   tags: ['email', 'smtp', 'notification'],
 
   handler: async (ctx) => {
-    const { to, cc, bcc, subject, html, text, attachments, replyTo } = ctx.input;
-    const { connectionId, from } = ctx.config;
+    const { to, cc, bcc, subject, html, text, attachments, replyTo } = ctx.input as z.infer<typeof inputSchema>;
+    const { connectionId, from } = ctx.config as z.infer<typeof configSchema>;
 
     if (!html && !text) throw new Error('Either html or text content is required');
 

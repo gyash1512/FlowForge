@@ -34,12 +34,13 @@ export const slackNode = defineNode({
   tags: ['slack', 'messaging', 'chat'],
 
   handler: async (ctx) => {
-    const { action } = ctx.input;
-    const { connectionId } = ctx.config;
+    const input = ctx.input as z.infer<typeof inputSchema>;
+    const { action } = input;
+    const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'sendMessage': {
-        const { channel, text, blocks } = ctx.input;
+        const { channel, text, blocks } = input;
         if (!channel) throw new Error('channel is required for action "sendMessage"');
         const result = await ctx.integrate('slack', 'sendMessage', {
           connectionId,
@@ -52,7 +53,7 @@ export const slackNode = defineNode({
       }
 
       case 'updateMessage': {
-        const { channel, text, ts, blocks } = ctx.input;
+        const { channel, text, ts, blocks } = input;
         if (!channel || !ts) throw new Error('channel and ts are required for action "updateMessage"');
         const result = await ctx.integrate('slack', 'updateMessage', {
           connectionId,
@@ -66,7 +67,7 @@ export const slackNode = defineNode({
       }
 
       case 'addReaction': {
-        const { channel, ts, emoji } = ctx.input;
+        const { channel, ts, emoji } = input;
         if (!channel || !ts || !emoji) throw new Error('channel, ts, and emoji are required for action "addReaction"');
         const result = await ctx.integrate('slack', 'addReaction', {
           connectionId,
@@ -79,7 +80,7 @@ export const slackNode = defineNode({
       }
 
       case 'createChannel': {
-        const { channelName, isPrivate } = ctx.input;
+        const { channelName, isPrivate } = input;
         if (!channelName) throw new Error('channelName is required for action "createChannel"');
         const result = await ctx.integrate('slack', 'createChannel', {
           connectionId,

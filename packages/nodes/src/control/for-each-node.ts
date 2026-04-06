@@ -25,7 +25,7 @@ export const forEachNode = defineNode({
   tags: ['control-flow', 'loop', 'forEach', 'iteration'],
 
   handler: async (ctx) => {
-    const { items } = ctx.input;
+    const { items } = ctx.input as z.infer<typeof inputSchema>;
     return { results: items, processedCount: items.length };
   },
 });

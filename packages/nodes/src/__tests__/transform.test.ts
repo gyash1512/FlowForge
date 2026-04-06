@@ -11,7 +11,7 @@ describe('transform/map', () => {
       input: { data: [1, 2, 3] },
       config: { expression: 'return item * 2' },
     });
-    const result = await mapNode.handler(ctx);
+    const result = await mapNode.handler(ctx) as Record<string, unknown>;
     expect(result.data).toEqual([2, 4, 6]);
     expect(result.count).toBe(3);
   });
@@ -21,7 +21,7 @@ describe('transform/map', () => {
       input: { data: ['a', 'b', 'c'] },
       config: { expression: 'return item + index' },
     });
-    const result = await mapNode.handler(ctx);
+    const result = await mapNode.handler(ctx) as Record<string, unknown>;
     expect(result.data).toEqual(['a0', 'b1', 'c2']);
   });
 
@@ -30,7 +30,7 @@ describe('transform/map', () => {
       input: { data: [] },
       config: { expression: 'return item' },
     });
-    const result = await mapNode.handler(ctx);
+    const result = await mapNode.handler(ctx) as Record<string, unknown>;
     expect(result.data).toEqual([]);
     expect(result.count).toBe(0);
   });
@@ -40,7 +40,7 @@ describe('transform/map', () => {
       input: { data: [{ name: 'Alice' }, { name: 'Bob' }] },
       config: { expression: 'return { ...item, greeting: "Hello " + item.name }' },
     });
-    const result = await mapNode.handler(ctx);
+    const result = await mapNode.handler(ctx) as Record<string, unknown>;
     expect(result.data).toEqual([
       { name: 'Alice', greeting: 'Hello Alice' },
       { name: 'Bob', greeting: 'Hello Bob' },
@@ -54,7 +54,7 @@ describe('transform/filter', () => {
       input: { data: [1, 2, 3, 4, 5] },
       config: { expression: 'return item > 3' },
     });
-    const result = await filterNode.handler(ctx);
+    const result = await filterNode.handler(ctx) as Record<string, unknown>;
     expect(result.data).toEqual([4, 5]);
     expect(result.count).toBe(2);
     expect(result.removedCount).toBe(3);
@@ -65,7 +65,7 @@ describe('transform/filter', () => {
       input: { data: [10, 20, 30] },
       config: { expression: 'return item > 0' },
     });
-    const result = await filterNode.handler(ctx);
+    const result = await filterNode.handler(ctx) as Record<string, unknown>;
     expect(result.data).toEqual([10, 20, 30]);
     expect(result.removedCount).toBe(0);
   });
@@ -75,7 +75,7 @@ describe('transform/filter', () => {
       input: { data: [1, 2, 3] },
       config: { expression: 'return item > 100' },
     });
-    const result = await filterNode.handler(ctx);
+    const result = await filterNode.handler(ctx) as Record<string, unknown>;
     expect(result.data).toEqual([]);
     expect(result.count).toBe(0);
     expect(result.removedCount).toBe(3);
@@ -91,7 +91,7 @@ describe('transform/filter', () => {
       input: { data: items },
       config: { expression: 'return item.age >= 18' },
     });
-    const result = await filterNode.handler(ctx);
+    const result = await filterNode.handler(ctx) as Record<string, unknown>;
     expect(result.data).toHaveLength(2);
     expect(result.removedCount).toBe(1);
   });
@@ -103,7 +103,7 @@ describe('transform/reduce', () => {
       input: { data: [1, 2, 3, 4], initialValue: 0 },
       config: { expression: 'return accumulator + item' },
     });
-    const result = await reduceNode.handler(ctx);
+    const result = await reduceNode.handler(ctx) as Record<string, unknown>;
     expect(result.result).toBe(10);
   });
 
@@ -112,7 +112,7 @@ describe('transform/reduce', () => {
       input: { data: [1, 2, 3, 4] },
       config: { expression: 'return accumulator + item' },
     });
-    const result = await reduceNode.handler(ctx);
+    const result = await reduceNode.handler(ctx) as Record<string, unknown>;
     expect(result.result).toBe(10);
   });
 
@@ -127,7 +127,7 @@ describe('transform/reduce', () => {
       },
       config: { expression: 'accumulator[item.key] = item.val; return accumulator' },
     });
-    const result = await reduceNode.handler(ctx);
+    const result = await reduceNode.handler(ctx) as Record<string, unknown>;
     expect(result.result).toEqual({ a: 1, b: 2 });
   });
 
@@ -136,7 +136,7 @@ describe('transform/reduce', () => {
       input: { data: ['hello', ' ', 'world'], initialValue: '' },
       config: { expression: 'return accumulator + item' },
     });
-    const result = await reduceNode.handler(ctx);
+    const result = await reduceNode.handler(ctx) as Record<string, unknown>;
     expect(result.result).toBe('hello world');
   });
 });
@@ -147,7 +147,7 @@ describe('transform/template', () => {
       input: { variables: { name: 'World' } },
       config: { template: 'Hello, {{name}}!' },
     });
-    const result = await templateNode.handler(ctx);
+    const result = await templateNode.handler(ctx) as Record<string, unknown>;
     expect(result.result).toBe('Hello, World!');
   });
 
@@ -156,7 +156,7 @@ describe('transform/template', () => {
       input: { variables: { user: { name: 'Alice', email: 'alice@example.com' } } },
       config: { template: '{{user.name}} <{{user.email}}>' },
     });
-    const result = await templateNode.handler(ctx);
+    const result = await templateNode.handler(ctx) as Record<string, unknown>;
     expect(result.result).toBe('Alice <alice@example.com>');
   });
 
@@ -165,7 +165,7 @@ describe('transform/template', () => {
       input: { variables: { name: 'Alice' } },
       config: { template: '{{name}} - {{missing}}' },
     });
-    const result = await templateNode.handler(ctx);
+    const result = await templateNode.handler(ctx) as Record<string, unknown>;
     expect(result.result).toBe('Alice - ');
   });
 
@@ -174,7 +174,7 @@ describe('transform/template', () => {
       input: { variables: { x: 'test' } },
       config: { template: '{{x}}-{{x}}-{{x}}' },
     });
-    const result = await templateNode.handler(ctx);
+    const result = await templateNode.handler(ctx) as Record<string, unknown>;
     expect(result.result).toBe('test-test-test');
   });
 
@@ -183,7 +183,7 @@ describe('transform/template', () => {
       input: { variables: {} },
       config: { template: 'No variables here' },
     });
-    const result = await templateNode.handler(ctx);
+    const result = await templateNode.handler(ctx) as Record<string, unknown>;
     expect(result.result).toBe('No variables here');
   });
 
@@ -192,7 +192,7 @@ describe('transform/template', () => {
       input: { variables: { name: 'Bob' } },
       config: { template: 'Hi {{ name }}!' },
     });
-    const result = await templateNode.handler(ctx);
+    const result = await templateNode.handler(ctx) as Record<string, unknown>;
     expect(result.result).toBe('Hi Bob!');
   });
 });

@@ -25,7 +25,7 @@ export const parallelNode = defineNode({
   tags: ['control-flow', 'parallel', 'fan-out', 'concurrency'],
 
   handler: async (ctx) => {
-    const { items } = ctx.input;
+    const { items } = ctx.input as z.infer<typeof inputSchema>;
     // In a real implementation, this would fan out to sub-pipelines
     // Here we pass items through for the runner to handle
     return { results: items, totalItems: items.length };

@@ -25,11 +25,12 @@ export const switchNode = defineNode({
   tags: ['control-flow', 'switch', 'routing'],
 
   handler: async (ctx) => {
-    const { value, cases } = ctx.input;
+    const input = ctx.input as z.infer<typeof inputSchema>;
+    const { value, cases } = input;
     const key = String(value);
     if (key in cases) {
       return { matched: key, value: cases[key] };
     }
-    return { matched: null, value: ctx.input.default };
+    return { matched: null, value: input.default };
   },
 });

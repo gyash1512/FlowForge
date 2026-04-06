@@ -11,8 +11,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint-typecheck:
-    name: Lint & Typecheck
+  lint-typecheck-test:
+    name: Lint, Typecheck & Test (TypeScript)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,26 +28,10 @@ jobs:
       - run: pnpm run build
       - run: pnpm run typecheck
       - run: pnpm run format:check
-
-  test-ts:
-    name: Test (TypeScript)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run build
       - run: pnpm run test:ci
 
   test-python:
-    name: Test (Python)
+    name: Lint, Typecheck & Test (Python)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -58,17 +42,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -e ".[dev]"
-
-      - name: Lint
-        run: ruff check .
-
-      - name: Type check
-        run: mypy flowforge_sdk
-
-      - name: Test
-        run: pytest --tb=short
+      - run: pip install -e ".[dev]"
+      - run: ruff check .
+      - run: mypy flowforge_sdk
+      - run: pytest --tb=short

@@ -43,12 +43,13 @@ export const githubNode = defineNode({
   tags: ['github', 'git', 'devops'],
 
   handler: async (ctx) => {
-    const { action, owner, repo } = ctx.input;
-    const { connectionId } = ctx.config;
+    const input = ctx.input as z.infer<typeof inputSchema>;
+    const { action, owner, repo } = input;
+    const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'createIssue': {
-        const { title, body, labels, assignees } = ctx.input;
+        const { title, body, labels, assignees } = input;
         if (!title) throw new Error('title is required for action "createIssue"');
         const result = await ctx.integrate('github', 'createIssue', {
           connectionId,
@@ -64,7 +65,7 @@ export const githubNode = defineNode({
       }
 
       case 'createPR': {
-        const { title, body, head, base, draft, labels } = ctx.input;
+        const { title, body, head, base, draft, labels } = input;
         if (!title || !head || !base) throw new Error('title, head, and base are required for action "createPR"');
         const result = await ctx.integrate('github', 'createPR', {
           connectionId,
@@ -82,7 +83,7 @@ export const githubNode = defineNode({
       }
 
       case 'addComment': {
-        const { issueNumber, prNumber, comment } = ctx.input;
+        const { issueNumber, prNumber, comment } = input;
         const targetNumber = issueNumber ?? prNumber;
         if (!targetNumber || !comment) throw new Error('issueNumber/prNumber and comment are required for action "addComment"');
         const result = await ctx.integrate('github', 'addComment', {
@@ -97,7 +98,7 @@ export const githubNode = defineNode({
       }
 
       case 'createRelease': {
-        const { tagName, releaseName, body, prerelease, generateReleaseNotes } = ctx.input;
+        const { tagName, releaseName, body, prerelease, generateReleaseNotes } = input;
         if (!tagName) throw new Error('tagName is required for action "createRelease"');
         const result = await ctx.integrate('github', 'createRelease', {
           connectionId,

@@ -189,27 +189,23 @@ export interface NodeContext<TInput = unknown, TConfig = unknown> {
 // ────────────────────────────────────────────────────────────────
 // Node Definition (PRD Section 5.1)
 // ────────────────────────────────────────────────────────────────
-export interface NodeDefinition<
-  TInput extends z.ZodType = z.ZodType,
-  TOutput extends z.ZodType = z.ZodType,
-  TConfig extends z.ZodType = z.ZodType,
-> {
+export interface NodeDefinition {
   // Identity
   name: string;
   version: string;
   description: string;
   category: NodeCategory;
 
-  // Schemas (Zod-based)
-  inputSchema: TInput;
-  outputSchema: TOutput;
-  configSchema: TConfig;
+  // Schemas (Zod-based, validated at runtime)
+  inputSchema: z.ZodTypeAny;
+  outputSchema: z.ZodTypeAny;
+  configSchema: z.ZodTypeAny;
 
   // Execution
-  handler: (ctx: NodeContext<z.infer<TInput>, z.infer<TConfig>>) => Promise<z.infer<TOutput>>;
+  handler: (ctx: NodeContext) => Promise<unknown>;
 
   // Lifecycle hooks
-  onInit?: (config: z.infer<TConfig>) => Promise<void>;
+  onInit?: (config: unknown) => Promise<void>;
   onDestroy?: () => Promise<void>;
   onError?: (error: Error, ctx: NodeContext) => Promise<void>;
 
@@ -224,22 +220,20 @@ export interface NodeDefinition<
 // ────────────────────────────────────────────────────────────────
 // Agent Node Definition (PRD Section 4.2)
 // ────────────────────────────────────────────────────────────────
-export interface AgentToolDef<TInput extends z.ZodType = z.ZodType> {
+export interface AgentToolDef {
   description: string;
-  inputSchema: TInput;
-  handler: (ctx: NodeContext, input: z.infer<TInput>) => Promise<unknown>;
+  inputSchema: z.ZodTypeAny;
+  handler: (ctx: NodeContext, input: unknown) => Promise<unknown>;
 }
 
-export interface AgentNodeOptions<
-  TOutput extends z.ZodType = z.ZodType,
-> {
+export interface AgentNodeOptions {
   name: string;
   version: string;
   description: string;
   model: string;
   systemPrompt: string;
   tools: Record<string, AgentToolDef>;
-  outputSchema: TOutput;
+  outputSchema: z.ZodTypeAny;
   maxIterations?: number;
   temperature?: number;
   maxTokens?: number;

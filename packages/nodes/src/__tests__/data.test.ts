@@ -20,7 +20,7 @@ describe('data/postgres', () => {
       pull,
     });
 
-    const result = await postgresNode.handler(ctx);
+    const result = await postgresNode.handler(ctx) as Record<string, unknown>;
 
     expect(pull).toHaveBeenCalledWith('postgres', {
       connectionId: 'pg-main',
@@ -45,7 +45,7 @@ describe('data/postgres', () => {
       push,
     });
 
-    const result = await postgresNode.handler(ctx);
+    const result = await postgresNode.handler(ctx) as Record<string, unknown>;
 
     expect(push).toHaveBeenCalledWith('postgres', expect.objectContaining({
       connectionId: 'pg-main',
@@ -76,7 +76,7 @@ describe('data/postgres', () => {
       push,
     });
 
-    const result = await postgresNode.handler(ctx);
+    const result = await postgresNode.handler(ctx) as Record<string, unknown>;
 
     const call = push.mock.calls[0];
     expect(call?.[0]).toBe('postgres');
@@ -99,7 +99,7 @@ describe('data/postgres', () => {
       push,
     });
 
-    const result = await postgresNode.handler(ctx);
+    const result = await postgresNode.handler(ctx) as Record<string, unknown>;
 
     expect(result.command).toBe('UPDATE');
     expect(result.rowCount).toBe(2);
@@ -117,7 +117,7 @@ describe('data/postgres', () => {
       push,
     });
 
-    const result = await postgresNode.handler(ctx);
+    const result = await postgresNode.handler(ctx) as Record<string, unknown>;
 
     expect(result.command).toBe('DELETE');
     expect(result.rowCount).toBe(3);
@@ -133,7 +133,7 @@ describe('data/redis', () => {
       pull,
     });
 
-    const result = await redisNode.handler(ctx);
+    const result = await redisNode.handler(ctx) as Record<string, unknown>;
 
     expect(pull).toHaveBeenCalledWith('redis', {
       connectionId: 'redis-main',
@@ -152,7 +152,7 @@ describe('data/redis', () => {
       push,
     });
 
-    const result = await redisNode.handler(ctx);
+    const result = await redisNode.handler(ctx) as Record<string, unknown>;
 
     expect(push).toHaveBeenCalledWith('redis', {
       connectionId: 'redis-main',
@@ -170,7 +170,7 @@ describe('data/redis', () => {
       push,
     });
 
-    const result = await redisNode.handler(ctx);
+    const result = await redisNode.handler(ctx) as Record<string, unknown>;
 
     expect(push).toHaveBeenCalledWith('redis', {
       connectionId: 'redis-main',
@@ -188,7 +188,7 @@ describe('data/redis', () => {
       push,
     });
 
-    const result = await redisNode.handler(ctx);
+    const result = await redisNode.handler(ctx) as Record<string, unknown>;
 
     expect(push).toHaveBeenCalledWith('redis', {
       connectionId: 'redis-main',
@@ -206,7 +206,7 @@ describe('data/redis', () => {
       pull,
     });
 
-    const result = await redisNode.handler(ctx);
+    const result = await redisNode.handler(ctx) as Record<string, unknown>;
 
     expect(pull).toHaveBeenCalledWith('redis', {
       connectionId: 'redis-main',
@@ -233,7 +233,7 @@ describe('data/redis', () => {
       pull,
     });
 
-    const result = await redisNode.handler(ctx);
+    const result = await redisNode.handler(ctx) as Record<string, unknown>;
 
     expect(pull).toHaveBeenCalledWith('redis', {
       connectionId: 'redis-main',
@@ -258,7 +258,7 @@ describe('data/mongodb', () => {
       pull,
     });
 
-    const result = await mongodbNode.handler(ctx);
+    const result = await mongodbNode.handler(ctx) as Record<string, unknown>;
 
     expect(pull).toHaveBeenCalledWith('mongodb', expect.objectContaining({
       connectionId: 'mongo-main',
@@ -282,7 +282,7 @@ describe('data/mongodb', () => {
       push,
     });
 
-    const result = await mongodbNode.handler(ctx);
+    const result = await mongodbNode.handler(ctx) as Record<string, unknown>;
 
     expect(push).toHaveBeenCalledWith('mongodb', expect.objectContaining({
       operation: 'insertOne',
@@ -313,7 +313,7 @@ describe('data/mongodb', () => {
       pull,
     });
 
-    const result = await mongodbNode.handler(ctx);
+    const result = await mongodbNode.handler(ctx) as Record<string, unknown>;
 
     expect(pull).toHaveBeenCalledWith('mongodb', expect.objectContaining({
       operation: 'aggregate',
@@ -334,7 +334,7 @@ describe('data/mongodb', () => {
       push,
     });
 
-    const result = await mongodbNode.handler(ctx);
+    const result = await mongodbNode.handler(ctx) as Record<string, unknown>;
 
     expect(result.deletedCount).toBe(1);
   });

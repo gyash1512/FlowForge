@@ -51,8 +51,8 @@ export const elasticsearchNode = defineNode({
   tags: ['search', 'elasticsearch', 'indexing'],
 
   handler: async (ctx) => {
-    const { action, index, id, query, document, operations, size, from, sort } = ctx.input;
-    const { connectionId } = ctx.config;
+    const { action, index, id, query, document, operations, size, from, sort } = ctx.input as z.infer<typeof inputSchema>;
+    const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     const baseParams = { connectionId, index };
 

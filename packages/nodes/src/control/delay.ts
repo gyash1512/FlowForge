@@ -26,8 +26,8 @@ export const delayNode = defineNode({
   tags: ['control-flow', 'delay', 'sleep'],
 
   handler: async (ctx) => {
-    const { data } = ctx.input;
-    const { ms } = ctx.config;
+    const { data } = ctx.input as z.infer<typeof inputSchema>;
+    const { ms } = ctx.config as z.infer<typeof configSchema>;
 
     ctx.logger.info({ ms }, 'Sleeping');
     await ctx.sleep(ms);

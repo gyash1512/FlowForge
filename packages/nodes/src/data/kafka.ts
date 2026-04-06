@@ -39,8 +39,8 @@ export const kafkaNode = defineNode({
   tags: ['kafka', 'streaming', 'message-queue'],
 
   handler: async (ctx) => {
-    const { action, topic, messages, groupId, maxMessages, timeout } = ctx.input;
-    const { connectionId } = ctx.config;
+    const { action, topic, messages, groupId, maxMessages, timeout } = ctx.input as z.infer<typeof inputSchema>;
+    const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'produce': {

@@ -15,7 +15,7 @@ from flowforge_sdk.errors import (
     WorkflowNotFoundError,
 )
 from flowforge_sdk.node import Node
-from flowforge_sdk.types import NodeContext, RunRecord, RunStatus, StepRecord, StepStatus
+from flowforge_sdk.types import NodeContext, RunRecord, RunStatus
 from flowforge_sdk.workflow import Workflow
 
 logger = logging.getLogger("flowforge")
@@ -217,22 +217,23 @@ class Engine:
             return await handler(ctx)
 
         if retry_config:
-            max_attempts = retry_config.max_attempts if hasattr(retry_config, 'max_attempts') else retry_config.get('max_attempts', 3)
-            backoff = retry_config.backoff if hasattr(retry_config, 'backoff') else retry_config.get('backoff', 'exponential')
-            delay_ms = retry_config.delay_ms if hasattr(retry_config, 'delay_ms') else retry_config.get('delay_ms', 1000)
-            max_delay_ms = retry_config.max_delay_ms if hasattr(retry_config, 'max_delay_ms') else retry_config.get('max_delay_ms')
+            rc = retry_config
+            max_attempts = rc.max_attempts
+            backoff = rc.backoff
+            delay_ms = rc.delay_ms
+            max_delay_ms = rc.max_delay_ms
 
-            last_error: Exception | None = None
             for attempt in range(1, max_attempts + 1):
                 try:
                     output = await execute(attempt)
                     node_outputs[defn.id] = output
                     return
-                except Exception as exc:
-                    last_error = exc
+                except Exception:
                     if attempt >= max_attempts:
                         break
-                    delay = _compute_delay(backoff, delay_ms, attempt, max_delay_ms)
+                    delay = _compute_delay(
+                        backoff, delay_ms, attempt, max_delay_ms,
+                    )
                     await asyncio.sleep(delay)
 
             raise RetryExhaustedError(defn.id, max_attempts)

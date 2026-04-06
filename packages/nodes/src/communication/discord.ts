@@ -33,12 +33,13 @@ export const discordNode = defineNode({
   tags: ['discord', 'messaging', 'chat'],
 
   handler: async (ctx) => {
-    const { action } = ctx.input;
-    const { connectionId } = ctx.config;
+    const input = ctx.input as z.infer<typeof inputSchema>;
+    const { action } = input;
+    const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'sendMessage': {
-        const { channelId, content, embeds } = ctx.input;
+        const { channelId, content, embeds } = input;
         if (!channelId) throw new Error('channelId is required for action "sendMessage"');
         const result = await ctx.integrate('discord', 'sendMessage', {
           connectionId,
@@ -51,7 +52,7 @@ export const discordNode = defineNode({
       }
 
       case 'createChannel': {
-        const { guildId, channelName, channelType } = ctx.input;
+        const { guildId, channelName, channelType } = input;
         if (!guildId || !channelName) throw new Error('guildId and channelName are required for action "createChannel"');
         const result = await ctx.integrate('discord', 'createChannel', {
           connectionId,
@@ -64,7 +65,7 @@ export const discordNode = defineNode({
       }
 
       case 'addRole': {
-        const { guildId, userId, roleId } = ctx.input;
+        const { guildId, userId, roleId } = input;
         if (!guildId || !userId || !roleId) throw new Error('guildId, userId, and roleId are required for action "addRole"');
         await ctx.integrate('discord', 'addRole', {
           connectionId,

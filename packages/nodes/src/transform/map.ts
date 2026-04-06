@@ -34,8 +34,8 @@ export const mapNode = defineNode({
   tags: ['transform', 'map', 'array'],
 
   handler: async (ctx) => {
-    const { data } = ctx.input;
-    const { expression } = ctx.config;
+    const { data } = ctx.input as z.infer<typeof inputSchema>;
+    const { expression } = ctx.config as z.infer<typeof configSchema>;
 
     const fn = createTransformFunction(expression);
 

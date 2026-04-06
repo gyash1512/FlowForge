@@ -38,12 +38,13 @@ export const stripeNode = defineNode({
   tags: ['stripe', 'payments', 'billing'],
 
   handler: async (ctx) => {
-    const { action } = ctx.input;
-    const { connectionId } = ctx.config;
+    const input = ctx.input as z.infer<typeof inputSchema>;
+    const { action } = input;
+    const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'createCharge': {
-        const { amount, currency, source, description } = ctx.input;
+        const { amount, currency, source, description } = input;
         if (amount === undefined) throw new Error('amount is required for action "createCharge"');
         if (!currency) throw new Error('currency is required for action "createCharge"');
         if (!source) throw new Error('source is required for action "createCharge"');
@@ -58,7 +59,7 @@ export const stripeNode = defineNode({
       }
 
       case 'createCustomer': {
-        const { email, name, metadata } = ctx.input;
+        const { email, name, metadata } = input;
         if (!email) throw new Error('email is required for action "createCustomer"');
         const result = await ctx.integrate('stripe', 'createCustomer', {
           connectionId,
@@ -70,7 +71,7 @@ export const stripeNode = defineNode({
       }
 
       case 'createSubscription': {
-        const { customerId, priceId, metadata } = ctx.input;
+        const { customerId, priceId, metadata } = input;
         if (!customerId) throw new Error('customerId is required for action "createSubscription"');
         if (!priceId) throw new Error('priceId is required for action "createSubscription"');
         const result = await ctx.integrate('stripe', 'createSubscription', {
@@ -83,7 +84,7 @@ export const stripeNode = defineNode({
       }
 
       case 'listPayments': {
-        const { customerId, limit, startingAfter } = ctx.input;
+        const { customerId, limit, startingAfter } = input;
         const result = await ctx.integrate('stripe', 'listPayments', {
           connectionId,
           customerId,
@@ -94,7 +95,7 @@ export const stripeNode = defineNode({
       }
 
       case 'createRefund': {
-        const { chargeId, amount, reason } = ctx.input;
+        const { chargeId, amount, reason } = input;
         if (!chargeId) throw new Error('chargeId is required for action "createRefund"');
         const result = await ctx.integrate('stripe', 'createRefund', {
           connectionId,

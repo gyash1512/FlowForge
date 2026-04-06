@@ -41,8 +41,8 @@ export const pineconeNode = defineNode({
   tags: ['pinecone', 'vector-db', 'embeddings', 'similarity-search'],
 
   handler: async (ctx) => {
-    const { action, namespace, vectors, topK, filter, queryVector, ids, includeMetadata, includeValues } = ctx.input;
-    const { connectionId } = ctx.config;
+    const { action, namespace, vectors, topK, filter, queryVector, ids, includeMetadata, includeValues } = ctx.input as z.infer<typeof inputSchema>;
+    const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'upsert': {

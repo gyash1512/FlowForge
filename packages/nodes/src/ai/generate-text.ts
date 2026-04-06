@@ -37,8 +37,8 @@ export const generateTextNode = defineNode({
   tags: ['ai', 'llm', 'text-generation'],
 
   handler: async (ctx) => {
-    const { prompt, messages, system } = ctx.input;
-    const { model, maxTokens, temperature } = ctx.config;
+    const { prompt, messages, system } = ctx.input as z.infer<typeof inputSchema>;
+    const { model, maxTokens, temperature } = ctx.config as z.infer<typeof configSchema>;
 
     if (!prompt && !messages?.length) {
       throw new Error('Either prompt or messages is required');

@@ -35,12 +35,13 @@ export const notionNode = defineNode({
   tags: ['notion', 'wiki', 'documentation'],
 
   handler: async (ctx) => {
-    const { action } = ctx.input;
-    const { connectionId } = ctx.config;
+    const input = ctx.input as z.infer<typeof inputSchema>;
+    const { action } = input;
+    const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'createPage': {
-        const { databaseId, parentPageId, properties, children } = ctx.input;
+        const { databaseId, parentPageId, properties, children } = input;
         if (!databaseId && !parentPageId) throw new Error('databaseId or parentPageId is required for action "createPage"');
         const parent = databaseId
           ? { database_id: databaseId }
@@ -56,7 +57,7 @@ export const notionNode = defineNode({
       }
 
       case 'updatePage': {
-        const { pageId, properties } = ctx.input;
+        const { pageId, properties } = input;
         if (!pageId) throw new Error('pageId is required for action "updatePage"');
         const result = await ctx.integrate('notion', 'updatePage', {
           connectionId,
@@ -68,7 +69,7 @@ export const notionNode = defineNode({
       }
 
       case 'queryDatabase': {
-        const { databaseId, filter, sorts, pageSize } = ctx.input;
+        const { databaseId, filter, sorts, pageSize } = input;
         if (!databaseId) throw new Error('databaseId is required for action "queryDatabase"');
         const result = await ctx.integrate('notion', 'queryDatabase', {
           connectionId,

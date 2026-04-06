@@ -32,12 +32,13 @@ export const telegramNode = defineNode({
   tags: ['telegram', 'messaging', 'bot'],
 
   handler: async (ctx) => {
-    const { action, chatId, replyToMessageId } = ctx.input;
-    const { connectionId } = ctx.config;
+    const input = ctx.input as z.infer<typeof inputSchema>;
+    const { action, chatId, replyToMessageId } = input;
+    const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'sendMessage': {
-        const { text, parseMode } = ctx.input;
+        const { text, parseMode } = input;
         if (!text) throw new Error('text is required for action "sendMessage"');
         const result = await ctx.integrate('telegram', 'sendMessage', {
           connectionId,
@@ -51,7 +52,7 @@ export const telegramNode = defineNode({
       }
 
       case 'sendPhoto': {
-        const { photoUrl, caption, parseMode } = ctx.input;
+        const { photoUrl, caption, parseMode } = input;
         if (!photoUrl) throw new Error('photoUrl is required for action "sendPhoto"');
         const result = await ctx.integrate('telegram', 'sendPhoto', {
           connectionId,
@@ -66,7 +67,7 @@ export const telegramNode = defineNode({
       }
 
       case 'sendDocument': {
-        const { documentUrl, caption, parseMode } = ctx.input;
+        const { documentUrl, caption, parseMode } = input;
         if (!documentUrl) throw new Error('documentUrl is required for action "sendDocument"');
         const result = await ctx.integrate('telegram', 'sendDocument', {
           connectionId,

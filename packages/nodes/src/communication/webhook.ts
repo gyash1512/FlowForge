@@ -31,8 +31,8 @@ export const webhookNode = defineNode({
   tags: ['webhook', 'http', 'notification'],
 
   handler: async (ctx) => {
-    const { url, body, headers, secret } = ctx.input;
-    const { timeout, signatureHeader } = ctx.config;
+    const { url, body, headers, secret } = ctx.input as z.infer<typeof inputSchema>;
+    const { timeout, signatureHeader } = ctx.config as z.infer<typeof configSchema>;
 
     const reqHeaders: Record<string, string> = {
       'Content-Type': 'application/json',

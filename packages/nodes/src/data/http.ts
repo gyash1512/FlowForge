@@ -42,8 +42,8 @@ export const httpNode = defineNode({
   tags: ['http', 'api', 'rest'],
 
   handler: async (ctx) => {
-    const { method, url, headers, query, body, auth } = ctx.input;
-    const { timeout, followRedirects, validateStatus } = ctx.config;
+    const { method, url, headers, query, body, auth } = ctx.input as z.infer<typeof inputSchema>;
+    const { timeout, followRedirects, validateStatus } = ctx.config as z.infer<typeof configSchema>;
 
     const reqHeaders: Record<string, string> = { ...headers };
 

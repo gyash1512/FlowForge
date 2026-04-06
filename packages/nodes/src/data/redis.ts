@@ -32,8 +32,8 @@ export const redisNode = defineNode({
   tags: ['cache', 'redis', 'key-value'],
 
   handler: async (ctx) => {
-    const { action, key, value, field, channel, ttl, start, stop } = ctx.input;
-    const { connectionId } = ctx.config;
+    const { action, key, value, field, channel, ttl, start, stop } = ctx.input as z.infer<typeof inputSchema>;
+    const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'get': {

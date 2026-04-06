@@ -315,8 +315,8 @@ export const mcpClientNode = defineNode({
   tags: ['ai', 'mcp', 'tools', 'model-context-protocol'],
 
   handler: async (ctx) => {
-    const { action, toolName, toolArgs, resourceUri } = ctx.input;
-    const { transport, command, args: cmdArgs, url, env } = ctx.config;
+    const { action, toolName, toolArgs, resourceUri } = ctx.input as z.infer<typeof inputSchema>;
+    const { transport, command, args: cmdArgs, url, env } = ctx.config as z.infer<typeof configSchema>;
 
     ctx.logger.info({ action, transport }, 'MCP client action');
 

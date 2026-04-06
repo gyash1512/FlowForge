@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@flowforge/shared": "workspace:*",
-    "zod": "^3.23.0"
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "tsup": "^8.3.0",

@@ -43,12 +43,13 @@ export const emailResendNode = defineNode({
   tags: ['email', 'resend', 'transactional'],
 
   handler: async (ctx) => {
-    const { action } = ctx.input;
-    const { connectionId, from } = ctx.config;
+    const input = ctx.input as z.infer<typeof inputSchema>;
+    const { action } = input;
+    const { connectionId, from } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'send': {
-        const { to, subject, html, text, tags } = ctx.input;
+        const { to, subject, html, text, tags } = input;
         if (!to || !subject) throw new Error('to and subject are required for action "send"');
         const result = await ctx.integrate('resend', 'send', {
           connectionId,
@@ -64,7 +65,7 @@ export const emailResendNode = defineNode({
       }
 
       case 'batch': {
-        const { emails } = ctx.input;
+        const { emails } = input;
         if (!emails?.length) throw new Error('emails array is required for action "batch"');
         const result = await ctx.integrate('resend', 'batch', {
           connectionId,
@@ -75,7 +76,7 @@ export const emailResendNode = defineNode({
       }
 
       case 'getStatus': {
-        const { emailId } = ctx.input;
+        const { emailId } = input;
         if (!emailId) throw new Error('emailId is required for action "getStatus"');
         const result = await ctx.integrate('resend', 'getStatus', {
           connectionId,

@@ -2,7 +2,7 @@
 
 import pytest
 
-from flowforge_sdk import Node, node, NodeType
+from flowforge_sdk import node, NodeType
 
 
 class TestNodeBuilder:

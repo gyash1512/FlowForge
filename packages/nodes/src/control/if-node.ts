@@ -25,7 +25,7 @@ export const ifNode = defineNode({
   tags: ['control-flow', 'conditional', 'branching'],
 
   handler: async (ctx) => {
-    const { condition, thenValue, elseValue } = ctx.input;
+    const { condition, thenValue, elseValue } = ctx.input as z.infer<typeof inputSchema>;
     if (condition) {
       return { branch: 'then' as const, value: thenValue };
     }

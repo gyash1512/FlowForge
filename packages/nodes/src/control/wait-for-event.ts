@@ -29,8 +29,8 @@ export const waitForEventNode = defineNode({
   tags: ['control-flow', 'event', 'wait'],
 
   handler: async (ctx) => {
-    const { event, match, timeout } = ctx.input;
-    const { defaultTimeout } = ctx.config;
+    const { event, match, timeout } = ctx.input as z.infer<typeof inputSchema>;
+    const { defaultTimeout } = ctx.config as z.infer<typeof configSchema>;
 
     const effectiveTimeout = timeout ?? defaultTimeout;
 

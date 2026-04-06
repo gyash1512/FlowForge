@@ -35,8 +35,8 @@ export const filterNode = defineNode({
   tags: ['transform', 'filter', 'array'],
 
   handler: async (ctx) => {
-    const { data } = ctx.input;
-    const { expression } = ctx.config;
+    const { data } = ctx.input as z.infer<typeof inputSchema>;
+    const { expression } = ctx.config as z.infer<typeof configSchema>;
 
     const fn = createPredicateFunction(expression);
 

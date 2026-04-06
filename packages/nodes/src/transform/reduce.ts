@@ -38,8 +38,8 @@ export const reduceNode = defineNode({
   tags: ['transform', 'reduce', 'aggregate'],
 
   handler: async (ctx) => {
-    const { data, initialValue } = ctx.input;
-    const { expression } = ctx.config;
+    const { data, initialValue } = ctx.input as z.infer<typeof inputSchema>;
+    const { expression } = ctx.config as z.infer<typeof configSchema>;
 
     const fn = createReducerFunction(expression);
 

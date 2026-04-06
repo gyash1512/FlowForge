@@ -10,9 +10,9 @@ import type {
  * Define an agent node that runs an LLM tool-calling loop.
  * Uses Vercel AI SDK under the hood via ctx.ai.
  */
-export function defineAgentNode<TOutput extends z.ZodType>(
-  options: AgentNodeOptions<TOutput>,
-): NodeDefinition<z.ZodType, TOutput, z.ZodObject<{ model: z.ZodDefault<z.ZodString> }>> {
+export function defineAgentNode(
+  options: AgentNodeOptions,
+): NodeDefinition {
   const configSchema = z.object({
     model: z.string().default(options.model),
   });
@@ -80,7 +80,7 @@ export function defineAgentNode<TOutput extends z.ZodType>(
             });
             return parsed.object;
           } catch {
-            return { text: result.text, toolsUsed } as z.infer<TOutput>;
+            return { text: result.text, toolsUsed };
           }
         }
 

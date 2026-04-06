@@ -29,8 +29,8 @@ export const subWorkflowNode = defineNode({
   tags: ['control-flow', 'sub-workflow', 'orchestration'],
 
   handler: async (ctx) => {
-    const { workflowId, data, waitForCompletion } = ctx.input;
-    const { eventPrefix, timeout } = ctx.config;
+    const { workflowId, data, waitForCompletion } = ctx.input as z.infer<typeof inputSchema>;
+    const { eventPrefix, timeout } = ctx.config as z.infer<typeof configSchema>;
 
     const eventName = `${eventPrefix}:${workflowId}`;
 

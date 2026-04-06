@@ -24,10 +24,10 @@ export const templateNode = defineNode({
   tags: ['transform', 'template', 'string'],
 
   handler: async (ctx) => {
-    const { variables } = ctx.input;
-    const { template } = ctx.config;
+    const { variables } = ctx.input as z.infer<typeof inputSchema>;
+    const { template } = ctx.config as z.infer<typeof configSchema>;
 
-    const result = template.replace(/\{\{(\s*[\w.]+\s*)\}\}/g, (_match, key: string) => {
+    const result = template.replace(/\{\{(\s*[\w.]+\s*)\}\}/g, (_match: string, key: string) => {
       const trimmedKey = key.trim();
       // Support nested access like "user.name"
       const parts = trimmedKey.split('.');

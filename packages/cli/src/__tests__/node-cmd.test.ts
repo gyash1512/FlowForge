@@ -8,7 +8,7 @@ function createMockSchema() {
   };
 }
 
-function createValidNode(overrides: Record<string, unknown> = {}) {
+function createValidNode(overrides: Record<string, unknown> = {}): Record<string, unknown> {
   return {
     name: 'test-node',
     version: '1.0.0',

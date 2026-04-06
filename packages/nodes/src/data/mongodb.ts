@@ -36,8 +36,8 @@ export const mongodbNode = defineNode({
   tags: ['database', 'nosql', 'mongodb'],
 
   handler: async (ctx) => {
-    const { action, collection, filter, document, documents, update, pipeline, options } = ctx.input;
-    const { connectionId, database } = ctx.config;
+    const { action, collection, filter, document, documents, update, pipeline, options } = ctx.input as z.infer<typeof inputSchema>;
+    const { connectionId, database } = ctx.config as z.infer<typeof configSchema>;
 
     const baseParams = { connectionId, database, collection };
 

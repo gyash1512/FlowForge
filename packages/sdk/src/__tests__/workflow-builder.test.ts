@@ -2,26 +2,27 @@ import { describe, it, expect } from 'vitest';
 import { z } from 'zod';
 import { workflow } from '../workflow-builder.js';
 import { defineNode } from '../define-node.js';
+import type { NodeDefinition } from '@flowforge/shared';
 
 const dummyNode = defineNode({
   name: 'test/dummy',
   version: '1.0.0',
   description: 'Dummy node',
   category: 'custom',
-  inputSchema: z.any(),
-  outputSchema: z.any(),
-  configSchema: z.any(),
+  inputSchema: z.unknown(),
+  outputSchema: z.unknown(),
+  configSchema: z.object({}),
   handler: async () => 'ok',
 });
 
-const dummyNode2 = defineNode({
+const dummyNode2: NodeDefinition = defineNode({
   name: 'test/dummy2',
   version: '1.0.0',
   description: 'Dummy node 2',
   category: 'custom',
-  inputSchema: z.any(),
-  outputSchema: z.any(),
-  configSchema: z.any(),
+  inputSchema: z.unknown(),
+  outputSchema: z.unknown(),
+  configSchema: z.object({}),
   handler: async () => 'ok2',
 });
 

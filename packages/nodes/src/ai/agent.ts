@@ -41,8 +41,9 @@ export const agentNode = defineNode({
   retries: 1,
 
   handler: async (ctx) => {
-    const { prompt, context } = ctx.input;
-    const { model, systemPrompt, maxIterations, maxTokens, temperature } = ctx.config;
+    const input = ctx.input as z.infer<typeof inputSchema>;
+    const { prompt, context } = input;
+    const { model, systemPrompt, maxIterations, maxTokens, temperature } = ctx.config as z.infer<typeof configSchema>;
 
     const toolsUsed: string[] = [];
     let iterations = 0;
@@ -50,8 +51,8 @@ export const agentNode = defineNode({
 
     // Build tool definitions from input if provided
     const aiTools: Record<string, { description: string; parameters: z.ZodType }> = {};
-    if (ctx.input.tools) {
-      for (const tool of ctx.input.tools) {
+    if (input.tools) {
+      for (const tool of input.tools) {
         aiTools[tool.name] = {
           description: tool.description,
           parameters: z.any(),

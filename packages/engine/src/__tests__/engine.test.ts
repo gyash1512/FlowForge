@@ -2,10 +2,12 @@ import { describe, it, expect } from 'vitest';
 import { z } from 'zod';
 import { Engine } from '../engine.js';
 import { NoopLogger } from '../logger.js';
-import type { WorkflowDefinition, WorkflowStep } from '@flowforge/shared';
+import type { WorkflowDefinition, WorkflowStep, NodeContext } from '@flowforge/shared';
 import { RunStatus } from '@flowforge/shared';
 
-function makeNode(name: string, handler: (...args: unknown[]) => Promise<unknown>) {
+type Ctx = NodeContext;
+
+function makeNode(name: string, handler: (ctx: Ctx) => Promise<unknown>) {
   return {
     name,
     version: '1.0.0',
@@ -33,7 +35,7 @@ describe('Engine', () => {
   it('registers and lists workflows', () => {
     const engine = new Engine({ logger: new NoopLogger() });
     const wf = makeWorkflow('test', [
-      { name: 'step-1', node: makeNode('test/step', async (ctx: any) => ctx.input) },
+      { name: 'step-1', node: makeNode('test/step', async (ctx: Ctx) => ctx.input) },
     ]);
     engine.register(wf);
     expect(engine.getWorkflow('test')).toBe(wf);
@@ -44,7 +46,7 @@ describe('Engine', () => {
     const engine = new Engine({ logger: new NoopLogger() });
     engine.register(
       makeWorkflow('test', [
-        { name: 'step-1', node: makeNode('test/echo', async (ctx: any) => `echo: ${JSON.stringify(ctx.input)}`) },
+        { name: 'step-1', node: makeNode('test/echo', async (ctx: Ctx) => `echo: ${JSON.stringify(ctx.input)}`) },
       ]),
     );
     const run = await engine.trigger('test', { name: 'test' });
@@ -64,7 +66,7 @@ describe('Engine', () => {
         { name: 'add', node: makeNode('test/add', async () => 10) },
         {
           name: 'double',
-          node: makeNode('test/double', async (ctx: any) => (ctx.steps?.add as number) * 2),
+          node: makeNode('test/double', async (ctx: Ctx) => (ctx.steps?.add as number) * 2),
           input: (ctx) => ctx.steps['add'],
           dependsOn: ['add'],
         },
@@ -79,7 +81,7 @@ describe('Engine', () => {
     const engine = new Engine({ logger: new NoopLogger() });
     engine.register(
       makeWorkflow('event-wf', [
-        { name: 'step', node: makeNode('test/echo', async (ctx: any) => ctx.input) },
+        { name: 'step', node: makeNode('test/echo', async (ctx: Ctx) => ctx.input) },
       ], { trigger: { type: 'event', event: 'user.created' } }),
     );
     const runs = await engine.emit('user.created', { userId: '123' });

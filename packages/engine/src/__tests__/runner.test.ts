@@ -3,9 +3,11 @@ import { z } from 'zod';
 import { Runner } from '../runner.js';
 import { NoopLogger } from '../logger.js';
 import { RunStatus } from '@flowforge/shared';
-import type { WorkflowDefinition, WorkflowStep } from '@flowforge/shared';
+import type { WorkflowDefinition, WorkflowStep, ControlFlowStep, NodeContext } from '@flowforge/shared';
 
-function makeNode(name: string, handler: (...args: unknown[]) => Promise<unknown>, opts?: Record<string, unknown>) {
+type Ctx = NodeContext;
+
+function makeNode(name: string, handler: (ctx: Ctx) => Promise<unknown>, opts?: Record<string, unknown>) {
   return {
     name,
     version: '1.0.0',
@@ -19,7 +21,7 @@ function makeNode(name: string, handler: (...args: unknown[]) => Promise<unknown
   };
 }
 
-function makeWorkflow(steps: WorkflowStep[], overrides?: Partial<WorkflowDefinition>): WorkflowDefinition {
+function makeWorkflow(steps: Array<WorkflowStep | ControlFlowStep>, overrides?: Partial<WorkflowDefinition>): WorkflowDefinition {
   return {
     id: 'test-wf',
     name: 'Test Workflow',
@@ -35,7 +37,7 @@ describe('Runner', () => {
 
   it('executes a single-step workflow', async () => {
     const wf = makeWorkflow([
-      { name: 'echo', node: makeNode('test/echo', async (ctx: any) => ctx.input) },
+      { name: 'echo', node: makeNode('test/echo', async (ctx: Ctx) => ctx.input) },
     ]);
     const run = await runner.execute(wf, 'hello');
     expect(run.status).toBe(RunStatus.COMPLETED);
@@ -47,7 +49,7 @@ describe('Runner', () => {
       { name: 'add', node: makeNode('test/add', async () => 5) },
       {
         name: 'double',
-        node: makeNode('test/double', async (ctx: any) => ctx.input * 2),
+        node: makeNode('test/double', async (ctx: Ctx) => (ctx.input as number) * 2),
         input: (ctx) => ctx.steps['add'],
         dependsOn: ['add'],
       },
@@ -62,19 +64,19 @@ describe('Runner', () => {
       { name: 'source', node: makeNode('test/source', async () => 1) },
       {
         name: 'left',
-        node: makeNode('test/left', async (ctx: any) => ctx.input + 10),
+        node: makeNode('test/left', async (ctx: Ctx) => (ctx.input as number) + 10),
         input: (ctx) => ctx.steps['source'],
         dependsOn: ['source'],
       },
       {
         name: 'right',
-        node: makeNode('test/right', async (ctx: any) => ctx.input + 20),
+        node: makeNode('test/right', async (ctx: Ctx) => (ctx.input as number) + 20),
         input: (ctx) => ctx.steps['source'],
         dependsOn: ['source'],
       },
       {
         name: 'merge',
-        node: makeNode('test/merge', async (ctx: any) => {
+        node: makeNode('test/merge', async (ctx: Ctx) => {
           return (ctx.steps['left'] as number) + (ctx.steps['right'] as number);
         }),
         input: (ctx) => ctx.steps,
@@ -172,8 +174,8 @@ describe('Runner', () => {
           name: 'process-items',
           items: () => [1, 2, 3],
           concurrency: 2,
-          pipeline: (item) => [
-            { name: 'double', node: makeNode('test/double', async (ctx: any) => ctx.input * 2), input: () => item },
+          pipeline: (item: unknown) => [
+            { name: 'double', node: makeNode('test/double', async (ctx: Ctx) => (ctx.input as number) * 2), input: () => item },
           ],
         },
       ],
@@ -187,7 +189,7 @@ describe('Runner', () => {
     const wf = makeWorkflow([
       {
         name: 'meta',
-        node: makeNode('test/meta', async (ctx: any) => ({
+        node: makeNode('test/meta', async (ctx: Ctx) => ({
           runId: ctx.metadata.runId,
           workflowId: ctx.metadata.workflowId,
         })),

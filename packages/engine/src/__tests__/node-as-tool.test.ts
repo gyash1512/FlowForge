@@ -162,8 +162,8 @@ describe('nodesToAgentTools', () => {
     const tools = nodesToAgentTools({ alpha: nodeA, beta: nodeB });
 
     expect(Object.keys(tools)).toEqual(['alpha', 'beta']);
-    expect(tools['alpha'].description).toBe('Node A');
-    expect(tools['beta'].description).toBe('Node B');
+    expect(tools['alpha']!.description).toBe('Node A');
+    expect(tools['beta']!.description).toBe('Node B');
   });
 
   it('returns an empty record for empty input', () => {
@@ -182,8 +182,8 @@ describe('nodesToAgentTools', () => {
     const tools = nodesToAgentTools({ add: nodeA, mul: nodeB });
     const ctx = makeContext();
 
-    const addResult = await tools['add'].handler(ctx, { n: 5 });
-    const mulResult = await tools['mul'].handler(ctx, { n: 7 });
+    const addResult = await tools['add']!.handler(ctx, { n: 5 });
+    const mulResult = await tools['mul']!.handler(ctx, { n: 7 });
 
     expect(addResult).toBe(15);
     expect(mulResult).toBe(21);

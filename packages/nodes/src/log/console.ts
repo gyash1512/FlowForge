@@ -27,8 +27,9 @@ export const consoleLogNode = defineNode({
   tags: ['logging', 'debug', 'observability'],
 
   handler: async (ctx) => {
-    const { message, data, level } = ctx.input;
-    const prefix = ctx.config.prefix ? `[${ctx.config.prefix}] ` : '';
+    const { message, data, level } = ctx.input as z.infer<typeof inputSchema>;
+    const { prefix: cfgPrefix } = ctx.config as z.infer<typeof configSchema>;
+    const prefix = cfgPrefix ? `[${cfgPrefix}] ` : '';
     const msg = `${prefix}${message ?? 'log'}`;
 
     if (data !== undefined) {

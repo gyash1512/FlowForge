@@ -29,8 +29,8 @@ export const embedNode = defineNode({
   tags: ['ai', 'embeddings', 'vector'],
 
   handler: async (ctx) => {
-    const { value } = ctx.input;
-    const { model } = ctx.config;
+    const { value } = ctx.input as z.infer<typeof inputSchema>;
+    const { model } = ctx.config as z.infer<typeof configSchema>;
 
     ctx.logger.info({ model, length: value.length }, 'Generating embedding');
 

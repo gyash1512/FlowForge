@@ -2,7 +2,7 @@
 
 import pytest
 
-from flowforge_sdk import Workflow, workflow, node
+from flowforge_sdk import workflow, node
 
 
 def _dummy_handler(ctx):

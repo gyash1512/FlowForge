@@ -28,6 +28,6 @@ export const whileNode = defineNode({
   handler: async (ctx) => {
     // The actual loop is handled by the runner's WhileStep
     // This node serves as the condition check within the loop body
-    return { iterations: 1, data: ctx.input.data };
+    return { iterations: 1, data: (ctx.input as z.infer<typeof inputSchema>).data };
   },
 });

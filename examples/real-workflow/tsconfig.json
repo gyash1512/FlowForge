@@ -6,11 +6,5 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false
   },
-  "include": ["src"],
-  "references": [
-    { "path": "../../packages/shared" },
-    { "path": "../../packages/sdk" },
-    { "path": "../../packages/engine" },
-    { "path": "../../packages/nodes" }
-  ]
+  "include": ["src"]
 }
