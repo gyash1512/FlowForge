@@ -50,7 +50,7 @@ describe('ComposioAdaptor', () => {
       'user-123',
     );
 
-    const call = (client.tools.execute as ReturnType<typeof vi.fn>).mock.calls[0];
+    const call = (client.tools.execute as ReturnType<typeof vi.fn>).mock.calls[0]!;
     expect(call[1].arguments).not.toHaveProperty('connectionId');
     expect(call[1].arguments).toEqual({ channel: '#general', text: 'Hi' });
   });
@@ -58,7 +58,7 @@ describe('ComposioAdaptor', () => {
   it('uses connectionId as Composio userId', async () => {
     await adaptor.execute('listUsers', {}, 'my-connection-id');
 
-    const call = (client.tools.execute as ReturnType<typeof vi.fn>).mock.calls[0];
+    const call = (client.tools.execute as ReturnType<typeof vi.fn>).mock.calls[0]!;
     expect(call[1].userId).toBe('my-connection-id');
   });
 

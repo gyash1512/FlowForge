@@ -4,10 +4,14 @@ from __future__ import annotations
 
 import asyncio
 from datetime import datetime
-from enum import StrEnum
+from enum import Enum
 from typing import Any, Protocol
 
 from pydantic import BaseModel, Field
+
+
+class StrEnum(str, Enum):
+    """str-valued Enum compatible with Python 3.10+."""
 
 
 class RunStatus(StrEnum):

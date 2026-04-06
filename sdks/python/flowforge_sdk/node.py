@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import builtins
 from collections.abc import Callable, Coroutine
 from typing import Any
 
@@ -15,13 +16,18 @@ class NodeDefinition(BaseModel):
 
     id: str
     name: str
-    type: NodeType = NodeType.FUNCTION
+    node_type: NodeType = NodeType.FUNCTION
     retry: RetryConfig | None = None
     timeout: int | None = None
     depends_on: list[str] | None = None
     metadata: dict[str, Any] | None = None
 
     model_config = {"arbitrary_types_allowed": True}
+
+    @property
+    def type(self) -> NodeType:
+        """Alias for node_type to maintain backwards compatibility."""
+        return self.node_type
 
 
 HandlerFn = Callable[[NodeContext], Coroutine[Any, Any, Any]]
@@ -41,22 +47,22 @@ class Node:
         self._depends_on: list[str] | None = None
         self._condition: ConditionFn | None = None
         self._metadata: dict[str, Any] | None = None
-        self._input_model: type[BaseModel] | None = None
-        self._output_model: type[BaseModel] | None = None
+        self._input_model: builtins.type[BaseModel] | None = None
+        self._output_model: builtins.type[BaseModel] | None = None
 
     def name(self, name: str) -> Node:
         self._name = name
         return self
 
-    def type(self, node_type: NodeType) -> Node:
-        self._type = node_type
+    def type(self, node_type: str | NodeType) -> Node:
+        self._type = NodeType(node_type)
         return self
 
-    def input_model(self, model: type[BaseModel]) -> Node:
+    def input_model(self, model: builtins.type[BaseModel]) -> Node:
         self._input_model = model
         return self
 
-    def output_model(self, model: type[BaseModel]) -> Node:
+    def output_model(self, model: builtins.type[BaseModel]) -> Node:
         self._output_model = model
         return self
 
@@ -101,7 +107,7 @@ class Node:
         return NodeDefinition(
             id=self._id,
             name=self._name,
-            type=self._type,
+            node_type=self._type,
             retry=self._retry,
             timeout=self._timeout,
             depends_on=self._depends_on,
@@ -120,10 +126,10 @@ class Node:
     def get_condition(self) -> ConditionFn | None:
         return self._condition
 
-    def get_input_model(self) -> type[BaseModel] | None:
+    def get_input_model(self) -> builtins.type[BaseModel] | None:
         return self._input_model
 
-    def get_output_model(self) -> type[BaseModel] | None:
+    def get_output_model(self) -> builtins.type[BaseModel] | None:
         return self._output_model
 
 
