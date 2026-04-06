@@ -17,7 +17,8 @@ const configSchema = z.object({});
 export const ifNode = defineNode({
   name: 'control/if',
   version: '0.1.0',
-  description: 'Conditional branching — evaluates a condition and returns the matching branch value',
+  description:
+    'Conditional branching — evaluates a condition and returns the matching branch value',
   category: 'control',
   inputSchema,
   outputSchema,

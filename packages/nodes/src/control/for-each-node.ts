@@ -17,7 +17,8 @@ const configSchema = z.object({
 export const forEachNode = defineNode({
   name: 'control/forEach',
   version: '0.1.0',
-  description: 'Iterate over an array, running a sub-pipeline for each item with concurrency control',
+  description:
+    'Iterate over an array, running a sub-pipeline for each item with concurrency control',
   category: 'control',
   inputSchema,
   outputSchema,

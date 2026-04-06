@@ -71,10 +71,7 @@ export class Worker {
     this.engine.registerAdaptor(new HttpAdaptor());
 
     this.cronScheduler = new CronScheduler(this.logger);
-    this.checkpointManager = new CheckpointManager(
-      new InMemoryCheckpointStore(),
-      this.logger,
-    );
+    this.checkpointManager = new CheckpointManager(new InMemoryCheckpointStore(), this.logger);
     this.runStore = new InMemoryRunStore();
 
     // Build the HTTP app
@@ -216,12 +213,7 @@ export class Worker {
     const matchingWorkflows = this.registry.findByEvent(type);
 
     // For cron events, also try to trigger the specific workflow
-    if (
-      type === 'cron' &&
-      data &&
-      typeof data === 'object' &&
-      'workflowId' in data
-    ) {
+    if (type === 'cron' && data && typeof data === 'object' && 'workflowId' in data) {
       const wfId = (data as { workflowId: string }).workflowId;
       const wf = this.registry.find(wfId);
       if (wf && !matchingWorkflows.some((mw) => mw.id === wfId)) {
@@ -230,12 +222,7 @@ export class Worker {
     }
 
     // For manual triggers, also try to trigger the specific workflow
-    if (
-      type === 'manual' &&
-      data &&
-      typeof data === 'object' &&
-      'workflowId' in data
-    ) {
+    if (type === 'manual' && data && typeof data === 'object' && 'workflowId' in data) {
       const wfId = (data as { workflowId: string }).workflowId;
       const wf = this.registry.find(wfId);
       if (wf && !matchingWorkflows.some((mw) => mw.id === wfId)) {

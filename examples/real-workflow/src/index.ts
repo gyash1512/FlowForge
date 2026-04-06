@@ -154,7 +154,10 @@ async function main() {
   const engine = new Engine();
   engine.register(realWorkflow);
 
-  console.log('Registered workflows:', engine.listWorkflows().map((w) => w.id));
+  console.log(
+    'Registered workflows:',
+    engine.listWorkflows().map((w) => w.id),
+  );
   console.log('\nExecuting real-user-pipeline...\n');
 
   const run = await engine.trigger('real-user-pipeline');
@@ -180,10 +183,4 @@ async function main() {
 
 main().catch(console.error);
 
-export {
-  fetchUsersNode,
-  transformUsersNode,
-  filterByCompanyNode,
-  createReportNode,
-  realWorkflow,
-};
+export { fetchUsersNode, transformUsersNode, filterByCompanyNode, createReportNode, realWorkflow };

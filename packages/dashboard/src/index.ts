@@ -4,7 +4,11 @@ export { createApp } from './app.js';
 export { workflowRoutes, registerWorkflow, unregisterWorkflow } from './routes/workflows.js';
 export { runRoutes, addRun, addStepRecords } from './routes/runs.js';
 export { eventRoutes } from './routes/events.js';
-export { integrationRoutes, registerIntegration, updateIntegrationHealth } from './routes/integrations.js';
+export {
+  integrationRoutes,
+  registerIntegration,
+  updateIntegrationHealth,
+} from './routes/integrations.js';
 export type { IntegrationStatus } from './routes/integrations.js';
 export { secretRoutes } from './routes/secrets.js';
 export { metricsRoutes } from './routes/metrics.js';

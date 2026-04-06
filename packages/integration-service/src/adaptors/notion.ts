@@ -2,9 +2,19 @@ import type { IntegrationAdaptor } from '@flowforge/shared';
 import { IntegrationError } from '@flowforge/shared';
 
 export interface NotionClient {
-  createPage(parentId: string, properties: Record<string, unknown>, children?: unknown[]): Promise<unknown>;
+  createPage(
+    parentId: string,
+    properties: Record<string, unknown>,
+    children?: unknown[],
+  ): Promise<unknown>;
   updatePage(pageId: string, properties: Record<string, unknown>): Promise<unknown>;
-  queryDatabase(databaseId: string, filter?: unknown, sorts?: unknown[], startCursor?: string, pageSize?: number): Promise<unknown>;
+  queryDatabase(
+    databaseId: string,
+    filter?: unknown,
+    sorts?: unknown[],
+    startCursor?: string,
+    pageSize?: number,
+  ): Promise<unknown>;
   appendBlock(blockId: string, children: unknown[]): Promise<unknown>;
 }
 

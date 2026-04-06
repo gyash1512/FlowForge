@@ -3,9 +3,7 @@ import { defineNode } from '@flowforge/sdk';
 
 const inputSchema = z.object({
   prompt: z.string().optional(),
-  messages: z
-    .array(z.object({ role: z.string(), content: z.string() }))
-    .optional(),
+  messages: z.array(z.object({ role: z.string(), content: z.string() })).optional(),
   system: z.string().optional(),
 });
 

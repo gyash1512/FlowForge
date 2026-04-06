@@ -43,7 +43,9 @@ export const agentNode = defineNode({
   handler: async (ctx) => {
     const input = ctx.input as z.infer<typeof inputSchema>;
     const { prompt, context } = input;
-    const { model, systemPrompt, maxIterations, maxTokens, temperature } = ctx.config as z.infer<typeof configSchema>;
+    const { model, systemPrompt, maxIterations, maxTokens, temperature } = ctx.config as z.infer<
+      typeof configSchema
+    >;
 
     const toolsUsed: string[] = [];
     let iterations = 0;

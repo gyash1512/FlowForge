@@ -164,9 +164,7 @@ describe('StepExecutor', () => {
     const step = makeStep('retry-exhaust-step', node);
     const ctx = makeContext();
 
-    await expect(executor.execute(step, ctx)).rejects.toThrow(
-      'exhausted all 2 retry attempts',
-    );
+    await expect(executor.execute(step, ctx)).rejects.toThrow('exhausted all 2 retry attempts');
   });
 
   it('enforces node timeout', async () => {
@@ -193,9 +191,7 @@ describe('StepExecutor', () => {
     const step = makeStep('validate-input-step', node);
     const ctx = makeContext({ name: 123 }); // invalid
 
-    await expect(executor.execute(step, ctx)).rejects.toThrow(
-      'Input validation failed',
-    );
+    await expect(executor.execute(step, ctx)).rejects.toThrow('Input validation failed');
   });
 
   it('validates output schema and rejects invalid output', async () => {
@@ -206,9 +202,7 @@ describe('StepExecutor', () => {
     const step = makeStep('validate-output-step', node);
     const ctx = makeContext();
 
-    await expect(executor.execute(step, ctx)).rejects.toThrow(
-      'Output validation failed',
-    );
+    await expect(executor.execute(step, ctx)).rejects.toThrow('Output validation failed');
   });
 
   it('passes valid data through schema validation', async () => {
@@ -268,9 +262,7 @@ describe('StepExecutor', () => {
     const step = makeStep('no-retry-validation', node);
     const ctx = makeContext();
 
-    await expect(executor.execute(step, ctx)).rejects.toThrow(
-      'Output validation failed',
-    );
+    await expect(executor.execute(step, ctx)).rejects.toThrow('Output validation failed');
     // Should only be called once since validation errors are not retried
     expect(callCount).toBe(1);
   });

@@ -8,10 +8,7 @@ import { RunStatus } from '@flowforge/shared';
 // Helpers
 // ────────────────────────────────────────────────────────────────
 
-function makeNode(
-  name: string,
-  handler: (...args: unknown[]) => Promise<unknown>,
-): NodeDefinition {
+function makeNode(name: string, handler: (...args: unknown[]) => Promise<unknown>): NodeDefinition {
   return {
     name,
     version: '1.0.0',
@@ -108,9 +105,7 @@ describe('Worker', () => {
   it('returns empty array when no workflows match an event', async () => {
     const wf = makeWorkflow(
       'wf-1',
-      [
-        { name: 'step-1', node: makeNode('test/noop', async () => null) },
-      ],
+      [{ name: 'step-1', node: makeNode('test/noop', async () => null) }],
       { trigger: { type: 'event', event: 'user.signup' } },
     );
     worker.register(wf);
@@ -144,16 +139,12 @@ describe('Worker', () => {
   it('lists runs with filtering', async () => {
     const wfA = makeWorkflow(
       'wf-a',
-      [
-        { name: 'step-1', node: makeNode('test/ok', async () => 'a') },
-      ],
+      [{ name: 'step-1', node: makeNode('test/ok', async () => 'a') }],
       { trigger: { type: 'event', event: 'evt-a' } },
     );
     const wfB = makeWorkflow(
       'wf-b',
-      [
-        { name: 'step-1', node: makeNode('test/ok', async () => 'b') },
-      ],
+      [{ name: 'step-1', node: makeNode('test/ok', async () => 'b') }],
       { trigger: { type: 'event', event: 'evt-b' } },
     );
     worker.register(wfA);
@@ -194,16 +185,12 @@ describe('Worker', () => {
   it('triggers multiple workflows for the same event', async () => {
     const wf1 = makeWorkflow(
       'multi-1',
-      [
-        { name: 'step-1', node: makeNode('test/ok', async () => 'from-1') },
-      ],
+      [{ name: 'step-1', node: makeNode('test/ok', async () => 'from-1') }],
       { trigger: { type: 'event', event: 'shared.event' } },
     );
     const wf2 = makeWorkflow(
       'multi-2',
-      [
-        { name: 'step-1', node: makeNode('test/ok', async () => 'from-2') },
-      ],
+      [{ name: 'step-1', node: makeNode('test/ok', async () => 'from-2') }],
       { trigger: { type: 'event', event: 'shared.event' } },
     );
     worker.register(wf1);
@@ -222,9 +209,7 @@ describe('Worker', () => {
   it('manual trigger via handleEvent with workflowId in data', async () => {
     const wf = makeWorkflow(
       'manual-wf',
-      [
-        { name: 'step-1', node: makeNode('test/ok', async () => 'triggered') },
-      ],
+      [{ name: 'step-1', node: makeNode('test/ok', async () => 'triggered') }],
       { trigger: { type: 'manual' } },
     );
     worker.register(wf);

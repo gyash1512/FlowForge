@@ -28,10 +28,7 @@ const dummyNode2: NodeDefinition = defineNode({
 
 describe('WorkflowBuilder', () => {
   it('builds a minimal workflow', () => {
-    const wf = workflow('simple')
-      .trigger({ type: 'manual' })
-      .node('step-1', dummyNode)
-      .build();
+    const wf = workflow('simple').trigger({ type: 'manual' }).node('step-1', dummyNode).build();
 
     expect(wf.id).toBe('simple');
     expect(wf.name).toBe('simple');
@@ -41,9 +38,7 @@ describe('WorkflowBuilder', () => {
   });
 
   it('throws without trigger', () => {
-    expect(() =>
-      workflow('no-trigger').node('a', dummyNode).build(),
-    ).toThrow('requires a trigger');
+    expect(() => workflow('no-trigger').node('a', dummyNode).build()).toThrow('requires a trigger');
   });
 
   it('throws without steps', () => {
@@ -150,9 +145,7 @@ describe('WorkflowBuilder', () => {
       .forEach('iterate', {
         items: (ctx) => ctx.event.data as unknown[],
         concurrency: 10,
-        pipeline: (item, idx) => [
-          ['process', dummyNode, { input: () => ({ item, idx }) }],
-        ],
+        pipeline: (item, idx) => [['process', dummyNode, { input: () => ({ item, idx }) }]],
       })
       .build();
 

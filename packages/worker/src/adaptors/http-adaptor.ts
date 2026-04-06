@@ -54,7 +54,12 @@ export class HttpAdaptor implements DataAdaptor {
     const hasBody = p.body !== undefined && p.body !== null;
 
     // Auto-set Content-Type for JSON bodies if not already set
-    if (hasBody && typeof p.body === 'object' && !headers['content-type'] && !headers['Content-Type']) {
+    if (
+      hasBody &&
+      typeof p.body === 'object' &&
+      !headers['content-type'] &&
+      !headers['Content-Type']
+    ) {
       headers['Content-Type'] = 'application/json';
     }
 

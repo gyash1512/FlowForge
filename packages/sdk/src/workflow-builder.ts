@@ -53,9 +53,7 @@ export interface WhileOptions {
   pipeline: Array<[string, NodeDefinition, NodeStepOptions?]>;
 }
 
-function toWorkflowSteps(
-  steps: Array<[string, NodeDefinition, NodeStepOptions?]>,
-): WorkflowStep[] {
+function toWorkflowSteps(steps: Array<[string, NodeDefinition, NodeStepOptions?]>): WorkflowStep[] {
   return steps.map(([name, node, opts]) => ({
     name,
     node,
@@ -136,9 +134,8 @@ export class WorkflowBuilder {
     nodeOrHandler: NodeDefinition | InlineHandler,
     options?: NodeStepOptions,
   ): this {
-    const nodeDef = typeof nodeOrHandler === 'function'
-      ? inlineNode(stepName, nodeOrHandler)
-      : nodeOrHandler;
+    const nodeDef =
+      typeof nodeOrHandler === 'function' ? inlineNode(stepName, nodeOrHandler) : nodeOrHandler;
 
     const step: WorkflowStep = {
       name: stepName,

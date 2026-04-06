@@ -3,11 +3,20 @@ import { z } from 'zod';
 import { Runner } from '../runner.js';
 import { NoopLogger } from '../logger.js';
 import { RunStatus } from '@flowforge/shared';
-import type { WorkflowDefinition, WorkflowStep, ControlFlowStep, NodeContext } from '@flowforge/shared';
+import type {
+  WorkflowDefinition,
+  WorkflowStep,
+  ControlFlowStep,
+  NodeContext,
+} from '@flowforge/shared';
 
 type Ctx = NodeContext;
 
-function makeNode(name: string, handler: (ctx: Ctx) => Promise<unknown>, opts?: Record<string, unknown>) {
+function makeNode(
+  name: string,
+  handler: (ctx: Ctx) => Promise<unknown>,
+  opts?: Record<string, unknown>,
+) {
   return {
     name,
     version: '1.0.0',
@@ -21,7 +30,10 @@ function makeNode(name: string, handler: (ctx: Ctx) => Promise<unknown>, opts?: 
   };
 }
 
-function makeWorkflow(steps: Array<WorkflowStep | ControlFlowStep>, overrides?: Partial<WorkflowDefinition>): WorkflowDefinition {
+function makeWorkflow(
+  steps: Array<WorkflowStep | ControlFlowStep>,
+  overrides?: Partial<WorkflowDefinition>,
+): WorkflowDefinition {
   return {
     id: 'test-wf',
     name: 'Test Workflow',
@@ -107,11 +119,15 @@ describe('Runner', () => {
     const wf = makeWorkflow([
       {
         name: 'retry',
-        node: makeNode('test/retry', async () => {
-          attempt++;
-          if (attempt < 3) throw new Error('not yet');
-          return 'done';
-        }, { retries: 3 }),
+        node: makeNode(
+          'test/retry',
+          async () => {
+            attempt++;
+            if (attempt < 3) throw new Error('not yet');
+            return 'done';
+          },
+          { retries: 3 },
+        ),
       },
     ]);
     const run = await runner.execute(wf, null);
@@ -123,7 +139,13 @@ describe('Runner', () => {
     const wf = makeWorkflow([
       {
         name: 'fail',
-        node: makeNode('test/fail', async () => { throw new Error('permanent'); }, { retries: 2 }),
+        node: makeNode(
+          'test/fail',
+          async () => {
+            throw new Error('permanent');
+          },
+          { retries: 2 },
+        ),
       },
     ]);
     const run = await runner.execute(wf, null);
@@ -135,7 +157,11 @@ describe('Runner', () => {
     const wf = makeWorkflow([
       {
         name: 'slow',
-        node: makeNode('test/slow', async () => new Promise((resolve) => setTimeout(resolve, 500)), { timeout: 50 }),
+        node: makeNode(
+          'test/slow',
+          async () => new Promise((resolve) => setTimeout(resolve, 500)),
+          { timeout: 50 },
+        ),
       },
     ]);
     const run = await runner.execute(wf, null);
@@ -150,12 +176,8 @@ describe('Runner', () => {
         type: 'if' as const,
         name: 'branch',
         condition: (ctx) => (ctx.steps['check'] as number) > 3,
-        then: [
-          { name: 'positive', node: makeNode('test/pos', async () => 'yes') },
-        ],
-        else: [
-          { name: 'negative', node: makeNode('test/neg', async () => 'no') },
-        ],
+        then: [{ name: 'positive', node: makeNode('test/pos', async () => 'yes') }],
+        else: [{ name: 'negative', node: makeNode('test/neg', async () => 'no') }],
       },
     ]);
     const run = await runner.execute(wf, null);
@@ -175,7 +197,11 @@ describe('Runner', () => {
           items: () => [1, 2, 3],
           concurrency: 2,
           pipeline: (item: unknown) => [
-            { name: 'double', node: makeNode('test/double', async (ctx: Ctx) => (ctx.input as number) * 2), input: () => item },
+            {
+              name: 'double',
+              node: makeNode('test/double', async (ctx: Ctx) => (ctx.input as number) * 2),
+              input: () => item,
+            },
           ],
         },
       ],

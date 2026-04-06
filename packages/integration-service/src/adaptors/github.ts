@@ -2,10 +2,30 @@ import type { IntegrationAdaptor } from '@flowforge/shared';
 import { IntegrationError } from '@flowforge/shared';
 
 export interface GitHubClient {
-  createIssue(owner: string, repo: string, title: string, body?: string, labels?: string[]): Promise<unknown>;
-  createPR(owner: string, repo: string, title: string, head: string, base: string, body?: string): Promise<unknown>;
+  createIssue(
+    owner: string,
+    repo: string,
+    title: string,
+    body?: string,
+    labels?: string[],
+  ): Promise<unknown>;
+  createPR(
+    owner: string,
+    repo: string,
+    title: string,
+    head: string,
+    base: string,
+    body?: string,
+  ): Promise<unknown>;
   addComment(owner: string, repo: string, issueNumber: number, body: string): Promise<unknown>;
-  createRelease(owner: string, repo: string, tag: string, name: string, body?: string, draft?: boolean): Promise<unknown>;
+  createRelease(
+    owner: string,
+    repo: string,
+    tag: string,
+    name: string,
+    body?: string,
+    draft?: boolean,
+  ): Promise<unknown>;
   listRepos(org?: string, page?: number, perPage?: number): Promise<unknown>;
 }
 

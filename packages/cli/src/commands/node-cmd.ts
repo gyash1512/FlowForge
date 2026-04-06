@@ -200,7 +200,10 @@ const testSubcommand = new Command('test')
         integrate: async () => null,
         ai: {
           generateText: async () => ({ text: '' }),
-          streamText: async () => ({ textStream: (async function* () {})(), text: Promise.resolve('') }),
+          streamText: async () => ({
+            textStream: (async function* () {})(),
+            text: Promise.resolve(''),
+          }),
           generateObject: async () => ({ object: {} }),
           embed: async () => ({ embedding: [] }),
         },
@@ -231,11 +234,7 @@ const testSubcommand = new Command('test')
         for (const log of logs) {
           const level = log.level.toUpperCase().padEnd(6);
           const color =
-            log.level === 'error'
-              ? chalk.red
-              : log.level === 'warn'
-                ? chalk.yellow
-                : chalk.dim;
+            log.level === 'error' ? chalk.red : log.level === 'warn' ? chalk.yellow : chalk.dim;
           console.log(`  ${color(level)} ${log.args.map(String).join(' ')}`);
         }
       }
@@ -254,7 +253,9 @@ const testSubcommand = new Command('test')
     }
   });
 
-function extractSchemaFields(schema: unknown): Array<{ name: string; type: string; required: boolean }> {
+function extractSchemaFields(
+  schema: unknown,
+): Array<{ name: string; type: string; required: boolean }> {
   const fields: Array<{ name: string; type: string; required: boolean }> = [];
 
   if (!schema || typeof schema !== 'object') return fields;
@@ -284,7 +285,9 @@ function extractSchemaFields(schema: unknown): Array<{ name: string; type: strin
         required = false;
         const innerType = innerDef.innerType as Record<string, unknown> | undefined;
         if (innerType?._def) {
-          const innerTypeName = (innerType._def as Record<string, unknown>).typeName as string | undefined;
+          const innerTypeName = (innerType._def as Record<string, unknown>).typeName as
+            | string
+            | undefined;
           if (innerTypeName) {
             type = innerTypeName.replace('Zod', '').toLowerCase();
           }
@@ -350,11 +353,20 @@ const docsSubcommand = new Command('docs')
 
       // Find the node definition: check default export, then named exports
       let nodeDef: Record<string, unknown> | undefined;
-      if (imported.default && typeof imported.default === 'object' && 'name' in (imported.default as object)) {
+      if (
+        imported.default &&
+        typeof imported.default === 'object' &&
+        'name' in (imported.default as object)
+      ) {
         nodeDef = imported.default as Record<string, unknown>;
       } else {
         for (const value of Object.values(imported)) {
-          if (value && typeof value === 'object' && 'name' in (value as object) && 'handler' in (value as object)) {
+          if (
+            value &&
+            typeof value === 'object' &&
+            'name' in (value as object) &&
+            'handler' in (value as object)
+          ) {
             nodeDef = value as Record<string, unknown>;
             break;
           }

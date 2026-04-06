@@ -55,9 +55,7 @@ export class RedisAdaptor implements DataAdaptor {
   async pull(params: unknown): Promise<unknown> {
     const p = params as RedisPullParams;
     if (!p.action || !p.key) {
-      throw new Error(
-        'RedisAdaptor.pull() requires "action" (get|hget|lrange) and "key"',
-      );
+      throw new Error('RedisAdaptor.pull() requires "action" (get|hget|lrange) and "key"');
     }
 
     const client = this.getClient();

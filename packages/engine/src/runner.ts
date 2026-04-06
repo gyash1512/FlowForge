@@ -145,9 +145,7 @@ export class Runner {
       const layers = resolveExecutionOrder([...stepsWithoutDeps, ...stepsWithDeps]);
       for (const layer of layers) {
         if (ctx.signal.aborted) break;
-        await Promise.all(
-          layer.map((step) => this.executeWorkflowStep(step, ctx)),
-        );
+        await Promise.all(layer.map((step) => this.executeWorkflowStep(step, ctx)));
       }
       // Then execute control flow steps in order
       for (const cfStep of controlFlowSteps) {
@@ -167,10 +165,7 @@ export class Runner {
     }
   }
 
-  private async executeWorkflowStep(
-    step: WorkflowStep,
-    ctx: ExecutionContext,
-  ): Promise<void> {
+  private async executeWorkflowStep(step: WorkflowStep, ctx: ExecutionContext): Promise<void> {
     const nodeLogger = ctx.logger.child({ stepName: step.name, nodeName: step.node.name });
 
     // Check condition
@@ -219,7 +214,10 @@ export class Runner {
 
     const fallbackAI: AIContext = {
       generateText: async () => ({ text: '', toolCalls: [], toolResults: [] }),
-      streamText: async () => ({ textStream: (async function* () {})(), text: Promise.resolve('') }),
+      streamText: async () => ({
+        textStream: (async function* () {})(),
+        text: Promise.resolve(''),
+      }),
       generateObject: async () => ({ object: {} }),
       embed: async () => ({ embedding: [] }),
     };
@@ -235,16 +233,38 @@ export class Runner {
       signal: ctx.signal,
       metadata: ctx.metadata,
       ai: providers.ai ?? fallbackAI,
-      pull: providers.pull ?? (async (source) => { throw new Error(`No data adaptor registered for "${source}". Register one via engine.registerAdaptor().`); }),
-      push: providers.push ?? (async (target) => { throw new Error(`No data adaptor registered for "${target}". Register one via engine.registerAdaptor().`); }),
-      integrate: providers.integrate ?? (async (name) => { throw new Error(`No integration adaptor registered for "${name}". Register one via engine.registerIntegration().`); }),
-      emit: async (eventName, _data) => { ctx.logger.info(`Event emitted: ${eventName}`); },
+      pull:
+        providers.pull ??
+        (async (source) => {
+          throw new Error(
+            `No data adaptor registered for "${source}". Register one via engine.registerAdaptor().`,
+          );
+        }),
+      push:
+        providers.push ??
+        (async (target) => {
+          throw new Error(
+            `No data adaptor registered for "${target}". Register one via engine.registerAdaptor().`,
+          );
+        }),
+      integrate:
+        providers.integrate ??
+        (async (name) => {
+          throw new Error(
+            `No integration adaptor registered for "${name}". Register one via engine.registerIntegration().`,
+          );
+        }),
+      emit: async (eventName, _data) => {
+        ctx.logger.info(`Event emitted: ${eventName}`);
+      },
       wait: async (_eventName, _match, timeout) => {
         if (timeout) await new Promise((resolve) => setTimeout(resolve, Math.min(timeout, 5000)));
         return {};
       },
       sleep: async (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
-      checkpoint: async () => { ctx.logger.debug('Checkpoint saved'); },
+      checkpoint: async () => {
+        ctx.logger.debug('Checkpoint saved');
+      },
     };
 
     const retryConfig = step.node.retries

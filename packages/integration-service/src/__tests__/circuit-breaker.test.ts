@@ -25,7 +25,10 @@ describe('CircuitBreaker', () => {
   });
 
   it('transitions to OPEN after reaching failure threshold', async () => {
-    const fail = () => cb.execute('slack', async () => { throw new Error('boom'); });
+    const fail = () =>
+      cb.execute('slack', async () => {
+        throw new Error('boom');
+      });
 
     await expect(fail()).rejects.toThrow('boom');
     await expect(fail()).rejects.toThrow('boom');
@@ -37,17 +40,25 @@ describe('CircuitBreaker', () => {
   it('rejects calls immediately when OPEN', async () => {
     // Trip the breaker
     for (let i = 0; i < 3; i++) {
-      await cb.execute('slack', async () => { throw new Error('fail'); }).catch(() => {});
+      await cb
+        .execute('slack', async () => {
+          throw new Error('fail');
+        })
+        .catch(() => {});
     }
 
-    await expect(
-      cb.execute('slack', async () => 'should not run'),
-    ).rejects.toThrow(CircuitBreakerOpenError);
+    await expect(cb.execute('slack', async () => 'should not run')).rejects.toThrow(
+      CircuitBreakerOpenError,
+    );
   });
 
   it('transitions to HALF_OPEN after timeout elapses', async () => {
     for (let i = 0; i < 3; i++) {
-      await cb.execute('slack', async () => { throw new Error('fail'); }).catch(() => {});
+      await cb
+        .execute('slack', async () => {
+          throw new Error('fail');
+        })
+        .catch(() => {});
     }
     expect(cb.getState('slack')).toBe(CircuitState.OPEN);
 
@@ -57,7 +68,11 @@ describe('CircuitBreaker', () => {
 
   it('resets to CLOSED on successful call in HALF_OPEN', async () => {
     for (let i = 0; i < 3; i++) {
-      await cb.execute('slack', async () => { throw new Error('fail'); }).catch(() => {});
+      await cb
+        .execute('slack', async () => {
+          throw new Error('fail');
+        })
+        .catch(() => {});
     }
 
     vi.advanceTimersByTime(5_000);
@@ -70,14 +85,20 @@ describe('CircuitBreaker', () => {
 
   it('re-opens on failure in HALF_OPEN', async () => {
     for (let i = 0; i < 3; i++) {
-      await cb.execute('slack', async () => { throw new Error('fail'); }).catch(() => {});
+      await cb
+        .execute('slack', async () => {
+          throw new Error('fail');
+        })
+        .catch(() => {});
     }
 
     vi.advanceTimersByTime(5_000);
     expect(cb.getState('slack')).toBe(CircuitState.HALF_OPEN);
 
     await expect(
-      cb.execute('slack', async () => { throw new Error('still broken'); }),
+      cb.execute('slack', async () => {
+        throw new Error('still broken');
+      }),
     ).rejects.toThrow('still broken');
 
     // Threshold is 3, but we only had 1 failure in HALF_OPEN — it gets
@@ -87,7 +108,11 @@ describe('CircuitBreaker', () => {
 
   it('tracks separate circuits per integration', async () => {
     for (let i = 0; i < 3; i++) {
-      await cb.execute('slack', async () => { throw new Error('fail'); }).catch(() => {});
+      await cb
+        .execute('slack', async () => {
+          throw new Error('fail');
+        })
+        .catch(() => {});
     }
     expect(cb.getState('slack')).toBe(CircuitState.OPEN);
     expect(cb.getState('email')).toBe(CircuitState.CLOSED);
@@ -97,7 +122,10 @@ describe('CircuitBreaker', () => {
   });
 
   it('resets failure count on success', async () => {
-    const fail = () => cb.execute('slack', async () => { throw new Error('fail'); });
+    const fail = () =>
+      cb.execute('slack', async () => {
+        throw new Error('fail');
+      });
 
     // 2 failures, then a success — should reset count
     await fail().catch(() => {});
@@ -113,7 +141,11 @@ describe('CircuitBreaker', () => {
   it('allows configuring per-integration thresholds', async () => {
     cb.configure('email', { threshold: 1 });
 
-    await cb.execute('email', async () => { throw new Error('fail'); }).catch(() => {});
+    await cb
+      .execute('email', async () => {
+        throw new Error('fail');
+      })
+      .catch(() => {});
     expect(cb.getState('email')).toBe(CircuitState.OPEN);
   });
 });

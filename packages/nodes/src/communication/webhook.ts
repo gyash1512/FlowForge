@@ -17,7 +17,10 @@ const outputSchema = z.object({
 const configSchema = z.object({
   timeout: z.number().int().default(30_000).describe('Request timeout in milliseconds'),
   retryOnFailure: z.boolean().default(false),
-  signatureHeader: z.string().default('X-Webhook-Signature').describe('Header name for HMAC signature'),
+  signatureHeader: z
+    .string()
+    .default('X-Webhook-Signature')
+    .describe('Header name for HMAC signature'),
 });
 
 export const webhookNode = defineNode({

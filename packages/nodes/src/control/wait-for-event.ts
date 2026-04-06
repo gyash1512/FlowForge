@@ -15,7 +15,11 @@ const outputSchema = z.object({
 });
 
 const configSchema = z.object({
-  defaultTimeout: z.number().int().default(300_000).describe('Default timeout in milliseconds (5 minutes)'),
+  defaultTimeout: z
+    .number()
+    .int()
+    .default(300_000)
+    .describe('Default timeout in milliseconds (5 minutes)'),
 });
 
 export const waitForEventNode = defineNode({

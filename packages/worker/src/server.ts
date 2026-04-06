@@ -1,10 +1,6 @@
 import { Hono } from 'hono';
 import type { Logger, RunRecord, WorkflowDefinition, RunFilter } from '@flowforge/shared';
-import {
-  RunStatus,
-  eventPayloadSchema,
-  runFilterSchema,
-} from '@flowforge/shared';
+import { RunStatus, eventPayloadSchema, runFilterSchema } from '@flowforge/shared';
 import type { WorkflowRegistry } from './registry.js';
 
 // ────────────────────────────────────────────────────────────────
@@ -95,10 +91,7 @@ export function createServer(deps: ServerDeps): Hono {
     const parsed = eventPayloadSchema.safeParse(body);
 
     if (!parsed.success) {
-      return c.json(
-        { error: 'Invalid event payload', details: parsed.error.issues },
-        400,
-      );
+      return c.json({ error: 'Invalid event payload', details: parsed.error.issues }, 400);
     }
 
     const { type, data } = parsed.data;
@@ -147,10 +140,7 @@ export function createServer(deps: ServerDeps): Hono {
 
     const parsed = runFilterSchema.safeParse(filterInput);
     if (!parsed.success) {
-      return c.json(
-        { error: 'Invalid filter parameters', details: parsed.error.issues },
-        400,
-      );
+      return c.json({ error: 'Invalid filter parameters', details: parsed.error.issues }, 400);
     }
 
     const runs = runStore.list(parsed.data);
@@ -199,14 +189,8 @@ export function createServer(deps: ServerDeps): Hono {
     if (!run) {
       return c.json({ error: `Run not found: ${id}` }, 404);
     }
-    if (
-      run.status !== RunStatus.RUNNING &&
-      run.status !== RunStatus.PENDING
-    ) {
-      return c.json(
-        { error: 'Only running or pending runs can be cancelled' },
-        400,
-      );
+    if (run.status !== RunStatus.RUNNING && run.status !== RunStatus.PENDING) {
+      return c.json({ error: 'Only running or pending runs can be cancelled' }, 400);
     }
 
     if (!onCancel) {

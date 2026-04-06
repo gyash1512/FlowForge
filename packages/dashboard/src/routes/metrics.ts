@@ -23,9 +23,8 @@ metricsRoutes.get('/', (c) => {
     .filter((r) => r.startedAt && r.completedAt)
     .map((r) => r.completedAt!.getTime() - r.startedAt!.getTime());
 
-  const avgDurationMs = durations.length > 0
-    ? durations.reduce((a, b) => a + b, 0) / durations.length
-    : 0;
+  const avgDurationMs =
+    durations.length > 0 ? durations.reduce((a, b) => a + b, 0) / durations.length : 0;
 
   const sortedDurations = [...durations].sort((a, b) => a - b);
   const p95Index = Math.floor(sortedDurations.length * 0.95);

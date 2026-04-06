@@ -77,9 +77,7 @@ export function generateProjectFiles(projectName: string): Record<string, string
       '',
     ].join('\n'),
 
-    '.gitignore': ['node_modules', 'dist', '.turbo', '.env', 'coverage', '*.log', ''].join(
-      '\n',
-    ),
+    '.gitignore': ['node_modules', 'dist', '.turbo', '.env', 'coverage', '*.log', ''].join('\n'),
 
     'src/workflows/example.workflow.ts': [
       "import { z } from 'zod';",
@@ -126,9 +124,7 @@ export const initCommand = new Command('init')
     const projectName = options.name ?? path.basename(process.cwd());
     const targetDir = path.resolve(options.dir ?? '.');
 
-    console.log(
-      chalk.bold.blue('\n  FlowForge') + chalk.dim(' — Scaffolding new project\n'),
-    );
+    console.log(chalk.bold.blue('\n  FlowForge') + chalk.dim(' — Scaffolding new project\n'));
 
     const spinner = ora('Generating project files...').start();
 

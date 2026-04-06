@@ -1,4 +1,10 @@
-import type { NodeContext, WorkflowEvent, WorkflowMetadata, AIContext, Logger } from '@flowforge/shared';
+import type {
+  NodeContext,
+  WorkflowEvent,
+  WorkflowMetadata,
+  AIContext,
+  Logger,
+} from '@flowforge/shared';
 import { vi } from 'vitest';
 
 /**
@@ -50,9 +56,20 @@ export function createMockContext<TInput = unknown, TConfig = unknown>(
   };
 
   const defaultAi: AIContext = {
-    generateText: vi.fn().mockResolvedValue({ text: 'mock text', usage: { promptTokens: 10, completionTokens: 20 }, finishReason: 'stop' }),
-    streamText: vi.fn().mockResolvedValue({ textStream: (async function* () { yield 'mock'; })(), text: Promise.resolve('mock') }),
-    generateObject: vi.fn().mockResolvedValue({ object: {}, usage: { promptTokens: 10, completionTokens: 20 } }),
+    generateText: vi.fn().mockResolvedValue({
+      text: 'mock text',
+      usage: { promptTokens: 10, completionTokens: 20 },
+      finishReason: 'stop',
+    }),
+    streamText: vi.fn().mockResolvedValue({
+      textStream: (async function* () {
+        yield 'mock';
+      })(),
+      text: Promise.resolve('mock'),
+    }),
+    generateObject: vi
+      .fn()
+      .mockResolvedValue({ object: {}, usage: { promptTokens: 10, completionTokens: 20 } }),
     embed: vi.fn().mockResolvedValue({ embedding: [0.1, 0.2, 0.3], usage: { tokens: 5 } }),
     ...overrides.ai,
   };

@@ -1,4 +1,11 @@
-import type { WorkflowDefinition, RunRecord, Logger, DataAdaptor, IntegrationAdaptor, AIContext } from '@flowforge/shared';
+import type {
+  WorkflowDefinition,
+  RunRecord,
+  Logger,
+  DataAdaptor,
+  IntegrationAdaptor,
+  AIContext,
+} from '@flowforge/shared';
 import { WorkflowNotFoundError, RunStatus } from '@flowforge/shared';
 import { Runner } from './runner.js';
 import type { RuntimeProviders } from './runner.js';
@@ -31,9 +38,8 @@ export class Engine {
     this.integrations = new IntegrationManager(this.logger);
 
     // Build AI context — user must pass the AI SDK functions explicitly, no magic
-    const aiCtx: AIContext = (options.ai && typeof options.ai === 'object')
-      ? options.ai
-      : createNoopAIProvider();
+    const aiCtx: AIContext =
+      options.ai && typeof options.ai === 'object' ? options.ai : createNoopAIProvider();
 
     const providers: RuntimeProviders = {
       pull: (source, params) => this.data.pull(source, params),

@@ -10,9 +10,7 @@ import type {
  * Define an agent node that runs an LLM tool-calling loop.
  * Uses Vercel AI SDK under the hood via ctx.ai.
  */
-export function defineAgentNode(
-  options: AgentNodeOptions,
-): NodeDefinition {
+export function defineAgentNode(options: AgentNodeOptions): NodeDefinition {
   const configSchema = z.object({
     model: z.string().default(options.model),
   });
@@ -33,7 +31,14 @@ export function defineAgentNode(
       const maxIterations = options.maxIterations ?? 10;
 
       // Build tool definitions for AI SDK
-      const aiTools: Record<string, { description: string; parameters: z.ZodType; execute: (...args: unknown[]) => Promise<unknown> }> = {};
+      const aiTools: Record<
+        string,
+        {
+          description: string;
+          parameters: z.ZodType;
+          execute: (...args: unknown[]) => Promise<unknown>;
+        }
+      > = {};
       for (const [name, tool] of Object.entries(options.tools)) {
         const t = tool as AgentToolDef;
         aiTools[name] = {
@@ -54,9 +59,10 @@ export function defineAgentNode(
         const result = await ctx.ai.generateText({
           model,
           system: options.systemPrompt,
-          prompt: iterations === 1
-            ? JSON.stringify(ctx.input)
-            : `Continue based on tool results. Previous: ${JSON.stringify(lastResponse)}`,
+          prompt:
+            iterations === 1
+              ? JSON.stringify(ctx.input)
+              : `Continue based on tool results. Previous: ${JSON.stringify(lastResponse)}`,
           tools: aiTools,
           maxTokens: options.maxTokens,
           temperature: options.temperature,

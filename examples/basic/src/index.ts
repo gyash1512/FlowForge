@@ -10,11 +10,13 @@ const fetchUsers = defineNode({
   description: 'Fetches users from the data source',
   category: 'data',
   inputSchema: z.any(),
-  outputSchema: z.array(z.object({
-    id: z.string(),
-    name: z.string(),
-    email: z.string(),
-  })),
+  outputSchema: z.array(
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      email: z.string(),
+    }),
+  ),
   configSchema: z.object({}),
   timeout: 5000,
   handler: async (_ctx) => {
@@ -32,18 +34,22 @@ const enrichUsers = defineNode({
   version: '1.0.0',
   description: 'Enriches users with domain information',
   category: 'transform',
-  inputSchema: z.array(z.object({
-    id: z.string(),
-    name: z.string(),
-    email: z.string(),
-  })),
-  outputSchema: z.array(z.object({
-    id: z.string(),
-    name: z.string(),
-    email: z.string(),
-    domain: z.string().optional(),
-    enrichedAt: z.string(),
-  })),
+  inputSchema: z.array(
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      email: z.string(),
+    }),
+  ),
+  outputSchema: z.array(
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      email: z.string(),
+      domain: z.string().optional(),
+      enrichedAt: z.string(),
+    }),
+  ),
   configSchema: z.object({}),
   handler: async (ctx) => {
     return ctx.input.map((u) => ({
@@ -115,16 +121,20 @@ async function main() {
   const engine = new Engine();
   engine.register(userSyncWorkflow);
 
-  console.log('Registered workflows:', engine.listWorkflows().map((w) => w.id));
+  console.log(
+    'Registered workflows:',
+    engine.listWorkflows().map((w) => w.id),
+  );
 
   const run = await engine.trigger('user-sync');
   console.log('Run result:', {
     id: run.id,
     status: run.status,
     output: run.output,
-    durationMs: run.completedAt && run.startedAt
-      ? run.completedAt.getTime() - run.startedAt.getTime()
-      : undefined,
+    durationMs:
+      run.completedAt && run.startedAt
+        ? run.completedAt.getTime() - run.startedAt.getTime()
+        : undefined,
   });
 }
 

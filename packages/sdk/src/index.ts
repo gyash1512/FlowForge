@@ -46,9 +46,4 @@ export type {
   MetricsSnapshot,
 } from '@flowforge/shared';
 
-export {
-  RunStatus,
-  StepStatus,
-  NodeCategory,
-  TriggerType,
-} from '@flowforge/shared';
+export { RunStatus, StepStatus, NodeCategory, TriggerType } from '@flowforge/shared';

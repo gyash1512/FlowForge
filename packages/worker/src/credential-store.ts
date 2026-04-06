@@ -121,19 +121,14 @@ export class CredentialStore {
     const iv = crypto.randomBytes(IV_LENGTH);
     const cipher = crypto.createCipheriv(ALGORITHM, this.key, iv);
 
-    const encrypted = Buffer.concat([
-      cipher.update(value, 'utf-8'),
-      cipher.final(),
-    ]);
+    const encrypted = Buffer.concat([cipher.update(value, 'utf-8'), cipher.final()]);
 
     const tag = cipher.getAuthTag();
 
     // Store as: iv:tag:ciphertext (all base64)
-    return [
-      iv.toString(ENCODING),
-      tag.toString(ENCODING),
-      encrypted.toString(ENCODING),
-    ].join(SEPARATOR);
+    return [iv.toString(ENCODING), tag.toString(ENCODING), encrypted.toString(ENCODING)].join(
+      SEPARATOR,
+    );
   }
 
   private decrypt(encrypted: string): string {
@@ -152,10 +147,7 @@ export class CredentialStore {
     const decipher = crypto.createDecipheriv(ALGORITHM, this.key, iv);
     decipher.setAuthTag(tag);
 
-    const decrypted = Buffer.concat([
-      decipher.update(ciphertext),
-      decipher.final(),
-    ]);
+    const decrypted = Buffer.concat([decipher.update(ciphertext), decipher.final()]);
 
     return decrypted.toString('utf-8');
   }

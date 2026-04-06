@@ -13,7 +13,7 @@ describe('control/delay', () => {
       sleep,
     });
 
-    const result = await delayNode.handler(ctx) as Record<string, unknown>;
+    const result = (await delayNode.handler(ctx)) as Record<string, unknown>;
 
     expect(sleep).toHaveBeenCalledWith(5000);
     expect(result.delayMs).toBe(5000);
@@ -29,7 +29,7 @@ describe('control/delay', () => {
       sleep,
     });
 
-    const result = await delayNode.handler(ctx) as Record<string, unknown>;
+    const result = (await delayNode.handler(ctx)) as Record<string, unknown>;
 
     expect(sleep).toHaveBeenCalledWith(100);
     expect(result.data).toBeUndefined();
@@ -44,7 +44,7 @@ describe('control/delay', () => {
       sleep,
     });
 
-    const result = await delayNode.handler(ctx) as Record<string, unknown>;
+    const result = (await delayNode.handler(ctx)) as Record<string, unknown>;
 
     expect(new Date(result.resumedAt as string).toISOString()).toBe(result.resumedAt);
   });
@@ -59,7 +59,7 @@ describe('control/wait-for-event', () => {
       wait,
     });
 
-    const result = await waitForEventNode.handler(ctx) as Record<string, unknown>;
+    const result = (await waitForEventNode.handler(ctx)) as Record<string, unknown>;
 
     expect(wait).toHaveBeenCalledWith('order.approved', { orderId: '123' }, 60_000);
     expect(result.event).toBe('order.approved');
@@ -88,7 +88,7 @@ describe('control/wait-for-event', () => {
       wait,
     });
 
-    const result = await waitForEventNode.handler(ctx) as Record<string, unknown>;
+    const result = (await waitForEventNode.handler(ctx)) as Record<string, unknown>;
 
     expect(result.timedOut).toBe(true);
     expect(result.data).toBeNull();
@@ -116,7 +116,7 @@ describe('control/sub-workflow', () => {
       emit,
     });
 
-    const result = await subWorkflowNode.handler(ctx) as Record<string, unknown>;
+    const result = (await subWorkflowNode.handler(ctx)) as Record<string, unknown>;
 
     expect(emit).toHaveBeenCalledWith('workflow:trigger:wf-child-1', {
       workflowId: 'wf-child-1',
@@ -138,7 +138,7 @@ describe('control/sub-workflow', () => {
       wait,
     });
 
-    const result = await subWorkflowNode.handler(ctx) as Record<string, unknown>;
+    const result = (await subWorkflowNode.handler(ctx)) as Record<string, unknown>;
 
     expect(emit).toHaveBeenCalled();
     expect(wait).toHaveBeenCalledWith(

@@ -39,13 +39,16 @@ export const kafkaNode = defineNode({
   tags: ['kafka', 'streaming', 'message-queue'],
 
   handler: async (ctx) => {
-    const { action, topic, messages, groupId, maxMessages, timeout } = ctx.input as z.infer<typeof inputSchema>;
+    const { action, topic, messages, groupId, maxMessages, timeout } = ctx.input as z.infer<
+      typeof inputSchema
+    >;
     const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'produce': {
         if (!topic) throw new Error('topic is required for action "produce"');
-        if (!messages || messages.length === 0) throw new Error('messages are required for action "produce"');
+        if (!messages || messages.length === 0)
+          throw new Error('messages are required for action "produce"');
         await ctx.push('kafka', {
           connectionId,
           command: 'PRODUCE',

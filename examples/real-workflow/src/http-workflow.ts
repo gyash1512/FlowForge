@@ -188,7 +188,10 @@ async function main() {
   engine.register(httpAdaptorWorkflow);
 
   console.log('Registered adaptors:', engine.data.list());
-  console.log('Registered workflows:', engine.listWorkflows().map((w) => w.id));
+  console.log(
+    'Registered workflows:',
+    engine.listWorkflows().map((w) => w.id),
+  );
   console.log('\nExecuting http-adaptor-pipeline...\n');
 
   const run = await engine.trigger('http-adaptor-pipeline');

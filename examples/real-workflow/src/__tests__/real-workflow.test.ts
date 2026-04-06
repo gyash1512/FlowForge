@@ -51,14 +51,12 @@ function makeTransformNode() {
     outputSchema: z.array(simplifiedUserSchema),
     configSchema: z.object({}),
     handler: async (ctx) => {
-      return ctx.input.map(
-        (user: z.infer<typeof userSchema>) => ({
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          company: user.company.name,
-        }),
-      );
+      return ctx.input.map((user: z.infer<typeof userSchema>) => ({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        company: user.company.name,
+      }));
     },
   });
 }
@@ -76,9 +74,8 @@ function makeFilterNode() {
     }),
     handler: async (ctx) => {
       const targets = (ctx.config as { companies: string[] }).companies;
-      return ctx.input.filter(
-        (user: z.infer<typeof simplifiedUserSchema>) =>
-          targets.some((c) => user.company.includes(c)),
+      return ctx.input.filter((user: z.infer<typeof simplifiedUserSchema>) =>
+        targets.some((c) => user.company.includes(c)),
       );
     },
   });
@@ -175,8 +172,7 @@ describe('real-workflow: end-to-end with live HTTP', () => {
     // Verify the filter actually worked -- every result must match one of the target companies
     for (const user of filtered) {
       const matchesTarget =
-        user.company.includes('Romaguera-Crona') ||
-        user.company.includes('Deckow-Crist');
+        user.company.includes('Romaguera-Crona') || user.company.includes('Deckow-Crist');
       expect(matchesTarget).toBe(true);
     }
 
@@ -276,8 +272,7 @@ describe('real-workflow: end-to-end with live HTTP', () => {
         input: (ctx) => ctx.steps['fetch'],
       })
       .if('user-count-branch', {
-        condition: (ctx) =>
-          (ctx.steps['count'] as { count: number }).count > 5,
+        condition: (ctx) => (ctx.steps['count'] as { count: number }).count > 5,
         then: [['result', manyUsersNode]],
         else: [['result', fewUsersNode]],
       })
@@ -342,13 +337,7 @@ describe('real-workflow: end-to-end with live HTTP', () => {
           return users;
         },
         concurrency: 3,
-        pipeline: (item) => [
-          [
-            'uppercase',
-            uppercaseNode,
-            { input: () => item },
-          ],
-        ],
+        pipeline: (item) => [['uppercase', uppercaseNode, { input: () => item }]],
       })
       .build();
 

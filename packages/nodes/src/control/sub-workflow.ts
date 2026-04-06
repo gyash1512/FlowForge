@@ -4,7 +4,10 @@ import { defineNode } from '@flowforge/sdk';
 const inputSchema = z.object({
   workflowId: z.string().describe('Target workflow identifier'),
   data: z.unknown().optional().describe('Data to pass to the sub-workflow'),
-  waitForCompletion: z.boolean().default(false).describe('Whether to wait for the sub-workflow to complete'),
+  waitForCompletion: z
+    .boolean()
+    .default(false)
+    .describe('Whether to wait for the sub-workflow to complete'),
 });
 
 const outputSchema = z.object({
@@ -14,7 +17,10 @@ const outputSchema = z.object({
 });
 
 const configSchema = z.object({
-  eventPrefix: z.string().default('workflow:trigger').describe('Event prefix for sub-workflow triggers'),
+  eventPrefix: z
+    .string()
+    .default('workflow:trigger')
+    .describe('Event prefix for sub-workflow triggers'),
   timeout: z.number().int().default(300_000).describe('Timeout when waiting for completion (ms)'),
 });
 

@@ -33,7 +33,10 @@ export class DataAdaptorManager {
   async pull(source: string, params: unknown): Promise<unknown> {
     const adaptor = this.adaptors.get(source);
     if (!adaptor) {
-      throw new IntegrationError(source, `Data adaptor "${source}" not registered. Available: ${this.list().join(', ') || 'none'}`);
+      throw new IntegrationError(
+        source,
+        `Data adaptor "${source}" not registered. Available: ${this.list().join(', ') || 'none'}`,
+      );
     }
     return adaptor.pull(params);
   }
@@ -41,7 +44,10 @@ export class DataAdaptorManager {
   async push(target: string, params: unknown): Promise<unknown> {
     const adaptor = this.adaptors.get(target);
     if (!adaptor) {
-      throw new IntegrationError(target, `Data adaptor "${target}" not registered. Available: ${this.list().join(', ') || 'none'}`);
+      throw new IntegrationError(
+        target,
+        `Data adaptor "${target}" not registered. Available: ${this.list().join(', ') || 'none'}`,
+      );
     }
     return adaptor.push(params);
   }
@@ -98,10 +104,16 @@ export class IntegrationManager {
   async execute(name: string, action: string, params: unknown): Promise<unknown> {
     const adaptor = this.adaptors.get(name);
     if (!adaptor) {
-      throw new IntegrationError(name, `Integration "${name}" not registered. Available: ${this.list().join(', ') || 'none'}`);
+      throw new IntegrationError(
+        name,
+        `Integration "${name}" not registered. Available: ${this.list().join(', ') || 'none'}`,
+      );
     }
     if (!adaptor.actions.includes(action)) {
-      throw new IntegrationError(name, `Unknown action "${action}". Available: ${adaptor.actions.join(', ')}`);
+      throw new IntegrationError(
+        name,
+        `Unknown action "${action}". Available: ${adaptor.actions.join(', ')}`,
+      );
     }
     return adaptor.execute(action, params, '');
   }

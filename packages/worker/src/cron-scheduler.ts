@@ -22,31 +22,31 @@ export class CronScheduler {
   /**
    * Register a cron-triggered workflow.
    */
-  register(
-    workflowId: string,
-    cronExpression: string,
-    callback: CronCallback,
-  ): void {
+  register(workflowId: string, cronExpression: string, callback: CronCallback): void {
     // Remove existing job for this workflow if present
     this.unregister(workflowId);
 
-    const job = new Cron(cronExpression, {
-      paused: !this.running,
-      catch: (err: unknown) => {
-        this.logger?.error(
-          `Cron job error for workflow ${workflowId}: ${err instanceof Error ? err.message : String(err)}`,
-        );
+    const job = new Cron(
+      cronExpression,
+      {
+        paused: !this.running,
+        catch: (err: unknown) => {
+          this.logger?.error(
+            `Cron job error for workflow ${workflowId}: ${err instanceof Error ? err.message : String(err)}`,
+          );
+        },
       },
-    }, async () => {
-      this.logger?.debug(`Cron triggered for workflow ${workflowId}`);
-      try {
-        await callback();
-      } catch (err) {
-        this.logger?.error(
-          `Cron callback error for workflow ${workflowId}: ${err instanceof Error ? err.message : String(err)}`,
-        );
-      }
-    });
+      async () => {
+        this.logger?.debug(`Cron triggered for workflow ${workflowId}`);
+        try {
+          await callback();
+        } catch (err) {
+          this.logger?.error(
+            `Cron callback error for workflow ${workflowId}: ${err instanceof Error ? err.message : String(err)}`,
+          );
+        }
+      },
+    );
 
     this.jobs.set(workflowId, {
       workflowId,
@@ -55,9 +55,7 @@ export class CronScheduler {
       callback,
     });
 
-    this.logger?.info(
-      `Cron registered for workflow ${workflowId}: ${cronExpression}`,
-    );
+    this.logger?.info(`Cron registered for workflow ${workflowId}: ${cronExpression}`);
   }
 
   /**

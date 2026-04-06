@@ -86,10 +86,8 @@ export function createApp(deps: ServerDeps): Hono {
       };
       return c.json(response, 200);
     } catch (error) {
-      const statusCode =
-        error instanceof FlowForgeError ? error.statusCode : 500;
-      const errorMessage =
-        error instanceof Error ? error.message : 'Unknown error';
+      const statusCode = error instanceof FlowForgeError ? error.statusCode : 500;
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
 
       const response: IntegrationResponse = {
         success: false,
@@ -112,10 +110,7 @@ export function createApp(deps: ServerDeps): Hono {
     }
 
     const allHealthy = [...results.values()].every(Boolean);
-    return c.json(
-      { healthy: allHealthy, integrations: status },
-      allHealthy ? 200 : 503,
-    );
+    return c.json({ healthy: allHealthy, integrations: status }, allHealthy ? 200 : 503);
   });
 
   // ── GET /integrations ───────────────────────────────────────

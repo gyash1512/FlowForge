@@ -321,12 +321,7 @@ export interface WhileStep {
   pipeline: WorkflowStep[];
 }
 
-export type ControlFlowStep =
-  | ParallelStep
-  | ConditionalStep
-  | ForEachStep
-  | SwitchStep
-  | WhileStep;
+export type ControlFlowStep = ParallelStep | ConditionalStep | ForEachStep | SwitchStep | WhileStep;
 
 // ────────────────────────────────────────────────────────────────
 // Workflow Definition

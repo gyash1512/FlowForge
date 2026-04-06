@@ -2,7 +2,15 @@ import { z } from 'zod';
 import { defineNode } from '@flowforge/sdk';
 
 const inputSchema = z.object({
-  action: z.enum(['find', 'findOne', 'insertOne', 'insertMany', 'updateOne', 'deleteOne', 'aggregate']),
+  action: z.enum([
+    'find',
+    'findOne',
+    'insertOne',
+    'insertMany',
+    'updateOne',
+    'deleteOne',
+    'aggregate',
+  ]),
   collection: z.string(),
   filter: z.record(z.unknown()).optional(),
   document: z.record(z.unknown()).optional(),
@@ -36,7 +44,8 @@ export const mongodbNode = defineNode({
   tags: ['database', 'nosql', 'mongodb'],
 
   handler: async (ctx) => {
-    const { action, collection, filter, document, documents, update, pipeline, options } = ctx.input as z.infer<typeof inputSchema>;
+    const { action, collection, filter, document, documents, update, pipeline, options } =
+      ctx.input as z.infer<typeof inputSchema>;
     const { connectionId, database } = ctx.config as z.infer<typeof configSchema>;
 
     const baseParams = { connectionId, database, collection };
@@ -74,7 +83,8 @@ export const mongodbNode = defineNode({
       }
 
       case 'insertMany': {
-        if (!documents?.length) throw new Error('documents array is required for action "insertMany"');
+        if (!documents?.length)
+          throw new Error('documents array is required for action "insertMany"');
         const result = await ctx.push('mongodb', {
           ...baseParams,
           operation: 'insertMany',
@@ -85,7 +95,8 @@ export const mongodbNode = defineNode({
       }
 
       case 'updateOne': {
-        if (!filter || !update) throw new Error('filter and update are required for action "updateOne"');
+        if (!filter || !update)
+          throw new Error('filter and update are required for action "updateOne"');
         const result = await ctx.push('mongodb', {
           ...baseParams,
           operation: 'updateOne',
@@ -94,7 +105,11 @@ export const mongodbNode = defineNode({
           options,
         });
         const res = result as { matchedCount?: number; modifiedCount?: number };
-        return { data: result, matchedCount: res.matchedCount ?? 0, modifiedCount: res.modifiedCount ?? 0 };
+        return {
+          data: result,
+          matchedCount: res.matchedCount ?? 0,
+          modifiedCount: res.modifiedCount ?? 0,
+        };
       }
 
       case 'deleteOne': {

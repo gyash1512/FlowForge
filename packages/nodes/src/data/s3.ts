@@ -36,7 +36,8 @@ export const s3Node = defineNode({
   tags: ['storage', 's3', 'object-storage'],
 
   handler: async (ctx) => {
-    const { action, bucket, key, body, contentType, prefix, maxKeys, expiresIn, metadata } = ctx.input as z.infer<typeof inputSchema>;
+    const { action, bucket, key, body, contentType, prefix, maxKeys, expiresIn, metadata } =
+      ctx.input as z.infer<typeof inputSchema>;
     const { connectionId, region } = ctx.config as z.infer<typeof configSchema>;
 
     const baseParams = { connectionId, region, bucket };

@@ -46,10 +46,7 @@ describe('withRetry', () => {
   });
 
   it('retries on failure then succeeds', async () => {
-    const fn = vi
-      .fn()
-      .mockRejectedValueOnce(new Error('fail'))
-      .mockResolvedValue('ok');
+    const fn = vi.fn().mockRejectedValueOnce(new Error('fail')).mockResolvedValue('ok');
     const config: RetryConfig = { maxAttempts: 3, backoff: 'fixed', delayMs: 0 };
     const result = await withRetry(fn, config, { nodeId: 'test' });
     expect(result).toBe('ok');
@@ -67,20 +64,14 @@ describe('withRetry', () => {
 
   it('calls onRetry callback', async () => {
     const onRetry = vi.fn();
-    const fn = vi
-      .fn()
-      .mockRejectedValueOnce(new Error('fail'))
-      .mockResolvedValue('ok');
+    const fn = vi.fn().mockRejectedValueOnce(new Error('fail')).mockResolvedValue('ok');
     const config: RetryConfig = { maxAttempts: 3, backoff: 'fixed', delayMs: 0 };
     await withRetry(fn, config, { nodeId: 'test', onRetry });
     expect(onRetry).toHaveBeenCalledWith(1, expect.any(Error), 0);
   });
 
   it('passes attempt number to fn', async () => {
-    const fn = vi
-      .fn()
-      .mockRejectedValueOnce(new Error('fail'))
-      .mockResolvedValue('ok');
+    const fn = vi.fn().mockRejectedValueOnce(new Error('fail')).mockResolvedValue('ok');
     const config: RetryConfig = { maxAttempts: 3, backoff: 'fixed', delayMs: 0 };
     await withRetry(fn, config, { nodeId: 'test' });
     expect(fn).toHaveBeenCalledWith(1);

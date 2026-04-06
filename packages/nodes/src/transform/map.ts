@@ -11,7 +11,9 @@ const outputSchema = z.object({
 });
 
 const configSchema = z.object({
-  expression: z.string().describe('JavaScript function body. Receives (item, index) and returns transformed item.'),
+  expression: z
+    .string()
+    .describe('JavaScript function body. Receives (item, index) and returns transformed item.'),
 });
 
 /**

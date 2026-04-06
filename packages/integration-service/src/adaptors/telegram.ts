@@ -2,9 +2,19 @@ import type { IntegrationAdaptor } from '@flowforge/shared';
 import { IntegrationError } from '@flowforge/shared';
 
 export interface TelegramClient {
-  sendMessage(chatId: string | number, text: string, parseMode?: string, replyToMessageId?: number): Promise<unknown>;
+  sendMessage(
+    chatId: string | number,
+    text: string,
+    parseMode?: string,
+    replyToMessageId?: number,
+  ): Promise<unknown>;
   sendPhoto(chatId: string | number, photo: string, caption?: string): Promise<unknown>;
-  sendDocument(chatId: string | number, document: string, caption?: string, filename?: string): Promise<unknown>;
+  sendDocument(
+    chatId: string | number,
+    document: string,
+    caption?: string,
+    filename?: string,
+  ): Promise<unknown>;
 }
 
 interface SendMessageParams {

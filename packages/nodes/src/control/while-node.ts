@@ -12,7 +12,12 @@ const outputSchema = z.object({
 });
 
 const configSchema = z.object({
-  maxIterations: z.number().int().min(1).default(100).describe('Maximum iterations to prevent infinite loops'),
+  maxIterations: z
+    .number()
+    .int()
+    .min(1)
+    .default(100)
+    .describe('Maximum iterations to prevent infinite loops'),
 });
 
 export const whileNode = defineNode({

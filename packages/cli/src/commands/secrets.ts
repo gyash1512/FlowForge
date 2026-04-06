@@ -96,9 +96,7 @@ const setSubcommand = new Command('set')
           : `Stored secret "${key}" in ${path.relative(process.cwd(), envPath)}`,
       );
       console.log(
-        chalk.dim(
-          '\n  Make sure .env is in your .gitignore to avoid committing secrets.\n',
-        ),
+        chalk.dim('\n  Make sure .env is in your .gitignore to avoid committing secrets.\n'),
       );
     } catch (error) {
       spinner.fail('Failed to store secret');
@@ -130,7 +128,10 @@ const listSubcommand = new Command('list')
         if (options.showValues) {
           console.log(`  ${chalk.cyan(key.padEnd(30))} ${chalk.dim(value)}`);
         } else {
-          const masked = value.length > 4 ? value.slice(0, 2) + '*'.repeat(value.length - 4) + value.slice(-2) : '****';
+          const masked =
+            value.length > 4
+              ? value.slice(0, 2) + '*'.repeat(value.length - 4) + value.slice(-2)
+              : '****';
           console.log(`  ${chalk.cyan(key.padEnd(30))} ${chalk.dim(masked)}`);
         }
       }

@@ -23,9 +23,7 @@ describe('HttpAdaptor', () => {
   });
 
   it('pull() throws if url is missing', async () => {
-    await expect(adaptor.pull({})).rejects.toThrow(
-      'HttpAdaptor.pull() requires a "url" string',
-    );
+    await expect(adaptor.pull({})).rejects.toThrow('HttpAdaptor.pull() requires a "url" string');
   });
 
   it('push() throws if url is missing', async () => {

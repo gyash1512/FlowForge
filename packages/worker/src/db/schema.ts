@@ -1,11 +1,4 @@
-import {
-  pgTable,
-  text,
-  timestamp,
-  jsonb,
-  integer,
-  uuid,
-} from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, jsonb, integer, uuid } from 'drizzle-orm/pg-core';
 
 // ── Workflows ──
 export const workflows = pgTable('workflows', {
@@ -24,7 +17,9 @@ export const workflows = pgTable('workflows', {
 // ── Workflow Runs ──
 export const workflowRuns = pgTable('workflow_runs', {
   id: text('id').primaryKey(),
-  workflowId: text('workflow_id').notNull().references(() => workflows.id),
+  workflowId: text('workflow_id')
+    .notNull()
+    .references(() => workflows.id),
   status: text('status').notNull().default('pending'),
   triggerType: text('trigger_type').notNull(),
   triggerConfig: jsonb('trigger_config').$type<Record<string, unknown>>(),
@@ -42,7 +37,9 @@ export const workflowRuns = pgTable('workflow_runs', {
 // ── Step Results ──
 export const stepResults = pgTable('step_results', {
   id: text('id').primaryKey(),
-  runId: text('run_id').notNull().references(() => workflowRuns.id),
+  runId: text('run_id')
+    .notNull()
+    .references(() => workflowRuns.id),
   stepName: text('step_name').notNull(),
   nodeName: text('node_name').notNull(),
   status: text('status').notNull().default('pending'),
@@ -68,7 +65,9 @@ export const events = pgTable('events', {
 
 // ── Checkpoints ──
 export const checkpoints = pgTable('checkpoints', {
-  runId: text('run_id').notNull().references(() => workflowRuns.id),
+  runId: text('run_id')
+    .notNull()
+    .references(() => workflowRuns.id),
   stepName: text('step_name').notNull(),
   state: jsonb('state').$type<Record<string, unknown>>().notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
@@ -87,7 +86,9 @@ export const tenants = pgTable('tenants', {
 // ── Audit Logs ──
 export const auditLogs = pgTable('audit_logs', {
   id: uuid('id').defaultRandom().primaryKey(),
-  tenantId: text('tenant_id').notNull().references(() => tenants.id),
+  tenantId: text('tenant_id')
+    .notNull()
+    .references(() => tenants.id),
   actor: text('actor').notNull(),
   action: text('action').notNull(),
   resourceType: text('resource_type').notNull(),
@@ -99,7 +100,9 @@ export const auditLogs = pgTable('audit_logs', {
 // ── API Keys ──
 export const apiKeys = pgTable('api_keys', {
   id: uuid('id').defaultRandom().primaryKey(),
-  tenantId: text('tenant_id').notNull().references(() => tenants.id),
+  tenantId: text('tenant_id')
+    .notNull()
+    .references(() => tenants.id),
   key: text('key').notNull(),
   name: text('name').notNull(),
   scopes: jsonb('scopes').$type<string[]>().notNull(),

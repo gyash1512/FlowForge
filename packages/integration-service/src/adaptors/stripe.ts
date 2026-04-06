@@ -2,9 +2,18 @@ import type { IntegrationAdaptor } from '@flowforge/shared';
 import { IntegrationError } from '@flowforge/shared';
 
 export interface StripeClient {
-  createCharge(amount: number, currency: string, source: string, description?: string): Promise<unknown>;
+  createCharge(
+    amount: number,
+    currency: string,
+    source: string,
+    description?: string,
+  ): Promise<unknown>;
   createCustomer(email: string, name?: string, metadata?: Record<string, string>): Promise<unknown>;
-  createSubscription(customerId: string, priceId: string, metadata?: Record<string, string>): Promise<unknown>;
+  createSubscription(
+    customerId: string,
+    priceId: string,
+    metadata?: Record<string, string>,
+  ): Promise<unknown>;
   listPayments(customerId?: string, limit?: number, startingAfter?: string): Promise<unknown>;
   createRefund(chargeId: string, amount?: number, reason?: string): Promise<unknown>;
 }
@@ -42,7 +51,13 @@ interface CreateRefundParams {
 
 export class StripeAdaptor implements IntegrationAdaptor {
   readonly name = 'stripe';
-  readonly actions = ['createCharge', 'createCustomer', 'createSubscription', 'listPayments', 'createRefund'];
+  readonly actions = [
+    'createCharge',
+    'createCustomer',
+    'createSubscription',
+    'listPayments',
+    'createRefund',
+  ];
 
   constructor(private readonly client?: StripeClient) {}
 

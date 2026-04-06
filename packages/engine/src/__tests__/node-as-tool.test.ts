@@ -1,7 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
 import { z } from 'zod';
 import { nodeAsAgentTool, nodesToAgentTools } from '../node-as-tool.js';
-import type { NodeDefinition, NodeContext, AIContext, WorkflowEvent, WorkflowMetadata } from '@flowforge/shared';
+import type {
+  NodeDefinition,
+  NodeContext,
+  AIContext,
+  WorkflowEvent,
+  WorkflowMetadata,
+} from '@flowforge/shared';
 
 // ────────────────────────────────────────────────────────────────
 // Helpers

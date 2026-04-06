@@ -28,7 +28,7 @@ export function corsMiddleware(options: CorsOptions = {}): MiddlewareHandler {
     // Determine allowed origin
     let allowedOrigin: string;
     if (Array.isArray(origin)) {
-      allowedOrigin = origin.includes(requestOrigin) ? requestOrigin : origin[0] ?? '*';
+      allowedOrigin = origin.includes(requestOrigin) ? requestOrigin : (origin[0] ?? '*');
     } else {
       allowedOrigin = origin;
     }

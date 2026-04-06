@@ -45,11 +45,7 @@ export function initTelemetry(options?: TelemetryOptions): void {
  *
  * Returns an object whose `end()` method closes the span with the given status.
  */
-export function createNodeSpan(
-  runId: string,
-  stepName: string,
-  nodeName: string,
-): Span {
+export function createNodeSpan(runId: string, stepName: string, nodeName: string): Span {
   const tracer = trace.getTracer('flowforge-worker');
   const otelSpan = tracer.startSpan(`node:${nodeName}`, {
     attributes: {

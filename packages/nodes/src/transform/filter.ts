@@ -12,7 +12,9 @@ const outputSchema = z.object({
 });
 
 const configSchema = z.object({
-  expression: z.string().describe('JavaScript function body. Receives (item, index) and should return a boolean.'),
+  expression: z
+    .string()
+    .describe('JavaScript function body. Receives (item, index) and should return a boolean.'),
 });
 
 /**

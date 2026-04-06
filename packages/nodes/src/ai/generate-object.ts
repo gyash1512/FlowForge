@@ -3,9 +3,7 @@ import { defineNode } from '@flowforge/sdk';
 
 const inputSchema = z.object({
   prompt: z.string().optional(),
-  messages: z
-    .array(z.object({ role: z.string(), content: z.string() }))
-    .optional(),
+  messages: z.array(z.object({ role: z.string(), content: z.string() })).optional(),
   system: z.string().optional(),
   schema: z.record(z.unknown()).describe('JSON representation of the desired output schema'),
 });
@@ -52,9 +50,7 @@ export const generateObjectNode = defineNode({
     // In practice the engine resolves it to a proper schema before reaching
     // the LLM provider.
     const zodSchema = z.object(
-      Object.fromEntries(
-        Object.entries(schema).map(([key]) => [key, z.unknown()]),
-      ),
+      Object.fromEntries(Object.entries(schema).map(([key]) => [key, z.unknown()])),
     );
 
     const result = await ctx.ai.generateObject({

@@ -107,11 +107,7 @@ export const deployCommand = new Command('deploy')
 
       default:
         deploySpinner.warn(`Deployment target "${target}" is not yet supported.`);
-        console.log(
-          chalk.dim(
-            '\n  Currently supported targets: local',
-          ),
-        );
+        console.log(chalk.dim('\n  Currently supported targets: local'));
         console.log(chalk.dim('  Remote deployment support is coming soon.\n'));
         break;
     }

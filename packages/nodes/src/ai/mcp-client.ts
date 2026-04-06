@@ -33,10 +33,13 @@ export class McpConnection {
   private env?: Record<string, string>;
 
   private childProcess?: ReturnType<typeof spawn>;
-  private pendingRequests = new Map<number, {
-    resolve: (value: JsonRpcResponse) => void;
-    reject: (error: Error) => void;
-  }>();
+  private pendingRequests = new Map<
+    number,
+    {
+      resolve: (value: JsonRpcResponse) => void;
+      reject: (error: Error) => void;
+    }
+  >();
   private buffer = '';
   private initialized = false;
 
@@ -198,7 +201,10 @@ export class McpConnection {
     });
   }
 
-  private async sendHttpRequest(method: string, params?: Record<string, unknown>): Promise<unknown> {
+  private async sendHttpRequest(
+    method: string,
+    params?: Record<string, unknown>,
+  ): Promise<unknown> {
     const targetUrl = this.url;
     if (!targetUrl) {
       throw new Error('URL is required for SSE/HTTP transport');
@@ -316,7 +322,13 @@ export const mcpClientNode = defineNode({
 
   handler: async (ctx) => {
     const { action, toolName, toolArgs, resourceUri } = ctx.input as z.infer<typeof inputSchema>;
-    const { transport, command, args: cmdArgs, url, env } = ctx.config as z.infer<typeof configSchema>;
+    const {
+      transport,
+      command,
+      args: cmdArgs,
+      url,
+      env,
+    } = ctx.config as z.infer<typeof configSchema>;
 
     ctx.logger.info({ action, transport }, 'MCP client action');
 

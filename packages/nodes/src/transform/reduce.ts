@@ -11,7 +11,11 @@ const outputSchema = z.object({
 });
 
 const configSchema = z.object({
-  expression: z.string().describe('JavaScript function body. Receives (accumulator, item, index) and returns the new accumulator.'),
+  expression: z
+    .string()
+    .describe(
+      'JavaScript function body. Receives (accumulator, item, index) and returns the new accumulator.',
+    ),
 });
 
 /**
@@ -19,7 +23,9 @@ const configSchema = z.object({
  * Uses the Function constructor intentionally to allow user-defined
  * reducers at runtime within sandboxed workflow execution.
  */
-function createReducerFunction(expression: string): (acc: unknown, item: unknown, index: number) => unknown {
+function createReducerFunction(
+  expression: string,
+): (acc: unknown, item: unknown, index: number) => unknown {
   return new Function('accumulator', 'item', 'index', expression) as (
     acc: unknown,
     item: unknown,

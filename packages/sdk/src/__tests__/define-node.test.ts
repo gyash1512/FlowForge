@@ -12,7 +12,8 @@ describe('defineNode', () => {
       inputSchema: z.object({ name: z.string() }),
       outputSchema: z.string(),
       configSchema: z.object({ prefix: z.string().default('Hello') }),
-      handler: async (ctx) => `${(ctx.config as { prefix: string }).prefix}, ${(ctx.input as { name: string }).name}!`,
+      handler: async (ctx) =>
+        `${(ctx.config as { prefix: string }).prefix}, ${(ctx.input as { name: string }).name}!`,
       tags: ['greet'],
       author: 'test',
     });

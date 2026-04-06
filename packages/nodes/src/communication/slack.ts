@@ -54,7 +54,8 @@ export const slackNode = defineNode({
 
       case 'updateMessage': {
         const { channel, text, ts, blocks } = input;
-        if (!channel || !ts) throw new Error('channel and ts are required for action "updateMessage"');
+        if (!channel || !ts)
+          throw new Error('channel and ts are required for action "updateMessage"');
         const result = await ctx.integrate('slack', 'updateMessage', {
           connectionId,
           channel,
@@ -68,7 +69,8 @@ export const slackNode = defineNode({
 
       case 'addReaction': {
         const { channel, ts, emoji } = input;
-        if (!channel || !ts || !emoji) throw new Error('channel, ts, and emoji are required for action "addReaction"');
+        if (!channel || !ts || !emoji)
+          throw new Error('channel, ts, and emoji are required for action "addReaction"');
         const result = await ctx.integrate('slack', 'addReaction', {
           connectionId,
           channel,

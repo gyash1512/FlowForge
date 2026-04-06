@@ -6,5 +6,16 @@ export default defineConfig({
   dts: true,
   clean: true,
   sourcemap: true,
-  external: ['@flowforge/shared', '@flowforge/engine', '@opentelemetry/api', '@opentelemetry/sdk-node', 'pino', 'bullmq', 'ioredis', 'pg', 'drizzle-orm', 'croner'],
+  external: [
+    '@flowforge/shared',
+    '@flowforge/engine',
+    '@opentelemetry/api',
+    '@opentelemetry/sdk-node',
+    'pino',
+    'bullmq',
+    'ioredis',
+    'pg',
+    'drizzle-orm',
+    'croner',
+  ],
 });

@@ -79,11 +79,7 @@ export class CheckpointManager {
     this.logger = logger;
   }
 
-  async save(
-    runId: RunId,
-    stepName: string,
-    state: Record<string, unknown>,
-  ): Promise<Checkpoint> {
+  async save(runId: RunId, stepName: string, state: Record<string, unknown>): Promise<Checkpoint> {
     const checkpoint: Checkpoint = {
       runId,
       stepName,
@@ -101,10 +97,7 @@ export class CheckpointManager {
     }
   }
 
-  async load(
-    runId: RunId,
-    stepName: string,
-  ): Promise<Checkpoint | undefined> {
+  async load(runId: RunId, stepName: string): Promise<Checkpoint | undefined> {
     try {
       return await this.store.load(runId, stepName);
     } catch (err) {

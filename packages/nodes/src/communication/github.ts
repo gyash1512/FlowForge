@@ -66,7 +66,8 @@ export const githubNode = defineNode({
 
       case 'createPR': {
         const { title, body, head, base, draft, labels } = input;
-        if (!title || !head || !base) throw new Error('title, head, and base are required for action "createPR"');
+        if (!title || !head || !base)
+          throw new Error('title, head, and base are required for action "createPR"');
         const result = await ctx.integrate('github', 'createPR', {
           connectionId,
           owner,
@@ -85,7 +86,8 @@ export const githubNode = defineNode({
       case 'addComment': {
         const { issueNumber, prNumber, comment } = input;
         const targetNumber = issueNumber ?? prNumber;
-        if (!targetNumber || !comment) throw new Error('issueNumber/prNumber and comment are required for action "addComment"');
+        if (!targetNumber || !comment)
+          throw new Error('issueNumber/prNumber and comment are required for action "addComment"');
         const result = await ctx.integrate('github', 'addComment', {
           connectionId,
           owner,

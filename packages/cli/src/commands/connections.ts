@@ -24,7 +24,9 @@ const testSubcommand = new Command('test')
         spinner.succeed(`Connection "${name}" is healthy`);
         console.log(chalk.green(`\n  Status: ${response.status}`));
         if (data && typeof data === 'object') {
-          console.log(chalk.dim(`  Response: ${JSON.stringify(data, null, 2).replace(/\n/g, '\n  ')}`));
+          console.log(
+            chalk.dim(`  Response: ${JSON.stringify(data, null, 2).replace(/\n/g, '\n  ')}`),
+          );
         }
       } else {
         spinner.fail(`Connection "${name}" health check failed`);
@@ -39,9 +41,7 @@ const testSubcommand = new Command('test')
       spinner.fail(`Failed to reach server at ${baseUrl}`);
       const message = error instanceof Error ? error.message : String(error);
       console.error(chalk.red(`\n  Error: ${message}`));
-      console.log(
-        chalk.dim('\n  Make sure the FlowForge server is running (flowforge dev).\n'),
-      );
+      console.log(chalk.dim('\n  Make sure the FlowForge server is running (flowforge dev).\n'));
       process.exitCode = 1;
     }
 

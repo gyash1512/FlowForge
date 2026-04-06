@@ -41,9 +41,17 @@ export { runMigrations, getMigrationConfig } from './db/migrations.js';
 
 // Adaptors
 export { PostgresAdaptor } from './adaptors/postgres-adaptor.js';
-export type { PostgresAdaptorConfig, PostgresPullParams, PostgresPushParams } from './adaptors/postgres-adaptor.js';
+export type {
+  PostgresAdaptorConfig,
+  PostgresPullParams,
+  PostgresPushParams,
+} from './adaptors/postgres-adaptor.js';
 export { RedisAdaptor } from './adaptors/redis-adaptor.js';
-export type { RedisAdaptorConfig, RedisPullParams, RedisPushParams } from './adaptors/redis-adaptor.js';
+export type {
+  RedisAdaptorConfig,
+  RedisPullParams,
+  RedisPushParams,
+} from './adaptors/redis-adaptor.js';
 export { HttpAdaptor } from './adaptors/http-adaptor.js';
 export type { HttpRequestParams } from './adaptors/http-adaptor.js';
 

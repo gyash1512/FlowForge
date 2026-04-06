@@ -33,7 +33,8 @@ export const postgresNode = defineNode({
   tags: ['database', 'sql', 'postgres'],
 
   handler: async (ctx) => {
-    const { action, table, query, params, data, where, conflictColumns, returning } = ctx.input as z.infer<typeof inputSchema>;
+    const { action, table, query, params, data, where, conflictColumns, returning } =
+      ctx.input as z.infer<typeof inputSchema>;
     const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
@@ -66,7 +67,8 @@ export const postgresNode = defineNode({
 
       case 'upsert': {
         if (!table || !data) throw new Error('table and data are required for action "upsert"');
-        if (!conflictColumns?.length) throw new Error('conflictColumns required for action "upsert"');
+        if (!conflictColumns?.length)
+          throw new Error('conflictColumns required for action "upsert"');
         const columns = Object.keys(data);
         const values = Object.values(data);
         const placeholders = columns.map((_, i) => `$${i + 1}`).join(', ');
@@ -86,11 +88,14 @@ export const postgresNode = defineNode({
       }
 
       case 'update': {
-        if (!table || !data || !where) throw new Error('table, data, and where are required for action "update"');
+        if (!table || !data || !where)
+          throw new Error('table, data, and where are required for action "update"');
         const setCols = Object.keys(data);
         const whereCols = Object.keys(where);
         const setClause = setCols.map((c, i) => `${c} = $${i + 1}`).join(', ');
-        const whereClause = whereCols.map((c, i) => `${c} = $${setCols.length + i + 1}`).join(' AND ');
+        const whereClause = whereCols
+          .map((c, i) => `${c} = $${setCols.length + i + 1}`)
+          .join(' AND ');
         const allValues = [...Object.values(data), ...Object.values(where)];
         const returningClause = returning?.length ? ` RETURNING ${returning.join(', ')}` : '';
         const sql = `UPDATE ${table} SET ${setClause} WHERE ${whereClause}${returningClause}`;

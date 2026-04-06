@@ -77,7 +77,14 @@ const listSubcommand = new Command('list')
 
       console.log(chalk.bold('\n  Recent Runs\n'));
       console.log(
-        chalk.dim('  ' + 'ID'.padEnd(28) + 'Workflow'.padEnd(24) + 'Status'.padEnd(14) + 'Duration'.padEnd(12) + 'Started'),
+        chalk.dim(
+          '  ' +
+            'ID'.padEnd(28) +
+            'Workflow'.padEnd(24) +
+            'Status'.padEnd(14) +
+            'Duration'.padEnd(12) +
+            'Started',
+        ),
       );
       console.log(chalk.dim('  ' + '-'.repeat(90)));
 
@@ -139,8 +146,12 @@ const inspectSubcommand = new Command('inspect')
       console.log(`  ${chalk.dim('ID:')}          ${chalk.cyan(run.id)}`);
       console.log(`  ${chalk.dim('Workflow:')}    ${run.workflowId}`);
       console.log(`  ${chalk.dim('Status:')}      ${formatStatus(run.status)}`);
-      console.log(`  ${chalk.dim('Started:')}     ${run.startedAt ? new Date(run.startedAt).toLocaleString() : '--'}`);
-      console.log(`  ${chalk.dim('Completed:')}   ${run.completedAt ? new Date(run.completedAt).toLocaleString() : '--'}`);
+      console.log(
+        `  ${chalk.dim('Started:')}     ${run.startedAt ? new Date(run.startedAt).toLocaleString() : '--'}`,
+      );
+      console.log(
+        `  ${chalk.dim('Completed:')}   ${run.completedAt ? new Date(run.completedAt).toLocaleString() : '--'}`,
+      );
 
       if (run.error) {
         console.log(`  ${chalk.dim('Error:')}       ${chalk.red(run.error)}`);
@@ -149,7 +160,14 @@ const inspectSubcommand = new Command('inspect')
       if (steps && steps.length > 0) {
         console.log(chalk.bold('\n  Steps\n'));
         console.log(
-          chalk.dim('  ' + 'Step'.padEnd(24) + 'Node'.padEnd(20) + 'Status'.padEnd(14) + 'Duration'.padEnd(12) + 'Attempt'),
+          chalk.dim(
+            '  ' +
+              'Step'.padEnd(24) +
+              'Node'.padEnd(20) +
+              'Status'.padEnd(14) +
+              'Duration'.padEnd(12) +
+              'Attempt',
+          ),
         );
         console.log(chalk.dim('  ' + '-'.repeat(78)));
 

@@ -3,12 +3,7 @@ export class FlowForgeError extends Error {
   public readonly statusCode: number;
   public readonly details?: Record<string, unknown>;
 
-  constructor(
-    message: string,
-    code: string,
-    statusCode = 500,
-    details?: Record<string, unknown>,
-  ) {
+  constructor(message: string, code: string, statusCode = 500, details?: Record<string, unknown>) {
     super(message);
     this.name = 'FlowForgeError';
     this.code = code;
@@ -44,12 +39,10 @@ export class NodeExecutionError extends FlowForgeError {
 
 export class NodeTimeoutError extends FlowForgeError {
   constructor(nodeName: string, timeoutMs: number) {
-    super(
-      `Node ${nodeName} timed out after ${timeoutMs}ms`,
-      'NODE_TIMEOUT',
-      408,
-      { nodeName, timeoutMs },
-    );
+    super(`Node ${nodeName} timed out after ${timeoutMs}ms`, 'NODE_TIMEOUT', 408, {
+      nodeName,
+      timeoutMs,
+    });
   }
 }
 
@@ -61,67 +54,50 @@ export class ValidationError extends FlowForgeError {
 
 export class RetryExhaustedError extends FlowForgeError {
   constructor(nodeName: string, maxAttempts: number) {
-    super(
-      `Node ${nodeName} exhausted all ${maxAttempts} retry attempts`,
-      'RETRY_EXHAUSTED',
-      500,
-      { nodeName, maxAttempts },
-    );
+    super(`Node ${nodeName} exhausted all ${maxAttempts} retry attempts`, 'RETRY_EXHAUSTED', 500, {
+      nodeName,
+      maxAttempts,
+    });
   }
 }
 
 export class WorkflowTimeoutError extends FlowForgeError {
   constructor(workflowId: string, timeoutMs: number) {
-    super(
-      `Workflow ${workflowId} timed out after ${timeoutMs}ms`,
-      'WORKFLOW_TIMEOUT',
-      408,
-      { workflowId, timeoutMs },
-    );
+    super(`Workflow ${workflowId} timed out after ${timeoutMs}ms`, 'WORKFLOW_TIMEOUT', 408, {
+      workflowId,
+      timeoutMs,
+    });
   }
 }
 
 export class IntegrationError extends FlowForgeError {
   constructor(integration: string, message: string) {
-    super(
-      `Integration error (${integration}): ${message}`,
-      'INTEGRATION_ERROR',
-      502,
-      { integration },
-    );
+    super(`Integration error (${integration}): ${message}`, 'INTEGRATION_ERROR', 502, {
+      integration,
+    });
   }
 }
 
 export class CircuitBreakerOpenError extends FlowForgeError {
   constructor(integration: string) {
-    super(
-      `Circuit breaker open for integration: ${integration}`,
-      'CIRCUIT_BREAKER_OPEN',
-      503,
-      { integration },
-    );
+    super(`Circuit breaker open for integration: ${integration}`, 'CIRCUIT_BREAKER_OPEN', 503, {
+      integration,
+    });
   }
 }
 
 export class RateLimitError extends FlowForgeError {
   constructor(integration: string, retryAfterMs?: number) {
-    super(
-      `Rate limit exceeded for integration: ${integration}`,
-      'RATE_LIMIT_EXCEEDED',
-      429,
-      { integration, retryAfterMs },
-    );
+    super(`Rate limit exceeded for integration: ${integration}`, 'RATE_LIMIT_EXCEEDED', 429, {
+      integration,
+      retryAfterMs,
+    });
   }
 }
 
 export class CheckpointError extends FlowForgeError {
   constructor(runId: string, message: string) {
-    super(
-      `Checkpoint error for run ${runId}: ${message}`,
-      'CHECKPOINT_ERROR',
-      500,
-      { runId },
-    );
+    super(`Checkpoint error for run ${runId}: ${message}`, 'CHECKPOINT_ERROR', 500, { runId });
   }
 }
 

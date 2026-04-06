@@ -2,7 +2,13 @@ import { z } from 'zod';
 import { defineNode } from '@flowforge/sdk';
 
 const inputSchema = z.object({
-  action: z.enum(['createCharge', 'createCustomer', 'createSubscription', 'listPayments', 'createRefund']),
+  action: z.enum([
+    'createCharge',
+    'createCustomer',
+    'createSubscription',
+    'listPayments',
+    'createRefund',
+  ]),
   amount: z.number().optional(),
   currency: z.string().optional(),
   source: z.string().optional(),

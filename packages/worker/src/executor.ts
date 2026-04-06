@@ -1,9 +1,4 @@
-import type {
-  WorkflowStep,
-  NodeContext,
-  Logger,
-  RetryConfig,
-} from '@flowforge/shared';
+import type { WorkflowStep, NodeContext, Logger, RetryConfig } from '@flowforge/shared';
 import {
   StepStatus,
   NodeExecutionError,
@@ -151,9 +146,7 @@ export class StepExecutor {
         record.completedAt = new Date();
         record.durationMs = record.completedAt.getTime() - startedAt.getTime();
 
-        this.logger?.info(
-          `Step "${step.name}" completed in ${record.durationMs}ms`,
-        );
+        this.logger?.info(`Step "${step.name}" completed in ${record.durationMs}ms`);
 
         return record;
       } catch (err) {
@@ -173,9 +166,7 @@ export class StepExecutor {
           throw err;
         }
 
-        this.logger?.warn(
-          `Step "${step.name}" attempt ${attempt} failed: ${lastError.message}`,
-        );
+        this.logger?.warn(`Step "${step.name}" attempt ${attempt} failed: ${lastError.message}`);
 
         if (attempt < maxAttempts && retryConfig) {
           const delay = computeDelay(retryConfig, attempt);
@@ -200,10 +191,7 @@ export class StepExecutor {
   /**
    * Execute the step handler once, with optional timeout.
    */
-  private async executeOnce(
-    step: WorkflowStep,
-    ctx: NodeContext,
-  ): Promise<unknown> {
+  private async executeOnce(step: WorkflowStep, ctx: NodeContext): Promise<unknown> {
     const timeoutMs = step.node.timeout;
 
     if (timeoutMs) {
@@ -214,11 +202,7 @@ export class StepExecutor {
             () => reject(new NodeTimeoutError(step.node.name, timeoutMs)),
             timeoutMs,
           );
-          ctx.signal.addEventListener(
-            'abort',
-            () => clearTimeout(timer),
-            { once: true },
-          );
+          ctx.signal.addEventListener('abort', () => clearTimeout(timer), { once: true });
         }),
       ]);
     }

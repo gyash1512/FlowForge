@@ -53,7 +53,8 @@ export const discordNode = defineNode({
 
       case 'createChannel': {
         const { guildId, channelName, channelType } = input;
-        if (!guildId || !channelName) throw new Error('guildId and channelName are required for action "createChannel"');
+        if (!guildId || !channelName)
+          throw new Error('guildId and channelName are required for action "createChannel"');
         const result = await ctx.integrate('discord', 'createChannel', {
           connectionId,
           guildId,
@@ -66,7 +67,8 @@ export const discordNode = defineNode({
 
       case 'addRole': {
         const { guildId, userId, roleId } = input;
-        if (!guildId || !userId || !roleId) throw new Error('guildId, userId, and roleId are required for action "addRole"');
+        if (!guildId || !userId || !roleId)
+          throw new Error('guildId, userId, and roleId are required for action "addRole"');
         await ctx.integrate('discord', 'addRole', {
           connectionId,
           guildId,

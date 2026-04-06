@@ -20,7 +20,11 @@ function makeNode(name: string, handler: (ctx: Ctx) => Promise<unknown>) {
   };
 }
 
-function makeWorkflow(id: string, steps: WorkflowStep[], overrides?: Partial<WorkflowDefinition>): WorkflowDefinition {
+function makeWorkflow(
+  id: string,
+  steps: WorkflowStep[],
+  overrides?: Partial<WorkflowDefinition>,
+): WorkflowDefinition {
   return {
     id,
     name: id,
@@ -46,7 +50,10 @@ describe('Engine', () => {
     const engine = new Engine({ logger: new NoopLogger() });
     engine.register(
       makeWorkflow('test', [
-        { name: 'step-1', node: makeNode('test/echo', async (ctx: Ctx) => `echo: ${JSON.stringify(ctx.input)}`) },
+        {
+          name: 'step-1',
+          node: makeNode('test/echo', async (ctx: Ctx) => `echo: ${JSON.stringify(ctx.input)}`),
+        },
       ]),
     );
     const run = await engine.trigger('test', { name: 'test' });
@@ -80,9 +87,11 @@ describe('Engine', () => {
   it('emits events to matching workflows', async () => {
     const engine = new Engine({ logger: new NoopLogger() });
     engine.register(
-      makeWorkflow('event-wf', [
-        { name: 'step', node: makeNode('test/echo', async (ctx: Ctx) => ctx.input) },
-      ], { trigger: { type: 'event', event: 'user.created' } }),
+      makeWorkflow(
+        'event-wf',
+        [{ name: 'step', node: makeNode('test/echo', async (ctx: Ctx) => ctx.input) }],
+        { trigger: { type: 'event', event: 'user.created' } },
+      ),
     );
     const runs = await engine.emit('user.created', { userId: '123' });
     expect(runs).toHaveLength(1);
@@ -93,7 +102,12 @@ describe('Engine', () => {
     const engine = new Engine({ logger: new NoopLogger() });
     engine.register(
       makeWorkflow('failing', [
-        { name: 'fail', node: makeNode('test/fail', async () => { throw new Error('boom'); }) },
+        {
+          name: 'fail',
+          node: makeNode('test/fail', async () => {
+            throw new Error('boom');
+          }),
+        },
       ]),
     );
     const run = await engine.trigger('failing');
@@ -104,9 +118,7 @@ describe('Engine', () => {
   it('stores and retrieves runs', async () => {
     const engine = new Engine({ logger: new NoopLogger() });
     engine.register(
-      makeWorkflow('test', [
-        { name: 'step', node: makeNode('test/ok', async () => 'ok') },
-      ]),
+      makeWorkflow('test', [{ name: 'step', node: makeNode('test/ok', async () => 'ok') }]),
     );
     const run = await engine.trigger('test');
     expect(engine.getRun(run.id)).toBe(run);

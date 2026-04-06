@@ -41,12 +41,23 @@ export const pineconeNode = defineNode({
   tags: ['pinecone', 'vector-db', 'embeddings', 'similarity-search'],
 
   handler: async (ctx) => {
-    const { action, namespace, vectors, topK, filter, queryVector, ids, includeMetadata, includeValues } = ctx.input as z.infer<typeof inputSchema>;
+    const {
+      action,
+      namespace,
+      vectors,
+      topK,
+      filter,
+      queryVector,
+      ids,
+      includeMetadata,
+      includeValues,
+    } = ctx.input as z.infer<typeof inputSchema>;
     const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
       case 'upsert': {
-        if (!vectors || vectors.length === 0) throw new Error('vectors are required for action "upsert"');
+        if (!vectors || vectors.length === 0)
+          throw new Error('vectors are required for action "upsert"');
         await ctx.push('pinecone', {
           connectionId,
           command: 'UPSERT',

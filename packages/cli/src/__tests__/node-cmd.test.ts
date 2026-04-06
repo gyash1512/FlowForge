@@ -198,7 +198,9 @@ describe('validateNodeDefinition', () => {
       const result = validateNodeDefinition(node);
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('"inputSchema" must be a Zod schema (must have a .parse method)');
+      expect(result.errors).toContain(
+        '"inputSchema" must be a Zod schema (must have a .parse method)',
+      );
     });
 
     it('should fail if outputSchema has no .parse method', () => {
@@ -206,7 +208,9 @@ describe('validateNodeDefinition', () => {
       const result = validateNodeDefinition(node);
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('"outputSchema" must be a Zod schema (must have a .parse method)');
+      expect(result.errors).toContain(
+        '"outputSchema" must be a Zod schema (must have a .parse method)',
+      );
     });
 
     it('should fail if configSchema has no .parse method', () => {
@@ -214,7 +218,9 @@ describe('validateNodeDefinition', () => {
       const result = validateNodeDefinition(node);
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('"configSchema" must be a Zod schema (must have a .parse method)');
+      expect(result.errors).toContain(
+        '"configSchema" must be a Zod schema (must have a .parse method)',
+      );
     });
   });
 
@@ -240,7 +246,9 @@ describe('validateNodeDefinition', () => {
       delete node.timeout;
       const result = validateNodeDefinition(node);
 
-      expect(result.warnings).toContain('Consider specifying "timeout" to prevent runaway executions');
+      expect(result.warnings).toContain(
+        'Consider specifying "timeout" to prevent runaway executions',
+      );
     });
 
     it('should not warn when all optional fields are present', () => {

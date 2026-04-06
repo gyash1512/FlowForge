@@ -51,7 +51,7 @@ export const emitCommand = new Command('emit')
         return;
       }
 
-      const result = await response.json() as Record<string, unknown>;
+      const result = (await response.json()) as Record<string, unknown>;
       spinner.succeed(`Event "${type}" emitted successfully`);
       console.log(chalk.dim(`\n  URL:      ${url}`));
       console.log(chalk.dim(`  Type:     ${type}`));
@@ -64,9 +64,7 @@ export const emitCommand = new Command('emit')
       spinner.fail('Failed to emit event');
       const message = error instanceof Error ? error.message : String(error);
       if (message.includes('ECONNREFUSED')) {
-        console.error(
-          chalk.red(`\n  Could not connect to dev worker at ${url}`),
-        );
+        console.error(chalk.red(`\n  Could not connect to dev worker at ${url}`));
         console.error(chalk.dim('  Is the dev worker running? Try: flowforge dev'));
       } else {
         console.error(chalk.red(`\n  Error: ${message}`));

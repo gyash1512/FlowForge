@@ -32,7 +32,9 @@ export const redisNode = defineNode({
   tags: ['cache', 'redis', 'key-value'],
 
   handler: async (ctx) => {
-    const { action, key, value, field, channel, ttl, start, stop } = ctx.input as z.infer<typeof inputSchema>;
+    const { action, key, value, field, channel, ttl, start, stop } = ctx.input as z.infer<
+      typeof inputSchema
+    >;
     const { connectionId } = ctx.config as z.infer<typeof configSchema>;
 
     switch (action) {
@@ -61,7 +63,11 @@ export const redisNode = defineNode({
 
       case 'hget': {
         if (!field) throw new Error('field is required for action "hget"');
-        const result = await ctx.pull('redis', { connectionId, command: 'HGET', args: [key, field] });
+        const result = await ctx.pull('redis', {
+          connectionId,
+          command: 'HGET',
+          args: [key, field],
+        });
         return { value: result, success: true };
       }
 

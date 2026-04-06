@@ -3,10 +3,7 @@ import { z } from 'zod';
 import { WorkflowRegistry } from '../registry.js';
 import type { WorkflowDefinition } from '@flowforge/shared';
 
-function makeWorkflow(
-  id: string,
-  overrides?: Partial<WorkflowDefinition>,
-): WorkflowDefinition {
+function makeWorkflow(id: string, overrides?: Partial<WorkflowDefinition>): WorkflowDefinition {
   return {
     id,
     name: `workflow-${id}`,

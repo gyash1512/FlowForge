@@ -42,10 +42,9 @@ export const notionNode = defineNode({
     switch (action) {
       case 'createPage': {
         const { databaseId, parentPageId, properties, children } = input;
-        if (!databaseId && !parentPageId) throw new Error('databaseId or parentPageId is required for action "createPage"');
-        const parent = databaseId
-          ? { database_id: databaseId }
-          : { page_id: parentPageId };
+        if (!databaseId && !parentPageId)
+          throw new Error('databaseId or parentPageId is required for action "createPage"');
+        const parent = databaseId ? { database_id: databaseId } : { page_id: parentPageId };
         const result = await ctx.integrate('notion', 'createPage', {
           connectionId,
           parent,

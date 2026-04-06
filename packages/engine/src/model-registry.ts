@@ -58,9 +58,7 @@ export class ModelRegistry {
     const provider = this.providers.get(providerName);
     if (!provider) {
       const available = [...this.providers.keys()].join(', ') || '(none)';
-      throw new Error(
-        `Provider "${providerName}" not registered. Available: ${available}`,
-      );
+      throw new Error(`Provider "${providerName}" not registered. Available: ${available}`);
     }
 
     return { provider, model: provider.createModel(modelId) };
