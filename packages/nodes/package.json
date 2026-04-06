@@ -23,8 +23,16 @@
   },
   "dependencies": {
     "@composio/core": "^0.6.8",
+    "@e2b/code-interpreter": "^1.0.4",
     "@flowforge/shared": "workspace:*",
     "@flowforge/sdk": "workspace:*",
+    "cheerio": "^1.0.0",
+    "duck-duck-scrape": "^2.2.5",
+    "execa": "^9.5.0",
+    "mathjs": "^14.0.0",
+    "pdf-parse": "^1.1.1",
+    "puppeteer-core": "^24.0.0",
+    "simple-git": "^3.27.0",
     "zod": "3.25.76"
   },
   "devDependencies": {

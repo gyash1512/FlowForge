@@ -6,3 +6,4 @@ export { switchNode } from './switch-node.js';
 export { parallelNode } from './parallel-node.js';
 export { forEachNode } from './for-each-node.js';
 export { whileNode } from './while-node.js';
+export { humanApprovalNode } from './human-approval.js';
