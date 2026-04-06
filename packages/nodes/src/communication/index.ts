@@ -3,10 +3,18 @@ export { slackNode } from './slack.js';
 export { discordNode } from './discord.js';
 export { telegramNode } from './telegram.js';
 export { microsoftTeamsNode } from './microsoft-teams.js';
+export { whatsappNode } from './whatsapp.js';
 
-// Email
+// Email & SMS
 export { emailSmtpNode } from './email-smtp.js';
 export { emailResendNode } from './email-resend.js';
+export { sendgridNode } from './sendgrid.js';
+export { twilioNode } from './twilio.js';
+export { mailchimpNode } from './mailchimp.js';
+
+// Meetings & scheduling
+export { zoomNode } from './zoom.js';
+export { calendlyNode } from './calendly.js';
 
 // Developer tools
 export { githubNode } from './github.js';
