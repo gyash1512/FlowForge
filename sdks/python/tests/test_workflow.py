@@ -1,6 +1,7 @@
 """Tests for the Workflow builder."""
 
 import pytest
+
 from flowforge_sdk import node, workflow
 
 
