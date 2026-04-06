@@ -1,8 +1,7 @@
 """Tests for the Node builder."""
 
 import pytest
-
-from flowforge_sdk import node, NodeType
+from flowforge_sdk import NodeType, node
 
 
 class TestNodeBuilder:

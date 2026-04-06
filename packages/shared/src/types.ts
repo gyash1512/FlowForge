@@ -423,6 +423,7 @@ export interface WorkerConfig {
 // Integration Config
 // ────────────────────────────────────────────────────────────────
 export interface IntegrationConfig {
+  composioBaseUrl?: string;
   nangoUrl?: string;
   nangoSecretKey?: string;
   port?: number;

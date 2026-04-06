@@ -1,8 +1,7 @@
 """Tests for the Workflow builder."""
 
 import pytest
-
-from flowforge_sdk import workflow, node
+from flowforge_sdk import node, workflow
 
 
 def _dummy_handler(ctx):

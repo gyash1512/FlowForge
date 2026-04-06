@@ -5,7 +5,16 @@ export { CircuitBreaker, CircuitState } from './circuit-breaker.js';
 export { createApp } from './server.js';
 export type { ServerDeps } from './server.js';
 
-// Adaptors
+// Composio-backed adaptors (preferred — uses pre-built integrations)
+export {
+  ComposioAdaptor,
+  createComposioAdaptors,
+  getComposioToolSlug,
+  TOOL_MAP,
+} from './adaptors/composio.js';
+export type { ComposioClient } from './adaptors/composio.js';
+
+// Legacy adaptors (kept for custom clients / self-hosted services without Composio)
 export { SlackAdaptor } from './adaptors/slack.js';
 export type { SlackClient } from './adaptors/slack.js';
 

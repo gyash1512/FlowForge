@@ -22,10 +22,12 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
+    "@composio/core": "^0.6.8",
     "@flowforge/shared": "workspace:*",
     "hono": "^4.4.0"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.0",
     "tsup": "^8.3.0",
     "typescript": "^5.5.0",
     "vitest": "^2.1.0"
