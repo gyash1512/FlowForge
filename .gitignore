@@ -43,3 +43,6 @@ venv/
 
 # Turbo
 .turbo/
+
+# Docs
+site/

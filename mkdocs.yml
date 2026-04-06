@@ -1,0 +1,107 @@
+site_name: FlowForge
+site_description: Code-First Workflow Engine for TypeScript
+site_url: https://gyash1512.github.io/FlowForge/
+repo_url: https://github.com/gyash1512/FlowForge
+repo_name: gyash1512/FlowForge
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.tabs
+    - content.code.copy
+    - content.code.annotate
+    - search.suggest
+    - search.highlight
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/gyash1512/FlowForge
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Quick Start: getting-started/quickstart.md
+      - Installation: getting-started/installation.md
+      - Core Concepts: getting-started/concepts.md
+      - Architecture: getting-started/architecture.md
+  - Tools:
+      - Overview: tools/index.md
+      - Filesystem: tools/filesystem.md
+      - Shell: tools/shell.md
+      - Code Interpreter: tools/code-interpreter.md
+      - Web Search: tools/web-search.md
+      - Web Scrape: tools/web-scrape.md
+      - Git: tools/git.md
+      - Browser: tools/browser.md
+      - Document Parser: tools/document-parser.md
+      - Math: tools/math.md
+      - Human Approval: tools/human-approval.md
+  - Nodes:
+      - Overview: nodes/index.md
+      - AI Nodes: nodes/ai.md
+      - Data Nodes: nodes/data.md
+      - Communication Nodes: nodes/communication.md
+      - Control Flow: nodes/control.md
+      - Transform Nodes: nodes/transform.md
+  - Integrations:
+      - Overview: integrations/index.md
+      - Composio: integrations/composio.md
+  - Guides:
+      - Building Custom Nodes: guides/custom-nodes.md
+      - Building Agents: guides/agents.md
+      - Safety & Permissions: guides/safety.md
+  - API Reference:
+      - SDK: reference/sdk.md
+      - Engine: reference/engine.md
+      - Shared Types: reference/types.md
