@@ -37,17 +37,17 @@ FlowForge is a **TypeScript-native workflow engine** for building, executing, an
 
 ## Packages
 
-| Package                     | Description                                                                  |
-| --------------------------- | ---------------------------------------------------------------------------- |
-| `@flowforgejs/sdk`          | Workflow DSL -- `defineNode()`, `defineAgentNode()`, `workflow()` builder    |
-| `@flowforgejs/engine`       | Execution engine with DAG scheduling, retry, event bus, AI provider          |
-| `@flowforgejs/nodes`        | 80+ built-in nodes                                                           |
-| `@flowforgejs/shared`       | Shared types, errors, schemas                                                |
-| `@flowforgejs/cli`          | Developer CLI                                                                |
-| `@flowforgejs/worker`       | BullMQ worker with Hono HTTP API                                             |
-| `@flowforgejs/dashboard`    | Monitoring API                                                               |
-| `@flowforgejs/integrations` | Composio-backed integration service                                          |
-| `@flowforgejs/test-utils`   | Testing utilities                                                            |
+| Package                     | Description                                                               |
+| --------------------------- | ------------------------------------------------------------------------- |
+| `@flowforgejs/sdk`          | Workflow DSL -- `defineNode()`, `defineAgentNode()`, `workflow()` builder |
+| `@flowforgejs/engine`       | Execution engine with DAG scheduling, retry, event bus, AI provider       |
+| `@flowforgejs/nodes`        | 80+ built-in nodes                                                        |
+| `@flowforgejs/shared`       | Shared types, errors, schemas                                             |
+| `@flowforgejs/cli`          | Developer CLI                                                             |
+| `@flowforgejs/worker`       | BullMQ worker with Hono HTTP API                                          |
+| `@flowforgejs/dashboard`    | Monitoring API                                                            |
+| `@flowforgejs/integrations` | Composio-backed integration service                                       |
+| `@flowforgejs/test-utils`   | Testing utilities                                                         |
 
 ---
 
