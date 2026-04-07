@@ -38,5 +38,10 @@
     "ai": {
       "optional": true
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gyash1512/FlowForge.git",
+    "directory": "packages/sdk"
   }
 }

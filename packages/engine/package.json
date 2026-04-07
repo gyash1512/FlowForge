@@ -30,5 +30,10 @@
     "@vitest/coverage-v8": "^2.1.0",
     "vitest": "^2.1.0",
     "zod": "3.25.76"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gyash1512/FlowForge.git",
+    "directory": "packages/engine"
   }
 }

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="300" rx="16" fill="url(#bg)"/>
+  <rect x="0" y="284" width="1200" height="4" fill="url(#accent)" rx="2"/>
+  <text x="600" y="130" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="72" fill="white" letter-spacing="-2">FlowForge</text>
+  <text x="600" y="185" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-weight="400" font-size="26" fill="#a0a0b8">Code-First Workflow Engine for TypeScript</text>
+  <text x="600" y="240" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="400" font-size="16" fill="#7c3aed">80+ nodes  |  38+ integrations  |  9 agentic tools  |  AI-native agents  |  human-in-the-loop</text>
+</svg>
