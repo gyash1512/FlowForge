@@ -7,12 +7,15 @@ on:
 
 permissions:
   contents: write
-  packages: write
+  id-token: write
 
 jobs:
   release:
-    name: Publish FlowForge package
+    name: Publish flowforgejs to npm
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -22,27 +25,25 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-          registry-url: https://npm.pkg.github.com
+          registry-url: https://registry.npmjs.org
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
       - run: pnpm run test:ci
 
-      # Dynamically set the scoped package name from the repo owner
-      # so no username ever appears in committed code
-      - name: Set package scope
+      - name: Set version from tag
         working-directory: packages/flowforge
         run: |
-          SCOPE="${{ github.repository_owner }}"
-          jq --arg name "@${SCOPE}/flowforge" '.name = $name' package.json > tmp.json
+          VERSION="${GITHUB_REF_NAME#v}"
+          jq --arg v "$VERSION" '.version = $v' package.json > tmp.json
           mv tmp.json package.json
-          cat package.json | head -5
 
-      - name: Publish to GitHub Packages
+      - name: Publish to npm
         working-directory: packages/flowforge
         run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
 
   create-release:
     name: Create GitHub Release
