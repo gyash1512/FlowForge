@@ -1,6 +1,6 @@
 {
   "name": "@flowforge/nodes",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Built-in node definitions for FlowForge workflow engine",
   "type": "module",

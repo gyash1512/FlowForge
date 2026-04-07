@@ -1,6 +1,6 @@
 {
   "name": "flowforgejs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "FlowForge — Code-First Workflow Engine for TypeScript with 80+ nodes, 9 agentic tools, and AI-native agent support",
   "type": "module",
   "exports": {

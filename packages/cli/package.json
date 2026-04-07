@@ -1,6 +1,6 @@
 {
   "name": "@flowforge/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "FlowForge CLI — Developer tools for building and managing workflows",
   "type": "module",
