@@ -11,10 +11,13 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
+  // @flowforge/* workspace packages are NOT external — they get bundled into the output.
+  // Only third-party deps that consumers install separately are external.
+  noExternal: [/@flowforge\/.*/],
   external: [
     'zod',
+    'nanoid',
     'ai',
-    '@ai-sdk/openai',
     'execa',
     'cheerio',
     'duck-duck-scrape',
@@ -24,5 +27,10 @@ export default defineConfig({
     'pdf-parse',
     'mathjs',
     '@composio/core',
+    'node:fs/promises',
+    'node:path',
+    'node:os',
+    'node:child_process',
+    'node:crypto',
   ],
 });
