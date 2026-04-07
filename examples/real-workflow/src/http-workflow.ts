@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { defineNode, workflow } from '@flowforge/sdk';
-import type { DataAdaptor } from '@flowforge/sdk';
-import { Engine, NoopLogger } from '@flowforge/engine';
+import { defineNode, workflow } from '@flowforgejs/sdk';
+import type { DataAdaptor } from '@flowforgejs/sdk';
+import { Engine, NoopLogger } from '@flowforgejs/engine';
 
 // ── HTTP Data Adaptor ──
 // Registers as a DataAdaptor so nodes can use ctx.pull('http', { url, method })

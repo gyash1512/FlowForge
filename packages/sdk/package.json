@@ -1,7 +1,6 @@
 {
-  "name": "@flowforge/sdk",
+  "name": "@flowforgejs/sdk",
   "version": "0.1.1",
-  "private": true,
   "description": "FlowForge SDK — Define type-safe workflows in TypeScript",
   "type": "module",
   "exports": {
@@ -23,7 +22,7 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
-    "@flowforge/shared": "workspace:*",
+    "@flowforgejs/shared": "workspace:*",
     "zod": "3.25.76"
   },
   "devDependencies": {

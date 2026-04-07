@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { defineNode } from '@flowforge/sdk';
+import { defineNode } from '@flowforgejs/sdk';
 
 const attachmentSchema = z.object({
   filename: z.string(),

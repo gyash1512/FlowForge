@@ -1,5 +1,5 @@
-import type { WorkflowDefinition, Logger } from '@flowforge/shared';
-import { WorkflowNotFoundError } from '@flowforge/shared';
+import type { WorkflowDefinition, Logger } from '@flowforgejs/shared';
+import { WorkflowNotFoundError } from '@flowforgejs/shared';
 
 export class WorkflowRegistry {
   private workflows = new Map<string, WorkflowDefinition>();

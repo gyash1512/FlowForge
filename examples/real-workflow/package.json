@@ -1,5 +1,5 @@
 {
-  "name": "@flowforge/example-real-workflow",
+  "name": "@flowforgejs/example-real-workflow",
   "version": "0.1.1",
   "private": true,
   "type": "module",
@@ -10,9 +10,9 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
-    "@flowforge/sdk": "workspace:*",
-    "@flowforge/engine": "workspace:*",
-    "@flowforge/nodes": "workspace:*",
+    "@flowforgejs/sdk": "workspace:*",
+    "@flowforgejs/engine": "workspace:*",
+    "@flowforgejs/nodes": "workspace:*",
     "zod": "3.25.76"
   },
   "devDependencies": {

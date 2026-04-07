@@ -44,6 +44,6 @@ export type {
   WorkflowSummary,
   RunFilter,
   MetricsSnapshot,
-} from '@flowforge/shared';
+} from '@flowforgejs/shared';
 
-export { RunStatus, StepStatus, NodeCategory, TriggerType } from '@flowforge/shared';
+export { RunStatus, StepStatus, NodeCategory, TriggerType } from '@flowforgejs/shared';

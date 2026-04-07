@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { computeDelay, withRetry } from '../retry.js';
-import type { RetryConfig } from '@flowforge/shared';
+import type { RetryConfig } from '@flowforgejs/shared';
 
 describe('computeDelay', () => {
   it('returns fixed delay', () => {

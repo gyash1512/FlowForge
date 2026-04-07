@@ -3,7 +3,7 @@ import {
   CIRCUIT_BREAKER_THRESHOLD,
   CIRCUIT_BREAKER_TIMEOUT_MS,
   CIRCUIT_BREAKER_RESET_MS,
-} from '@flowforge/shared';
+} from '@flowforgejs/shared';
 
 export const CircuitState = {
   CLOSED: 'CLOSED',

@@ -63,7 +63,7 @@ Execute queries and mutations against a PostgreSQL database.
 **Output:** `{ rows: Record<string, unknown>[], rowCount: number, command: string }`
 
 ```typescript
-import { postgresNode } from '@flowforge/nodes';
+import { postgresNode } from '@flowforgejs/nodes';
 
 // Query
 workflow('db-query')
@@ -103,7 +103,7 @@ Perform key-value, list, and pub/sub operations on Redis.
 **Common actions:** `get`, `set`, `delete`, `lpush`, `lrange`, `publish`, `subscribe`
 
 ```typescript
-import { redisNode } from '@flowforge/nodes';
+import { redisNode } from '@flowforgejs/nodes';
 
 workflow('cache')
   .trigger({ type: 'event', event: 'data.computed' })
@@ -128,7 +128,7 @@ General-purpose HTTP client for calling REST APIs.
 **Common actions:** `get`, `post`, `put`, `patch`, `delete`, `head`
 
 ```typescript
-import { httpNode } from '@flowforge/nodes';
+import { httpNode } from '@flowforgejs/nodes';
 
 workflow('api-call')
   .trigger({ type: 'manual' })
@@ -153,7 +153,7 @@ Perform document operations on MongoDB collections.
 **Common actions:** `find`, `findOne`, `insertOne`, `insertMany`, `updateOne`, `deleteOne`
 
 ```typescript
-import { mongodbNode } from '@flowforge/nodes';
+import { mongodbNode } from '@flowforgejs/nodes';
 
 workflow('mongo-insert')
   .trigger({ type: 'event', event: 'order.placed' })
@@ -177,7 +177,7 @@ Interact with AWS S3 or S3-compatible object storage.
 **Common actions:** `getObject`, `putObject`, `deleteObject`, `listObjects`, `copyObject`
 
 ```typescript
-import { s3Node } from '@flowforge/nodes';
+import { s3Node } from '@flowforgejs/nodes';
 
 workflow('upload')
   .trigger({ type: 'event', event: 'file.ready' })
@@ -219,7 +219,7 @@ Operate on a Pinecone vector database for similarity search and retrieval.
 **Common actions:** `upsert`, `query`, `delete`, `fetch`, `listIndexes`
 
 ```typescript
-import { pineconeNode } from '@flowforge/nodes';
+import { pineconeNode } from '@flowforgejs/nodes';
 
 workflow('semantic-search')
   .trigger({ type: 'manual' })

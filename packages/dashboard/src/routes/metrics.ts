@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
-import type { MetricsSnapshot } from '@flowforge/shared';
-import { RunStatus } from '@flowforge/shared';
+import type { MetricsSnapshot } from '@flowforgejs/shared';
+import { RunStatus } from '@flowforgejs/shared';
 import { getRunStore } from './runs.js';
 
 export const metricsRoutes = new Hono();

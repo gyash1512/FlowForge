@@ -11,7 +11,7 @@ import type {
   ForEachStep,
   SwitchStep,
   WhileStep,
-} from '@flowforge/shared';
+} from '@flowforgejs/shared';
 
 // ────────────────────────────────────────────────────────────────
 // Step options when adding a node to a workflow

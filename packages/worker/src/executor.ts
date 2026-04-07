@@ -1,4 +1,4 @@
-import type { WorkflowStep, NodeContext, Logger, RetryConfig } from '@flowforge/shared';
+import type { WorkflowStep, NodeContext, Logger, RetryConfig } from '@flowforgejs/shared';
 import {
   StepStatus,
   NodeExecutionError,
@@ -6,8 +6,8 @@ import {
   RetryExhaustedError,
   ValidationError,
   stepId,
-} from '@flowforge/shared';
-import type { StepRecord } from '@flowforge/shared';
+} from '@flowforgejs/shared';
+import type { StepRecord } from '@flowforgejs/shared';
 
 // ────────────────────────────────────────────────────────────────
 // Retry helpers (inline, no external dependency)

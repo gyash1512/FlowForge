@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { z } from 'zod';
 import { workflow } from '../workflow-builder.js';
 import { defineNode } from '../define-node.js';
-import type { NodeDefinition } from '@flowforge/shared';
+import type { NodeDefinition } from '@flowforgejs/shared';
 
 const dummyNode = defineNode({
   name: 'test/dummy',

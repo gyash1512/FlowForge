@@ -11,7 +11,7 @@ Every tool node follows the same pattern:
 3. Enforce security constraints defined in the tool's **config schema** before executing anything.
 4. Return a structured output with a `success` boolean.
 
-Tools are defined with `defineNode()` from `@flowforge/sdk` and live under the `tools/` namespace (e.g. `tools/filesystem`, `tools/shell`).
+Tools are defined with `defineNode()` from `@flowforgejs/sdk` and live under the `tools/` namespace (e.g. `tools/filesystem`, `tools/shell`).
 
 ## Available Tools
 
@@ -30,11 +30,11 @@ Tools are defined with `defineNode()` from `@flowforge/sdk` and live under the `
 
 ## Integration with AI Agents
 
-The defining feature of FlowForge tools is that **any tool node can be automatically converted into an agent tool** using the `nodeAsAgentTool()` function from `@flowforge/engine`. This means an AI agent node can call any tool during its reasoning loop, just like a native function call.
+The defining feature of FlowForge tools is that **any tool node can be automatically converted into an agent tool** using the `nodeAsAgentTool()` function from `@flowforgejs/engine`. This means an AI agent node can call any tool during its reasoning loop, just like a native function call.
 
 ```typescript
-import { filesystemNode, shellNode } from '@flowforge/nodes';
-import { nodesToAgentTools } from '@flowforge/engine';
+import { filesystemNode, shellNode } from '@flowforgejs/nodes';
+import { nodesToAgentTools } from '@flowforgejs/engine';
 
 // Convert existing nodes into agent-callable tools
 const tools = nodesToAgentTools({

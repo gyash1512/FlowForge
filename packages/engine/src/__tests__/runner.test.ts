@@ -2,13 +2,13 @@ import { describe, it, expect, vi } from 'vitest';
 import { z } from 'zod';
 import { Runner } from '../runner.js';
 import { NoopLogger } from '../logger.js';
-import { RunStatus } from '@flowforge/shared';
+import { RunStatus } from '@flowforgejs/shared';
 import type {
   WorkflowDefinition,
   WorkflowStep,
   ControlFlowStep,
   NodeContext,
-} from '@flowforge/shared';
+} from '@flowforgejs/shared';
 
 type Ctx = NodeContext;
 

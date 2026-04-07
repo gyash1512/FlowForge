@@ -1,7 +1,6 @@
 {
-  "name": "@flowforge/test-utils",
+  "name": "@flowforgejs/test-utils",
   "version": "0.1.1",
-  "private": true,
   "description": "Testing utilities for FlowForge node authors",
   "type": "module",
   "exports": {
@@ -23,8 +22,8 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
-    "@flowforge/shared": "workspace:*",
-    "@flowforge/sdk": "workspace:*",
+    "@flowforgejs/shared": "workspace:*",
+    "@flowforgejs/sdk": "workspace:*",
     "zod": "3.25.76"
   },
   "devDependencies": {

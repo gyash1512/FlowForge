@@ -7,7 +7,7 @@ import type {
   AIContext,
   WorkflowEvent,
   WorkflowMetadata,
-} from '@flowforge/shared';
+} from '@flowforgejs/shared';
 
 // ────────────────────────────────────────────────────────────────
 // Helpers

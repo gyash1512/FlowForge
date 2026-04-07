@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
-import { CircuitBreakerOpenError } from '@flowforge/shared';
+import { CircuitBreakerOpenError } from '@flowforgejs/shared';
 import { CircuitBreaker, CircuitState } from '../circuit-breaker.js';
 
 describe('CircuitBreaker', () => {

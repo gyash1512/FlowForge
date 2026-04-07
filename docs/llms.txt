@@ -5,12 +5,12 @@
 ## Quick Start
 
 ```bash
-npm install @flowforge/sdk @flowforge/engine
+npm install @flowforgejs/sdk @flowforgejs/engine
 ```
 
 ```typescript
-import { defineNode, workflow } from '@flowforge/sdk';
-import { Engine } from '@flowforge/engine';
+import { defineNode, workflow } from '@flowforgejs/sdk';
+import { Engine } from '@flowforgejs/engine';
 import { z } from 'zod';
 
 const greet = defineNode({
@@ -37,15 +37,15 @@ console.log(run.output); // "Hello, World!"
 
 ## Packages
 
-- `@flowforge/sdk` — Workflow DSL: `defineNode()`, `defineAgentNode()`, `workflow()` builder
-- `@flowforge/engine` — In-memory execution engine with DAG scheduling, retry, event bus
-- `@flowforge/worker` — Production worker: BullMQ queues, Hono HTTP API, Drizzle/Postgres persistence
-- `@flowforge/nodes` — 34 built-in nodes: data, communication, AI, control flow, transform
-- `@flowforge/integrations` — Integration service: Slack, Email, Discord, GitHub, Notion, Telegram, Stripe, Webhook
-- `@flowforge/cli` — Developer CLI: init, dev, emit, runs, node validate/test/docs, secrets, deploy
-- `@flowforge/dashboard` — Monitoring API: workflows, runs, events, metrics, SSE streaming
-- `@flowforge/test-utils` — Testing: mock context, mock logger, test runner for node authors
-- `@flowforge/shared` — Shared types, errors, schemas, constants
+- `@flowforgejs/sdk` — Workflow DSL: `defineNode()`, `defineAgentNode()`, `workflow()` builder
+- `@flowforgejs/engine` — In-memory execution engine with DAG scheduling, retry, event bus
+- `@flowforgejs/worker` — Production worker: BullMQ queues, Hono HTTP API, Drizzle/Postgres persistence
+- `@flowforgejs/nodes` — 34 built-in nodes: data, communication, AI, control flow, transform
+- `@flowforgejs/integrations` — Integration service: Slack, Email, Discord, GitHub, Notion, Telegram, Stripe, Webhook
+- `@flowforgejs/cli` — Developer CLI: init, dev, emit, runs, node validate/test/docs, secrets, deploy
+- `@flowforgejs/dashboard` — Monitoring API: workflows, runs, events, metrics, SSE streaming
+- `@flowforgejs/test-utils` — Testing: mock context, mock logger, test runner for node authors
+- `@flowforgejs/shared` — Shared types, errors, schemas, constants
 
 ## Node Definition Interface
 

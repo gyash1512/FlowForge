@@ -5,8 +5,8 @@ import type {
   DataAdaptor,
   IntegrationAdaptor,
   AIContext,
-} from '@flowforge/shared';
-import { WorkflowNotFoundError, RunStatus } from '@flowforge/shared';
+} from '@flowforgejs/shared';
+import { WorkflowNotFoundError, RunStatus } from '@flowforgejs/shared';
 import { Runner } from './runner.js';
 import type { RuntimeProviders } from './runner.js';
 import { EventBus } from './event-bus.js';

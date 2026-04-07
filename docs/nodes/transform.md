@@ -24,7 +24,7 @@ Transform each element in an array using a user-defined JavaScript expression.
 **Output:** `{ data: unknown[], count: number }`
 
 ```typescript
-import { mapNode } from '@flowforge/nodes';
+import { mapNode } from '@flowforgejs/nodes';
 
 workflow('transform-records')
   .trigger({ type: 'event', event: 'data.loaded' })
@@ -52,7 +52,7 @@ Filter an array using a user-defined predicate function.
 **Output:** `{ data: unknown[], count: number, removedCount: number }`
 
 ```typescript
-import { filterNode } from '@flowforge/nodes';
+import { filterNode } from '@flowforgejs/nodes';
 
 workflow('filter-active')
   .trigger({ type: 'manual' })
@@ -80,7 +80,7 @@ Reduce an array to a single value using a user-defined reducer function.
 **Output:** `{ result: unknown }`
 
 ```typescript
-import { reduceNode } from '@flowforge/nodes';
+import { reduceNode } from '@flowforgejs/nodes';
 
 workflow('sum-values')
   .trigger({ type: 'manual' })
@@ -109,7 +109,7 @@ Render a string template using `{{variable}}` placeholder syntax. Supports neste
 **Output:** `{ result: string }`
 
 ```typescript
-import { templateNode } from '@flowforge/nodes';
+import { templateNode } from '@flowforgejs/nodes';
 
 workflow('send-notification')
   .trigger({ type: 'event', event: 'order.shipped' })

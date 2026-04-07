@@ -160,7 +160,7 @@ The `destination` parameter for `moveFile` and `copyFile` is also validated agai
 ## Usage Example: Workflow
 
 ```typescript
-import { filesystemNode } from '@flowforge/nodes';
+import { filesystemNode } from '@flowforgejs/nodes';
 
 // Use within a workflow definition
 const workflow = {
@@ -184,8 +184,8 @@ const workflow = {
 ## Usage Example: Agent Tool
 
 ```typescript
-import { filesystemNode } from '@flowforge/nodes';
-import { nodeAsAgentTool } from '@flowforge/engine';
+import { filesystemNode } from '@flowforgejs/nodes';
+import { nodeAsAgentTool } from '@flowforgejs/engine';
 
 // Convert to an agent tool with injected config
 const fsTool = nodeAsAgentTool(filesystemNode);

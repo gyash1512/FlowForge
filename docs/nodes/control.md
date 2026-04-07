@@ -29,7 +29,7 @@ Pause workflow execution for a configurable duration. Data passes through unchan
 **Output:** `{ data: unknown, delayMs: number, resumedAt: string }`
 
 ```typescript
-import { delayNode } from '@flowforge/nodes';
+import { delayNode } from '@flowforgejs/nodes';
 
 workflow('rate-limited')
   .trigger({ type: 'event', event: 'batch.ready' })
@@ -57,7 +57,7 @@ Conditional branching. Evaluates a boolean condition and returns the matching br
 **Output:** `{ branch: 'then' | 'else', value: unknown }`
 
 ```typescript
-import { ifNode } from '@flowforge/nodes';
+import { ifNode } from '@flowforgejs/nodes';
 
 workflow('conditional')
   .trigger({ type: 'event', event: 'order.placed' })
@@ -95,7 +95,7 @@ Multi-way branching. Routes to one of N outputs based on a value.
 **Output:** `{ matched: string | null, value: unknown }`
 
 ```typescript
-import { switchNode } from '@flowforge/nodes';
+import { switchNode } from '@flowforgejs/nodes';
 
 workflow('route-by-type')
   .trigger({ type: 'event', event: 'ticket.created' })
@@ -235,7 +235,7 @@ Pause workflow execution and wait for a specific event to arrive. Supports match
 **Output:** `{ event: string, data: unknown, receivedAt: string, timedOut: boolean }`
 
 ```typescript
-import { waitForEventNode } from '@flowforge/nodes';
+import { waitForEventNode } from '@flowforgejs/nodes';
 
 workflow('approval-flow')
   .trigger({ type: 'event', event: 'deployment.requested' })
@@ -269,7 +269,7 @@ Trigger another workflow as a sub-workflow via event emission. Optionally wait f
 **Config:** `{ eventPrefix: string, timeout: number }`
 
 ```typescript
-import { subWorkflowNode } from '@flowforge/nodes';
+import { subWorkflowNode } from '@flowforgejs/nodes';
 
 workflow('orchestrator')
   .trigger({ type: 'manual' })
@@ -317,7 +317,7 @@ Pause workflow execution and wait for a human to approve or reject an action. Th
 **Output:** `{ approved: boolean, approvedBy?: string, reason?: string, respondedAt: string, timedOut: boolean, originalAction: string, details?: unknown }`
 
 ```typescript
-import { humanApprovalNode } from '@flowforge/nodes';
+import { humanApprovalNode } from '@flowforgejs/nodes';
 
 workflow('deploy-production')
   .trigger({ type: 'event', event: 'deploy.requested' })

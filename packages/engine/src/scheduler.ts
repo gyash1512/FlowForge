@@ -1,5 +1,5 @@
-import type { WorkflowStep } from '@flowforge/shared';
-import { ValidationError } from '@flowforge/shared';
+import type { WorkflowStep } from '@flowforgejs/shared';
+import { ValidationError } from '@flowforgejs/shared';
 
 /**
  * Resolves node execution order using topological sort.

@@ -7,8 +7,8 @@ export default defineConfig({
   clean: true,
   sourcemap: true,
   external: [
-    '@flowforge/shared',
-    '@flowforge/engine',
+    '@flowforgejs/shared',
+    '@flowforgejs/engine',
     '@opentelemetry/api',
     '@opentelemetry/sdk-node',
     'pino',

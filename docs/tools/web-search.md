@@ -87,7 +87,7 @@ The Web Search tool has a relatively small attack surface:
 ## Usage Example
 
 ```typescript
-import { webSearchNode } from '@flowforge/nodes';
+import { webSearchNode } from '@flowforgejs/nodes';
 
 const workflow = {
   nodes: [

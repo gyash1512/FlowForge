@@ -42,8 +42,8 @@ describe('init command', () => {
       expect(pkg.scripts).toBeDefined();
       expect(pkg.scripts.dev).toBe('flowforge dev');
       expect(pkg.scripts.deploy).toBe('flowforge deploy');
-      expect(pkg.dependencies).toHaveProperty('@flowforge/sdk');
-      expect(pkg.dependencies).toHaveProperty('@flowforge/shared');
+      expect(pkg.dependencies).toHaveProperty('@flowforgejs/sdk');
+      expect(pkg.dependencies).toHaveProperty('@flowforgejs/shared');
     });
 
     it('should produce valid JSON for tsconfig.json', () => {

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { defineNode } from '@flowforge/sdk';
+import { defineNode } from '@flowforgejs/sdk';
 
 const inputSchema = z.object({
   event: z.string().describe('Event type to wait for'),

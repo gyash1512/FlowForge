@@ -1,4 +1,4 @@
-import type { NodeDefinition } from '@flowforge/shared';
+import type { NodeDefinition } from '@flowforgejs/shared';
 import { createMockContext } from './mock-context.js';
 import type { MockContextOptions, MockCall } from './mock-context.js';
 import type { MockLogger } from './mock-logger.js';

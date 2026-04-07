@@ -1,5 +1,5 @@
 import { Cron } from 'croner';
-import type { Logger } from '@flowforge/shared';
+import type { Logger } from '@flowforgejs/shared';
 
 export type CronCallback = () => void | Promise<void>;
 

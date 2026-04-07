@@ -1,7 +1,6 @@
 {
-  "name": "@flowforge/engine",
+  "name": "@flowforgejs/engine",
   "version": "0.1.1",
-  "private": true,
   "description": "FlowForge workflow execution engine",
   "type": "module",
   "exports": {
@@ -23,7 +22,7 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
-    "@flowforge/shared": "workspace:*"
+    "@flowforgejs/shared": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^8.3.0",

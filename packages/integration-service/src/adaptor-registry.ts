@@ -1,4 +1,4 @@
-import type { IntegrationAdaptor } from '@flowforge/shared';
+import type { IntegrationAdaptor } from '@flowforgejs/shared';
 
 export class AdaptorRegistry {
   private readonly adaptors = new Map<string, IntegrationAdaptor>();

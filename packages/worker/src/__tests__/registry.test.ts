@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { z } from 'zod';
 import { WorkflowRegistry } from '../registry.js';
-import type { WorkflowDefinition } from '@flowforge/shared';
+import type { WorkflowDefinition } from '@flowforgejs/shared';
 
 function makeWorkflow(id: string, overrides?: Partial<WorkflowDefinition>): WorkflowDefinition {
   return {

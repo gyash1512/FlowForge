@@ -1,5 +1,5 @@
 import type { z } from 'zod';
-import type { NodeDefinition, NodeCategory, NodeContext } from '@flowforge/shared';
+import type { NodeDefinition, NodeCategory, NodeContext } from '@flowforgejs/shared';
 
 export interface DefineNodeInput {
   name: string;

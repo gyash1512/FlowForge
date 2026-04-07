@@ -1,5 +1,5 @@
-import type { RetryConfig } from '@flowforge/shared';
-import { RetryExhaustedError } from '@flowforge/shared';
+import type { RetryConfig } from '@flowforgejs/shared';
+import { RetryExhaustedError } from '@flowforgejs/shared';
 
 export function computeDelay(config: RetryConfig, attempt: number): number {
   let delay: number;

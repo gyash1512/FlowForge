@@ -1,13 +1,13 @@
 # SDK Reference
 
-The `@flowforge/sdk` package provides the primary API for defining nodes, agents, and workflows.
+The `@flowforgejs/sdk` package provides the primary API for defining nodes, agents, and workflows.
 
 ## defineNode(options)
 
 Creates a `NodeDefinition` from the provided options.
 
 ```typescript
-import { defineNode } from '@flowforge/sdk';
+import { defineNode } from '@flowforgejs/sdk';
 ```
 
 ### Parameters
@@ -47,7 +47,7 @@ interface DefineNodeInput {
 
 ```typescript
 import { z } from 'zod';
-import { defineNode } from '@flowforge/sdk';
+import { defineNode } from '@flowforgejs/sdk';
 
 const myNode = defineNode({
   name: 'custom/hello',
@@ -72,7 +72,7 @@ const myNode = defineNode({
 Creates a `NodeDefinition` that runs an LLM tool-calling loop.
 
 ```typescript
-import { defineAgentNode } from '@flowforge/sdk';
+import { defineAgentNode } from '@flowforgejs/sdk';
 ```
 
 ### Parameters
@@ -126,7 +126,7 @@ interface AgentToolDef {
 Creates a `WorkflowBuilder` for declaratively constructing workflow definitions.
 
 ```typescript
-import { workflow } from '@flowforge/sdk';
+import { workflow } from '@flowforgejs/sdk';
 ```
 
 ### WorkflowBuilder Methods
@@ -298,8 +298,8 @@ Attach arbitrary metadata to the workflow.
 ### Complete Example
 
 ```typescript
-import { workflow } from '@flowforge/sdk';
-import { generateTextNode, slackNode, postgresNode } from '@flowforge/nodes';
+import { workflow } from '@flowforgejs/sdk';
+import { generateTextNode, slackNode, postgresNode } from '@flowforgejs/nodes';
 
 const wf = workflow('order-notification')
   .name('Order Notification Pipeline')

@@ -7,19 +7,19 @@ Most projects need only the SDK and engine:
 === "pnpm"
 
     ```bash
-    pnpm add @flowforge/sdk @flowforge/engine zod
+    pnpm add @flowforgejs/sdk @flowforgejs/engine zod
     ```
 
 === "npm"
 
     ```bash
-    npm install @flowforge/sdk @flowforge/engine zod
+    npm install @flowforgejs/sdk @flowforgejs/engine zod
     ```
 
 === "yarn"
 
     ```bash
-    yarn add @flowforge/sdk @flowforge/engine zod
+    yarn add @flowforgejs/sdk @flowforgejs/engine zod
     ```
 
 !!! note "Zod is a peer dependency"
@@ -27,22 +27,22 @@ FlowForge uses Zod 3.x for schema validation. Install it alongside the SDK.
 
 ## Which packages to install
 
-| Package                   | Install when you need...                                                                                                                  |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `@flowforge/sdk`          | Always. Provides `defineNode()`, `defineAgentNode()`, and `workflow()`.                                                                   |
-| `@flowforge/engine`       | Always. Provides the `Engine` class that executes workflows.                                                                              |
-| `@flowforge/nodes`        | You want the 80+ built-in nodes (AI, data, communication, tools, control flow, transforms).                                               |
-| `@flowforge/shared`       | Rarely installed directly. Shared types are re-exported by the SDK and engine. Useful if you are writing a custom adaptor or integration. |
-| `@flowforge/cli`          | You want the `flowforge` CLI for scaffolding, running, and managing workflows.                                                            |
-| `@flowforge/worker`       | You need distributed execution via BullMQ with a Hono HTTP API.                                                                           |
-| `@flowforge/dashboard`    | You want the monitoring dashboard API server.                                                                                             |
-| `@flowforge/integrations` | You are deploying the integration service (Composio adaptor) as a standalone microservice.                                                |
-| `@flowforge/test-utils`   | You are writing tests for custom nodes.                                                                                                   |
+| Package                     | Install when you need...                                                                                                                  |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `@flowforgejs/sdk`          | Always. Provides `defineNode()`, `defineAgentNode()`, and `workflow()`.                                                                   |
+| `@flowforgejs/engine`       | Always. Provides the `Engine` class that executes workflows.                                                                              |
+| `@flowforgejs/nodes`        | You want the 80+ built-in nodes (AI, data, communication, tools, control flow, transforms).                                               |
+| `@flowforgejs/shared`       | Rarely installed directly. Shared types are re-exported by the SDK and engine. Useful if you are writing a custom adaptor or integration. |
+| `@flowforgejs/cli`          | You want the `flowforge` CLI for scaffolding, running, and managing workflows.                                                            |
+| `@flowforgejs/worker`       | You need distributed execution via BullMQ with a Hono HTTP API.                                                                           |
+| `@flowforgejs/dashboard`    | You want the monitoring dashboard API server.                                                                                             |
+| `@flowforgejs/integrations` | You are deploying the integration service (Composio adaptor) as a standalone microservice.                                                |
+| `@flowforgejs/test-utils`   | You are writing tests for custom nodes.                                                                                                   |
 
 ### Full install (all built-in nodes)
 
 ```bash
-pnpm add @flowforge/sdk @flowforge/engine @flowforge/nodes zod
+pnpm add @flowforgejs/sdk @flowforgejs/engine @flowforgejs/nodes zod
 ```
 
 ### AI workflows

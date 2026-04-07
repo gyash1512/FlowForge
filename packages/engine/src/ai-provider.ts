@@ -7,7 +7,7 @@ import type {
   AIRequestParams,
   AIObjectParams,
   AIEmbedParams,
-} from '@flowforge/shared';
+} from '@flowforgejs/shared';
 
 export interface AISDKFunctions {
   generateText: (params: AIRequestParams) => Promise<AITextResponse>;

@@ -1,4 +1,4 @@
-import { DEFAULT_RATE_LIMIT_MAX, DEFAULT_RATE_LIMIT_WINDOW_MS } from '@flowforge/shared';
+import { DEFAULT_RATE_LIMIT_MAX, DEFAULT_RATE_LIMIT_WINDOW_MS } from '@flowforgejs/shared';
 
 interface TokenBucket {
   tokens: number;

@@ -1,5 +1,5 @@
-import type { DataAdaptor, IntegrationAdaptor, Logger } from '@flowforge/shared';
-import { IntegrationError } from '@flowforge/shared';
+import type { DataAdaptor, IntegrationAdaptor, Logger } from '@flowforgejs/shared';
+import { IntegrationError } from '@flowforgejs/shared';
 
 /**
  * Manages data adaptors (postgres, redis, http, etc.) for ctx.pull()/ctx.push().

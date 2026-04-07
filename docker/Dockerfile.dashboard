@@ -18,7 +18,7 @@ COPY tsconfig.json turbo.json ./
 COPY packages/shared/ ./packages/shared/
 COPY packages/dashboard/ ./packages/dashboard/
 
-RUN pnpm run build --filter=@flowforge/dashboard...
+RUN pnpm run build --filter=@flowforgejs/dashboard...
 
 # ── Stage 3: Production image ──
 FROM node:20-alpine AS runner

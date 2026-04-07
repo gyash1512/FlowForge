@@ -4,7 +4,7 @@ Nodes are the fundamental building blocks of FlowForge workflows. Each node enca
 
 ## What is a Node?
 
-A node is defined by the `NodeDefinition` interface from `@flowforge/shared`:
+A node is defined by the `NodeDefinition` interface from `@flowforgejs/shared`:
 
 ```typescript
 interface NodeDefinition {
@@ -54,8 +54,8 @@ FlowForge ships with **50+ built-in nodes** organized into the following categor
 Nodes are used as steps inside workflows. You can reference built-in nodes or custom ones:
 
 ```typescript
-import { workflow } from '@flowforge/sdk';
-import { generateTextNode } from '@flowforge/nodes';
+import { workflow } from '@flowforgejs/sdk';
+import { generateTextNode } from '@flowforgejs/nodes';
 
 const myWorkflow = workflow('summarize')
   .name('Summarize Document')
@@ -82,11 +82,11 @@ const wf = workflow('quick')
 
 ## Creating Custom Nodes
 
-Use `defineNode()` from `@flowforge/sdk` to create reusable nodes:
+Use `defineNode()` from `@flowforgejs/sdk` to create reusable nodes:
 
 ```typescript
 import { z } from 'zod';
-import { defineNode } from '@flowforge/sdk';
+import { defineNode } from '@flowforgejs/sdk';
 
 export const myNode = defineNode({
   name: 'custom/my-node',

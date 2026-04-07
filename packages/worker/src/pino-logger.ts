@@ -2,7 +2,7 @@
 // Pino-based Logger
 // ────────────────────────────────────────────────────────────────
 
-import type { Logger } from '@flowforge/shared';
+import type { Logger } from '@flowforgejs/shared';
 import pino from 'pino';
 
 export interface PinoLoggerOptions {

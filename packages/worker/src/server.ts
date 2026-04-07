@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
-import type { Logger, RunRecord, WorkflowDefinition, RunFilter } from '@flowforge/shared';
-import { RunStatus, eventPayloadSchema, runFilterSchema } from '@flowforge/shared';
+import type { Logger, RunRecord, WorkflowDefinition, RunFilter } from '@flowforgejs/shared';
+import { RunStatus, eventPayloadSchema, runFilterSchema } from '@flowforgejs/shared';
 import type { WorkflowRegistry } from './registry.js';
 
 // ────────────────────────────────────────────────────────────────

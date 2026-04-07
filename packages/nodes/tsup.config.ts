@@ -6,5 +6,5 @@ export default defineConfig({
   dts: true,
   clean: true,
   sourcemap: true,
-  external: ['@flowforge/shared', '@flowforge/sdk'],
+  external: ['@flowforgejs/shared', '@flowforgejs/sdk'],
 });

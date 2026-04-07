@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { defineNode } from '@flowforge/sdk';
+import { defineNode } from '@flowforgejs/sdk';
 
 const inputSchema = z.object({
   items: z.array(z.unknown()).describe('Array of items to iterate over'),

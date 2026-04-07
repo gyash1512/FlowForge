@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import type { IntegrationAdaptor } from '@flowforge/shared';
+import type { IntegrationAdaptor } from '@flowforgejs/shared';
 import { AdaptorRegistry } from '../adaptor-registry.js';
 
 function makeAdaptor(name: string, overrides?: Partial<IntegrationAdaptor>): IntegrationAdaptor {

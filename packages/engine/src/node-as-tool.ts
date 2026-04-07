@@ -1,4 +1,4 @@
-import type { NodeDefinition, AgentToolDef, NodeContext } from '@flowforge/shared';
+import type { NodeDefinition, AgentToolDef, NodeContext } from '@flowforgejs/shared';
 
 /**
  * Converts a NodeDefinition into an AgentToolDef that can be used in agent nodes.
@@ -39,8 +39,8 @@ export function nodeAsAgentTool(node: NodeDefinition): AgentToolDef {
  *
  * @example
  * ```ts
- * import { generateTextNode } from '@flowforge/nodes';
- * import { nodesToAgentTools } from '@flowforge/engine';
+ * import { generateTextNode } from '@flowforgejs/nodes';
+ * import { nodesToAgentTools } from '@flowforgejs/engine';
  *
  * const tools = nodesToAgentTools({
  *   'generate-text': generateTextNode,

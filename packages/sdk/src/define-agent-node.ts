@@ -4,7 +4,7 @@ import type {
   AgentNodeOptions,
   AgentToolDef,
   NodeContext,
-} from '@flowforge/shared';
+} from '@flowforgejs/shared';
 
 /**
  * Define an agent node that runs an LLM tool-calling loop.

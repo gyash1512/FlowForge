@@ -1,4 +1,4 @@
-import type { Logger } from '@flowforge/shared';
+import type { Logger } from '@flowforgejs/shared';
 
 export interface LogCall {
   level: 'info' | 'warn' | 'error' | 'debug';

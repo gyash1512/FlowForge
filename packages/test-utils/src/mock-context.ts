@@ -7,7 +7,7 @@ import type {
   AIStreamResponse,
   AIObjectResponse,
   AIEmbedResponse,
-} from '@flowforge/shared';
+} from '@flowforgejs/shared';
 import { MockLogger } from './mock-logger.js';
 
 export interface MockCall {

@@ -4,11 +4,11 @@ This guide covers how to create, test, and publish custom nodes for FlowForge.
 
 ## defineNode() API
 
-The `defineNode()` function from `@flowforge/sdk` creates a `NodeDefinition` object:
+The `defineNode()` function from `@flowforgejs/sdk` creates a `NodeDefinition` object:
 
 ```typescript
 import { z } from 'zod';
-import { defineNode } from '@flowforge/sdk';
+import { defineNode } from '@flowforgejs/sdk';
 
 export const sentimentNode = defineNode({
   name: 'custom/sentiment-analysis',
@@ -184,13 +184,13 @@ onError: async (error, ctx) => {
 },
 ```
 
-## Testing with @flowforge/test-utils
+## Testing with @flowforgejs/test-utils
 
-The `@flowforge/test-utils` package provides `createMockContext()` for unit testing nodes:
+The `@flowforgejs/test-utils` package provides `createMockContext()` for unit testing nodes:
 
 ```typescript
 import { describe, it, expect } from 'vitest';
-import { createMockContext } from '@flowforge/test-utils';
+import { createMockContext } from '@flowforgejs/test-utils';
 import { sentimentNode } from './sentiment';
 
 describe('sentimentNode', () => {
@@ -263,7 +263,7 @@ my-flowforge-nodes/
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "peerDependencies": {
-    "@flowforge/sdk": "^0.1.0",
+    "@flowforgejs/sdk": "^0.1.0",
     "zod": "^3.0.0"
   }
 }
@@ -279,7 +279,7 @@ Consumers install and use:
 
 ```typescript
 import { sentimentNode } from '@my-org/flowforge-nodes';
-import { workflow } from '@flowforge/sdk';
+import { workflow } from '@flowforgejs/sdk';
 
 const wf = workflow('analyze')
   .trigger({ type: 'manual' })
@@ -291,4 +291,4 @@ const wf = workflow('analyze')
 ```
 
 !!! warning "Peer dependencies"
-Always declare `@flowforge/sdk` and `zod` as peer dependencies to avoid version conflicts and duplicate instances.
+Always declare `@flowforgejs/sdk` and `zod` as peer dependencies to avoid version conflicts and duplicate instances.

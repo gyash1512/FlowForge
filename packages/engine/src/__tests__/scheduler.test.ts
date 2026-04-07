@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { z } from 'zod';
 import { resolveExecutionOrder } from '../scheduler.js';
-import type { WorkflowStep } from '@flowforge/shared';
+import type { WorkflowStep } from '@flowforgejs/shared';
 
 function makeStep(name: string, dependsOn?: string[]): WorkflowStep {
   return {

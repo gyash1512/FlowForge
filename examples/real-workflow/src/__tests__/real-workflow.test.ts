@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { z } from 'zod';
-import { defineNode, workflow, RunStatus } from '@flowforge/sdk';
-import { Engine, NoopLogger } from '@flowforge/engine';
+import { defineNode, workflow, RunStatus } from '@flowforgejs/sdk';
+import { Engine, NoopLogger } from '@flowforgejs/engine';
 
 // ── Shared schemas used across tests ──
 

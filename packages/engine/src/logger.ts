@@ -1,4 +1,4 @@
-import type { Logger } from '@flowforge/shared';
+import type { Logger } from '@flowforgejs/shared';
 
 export class ConsoleLogger implements Logger {
   private bindings: Record<string, unknown>;

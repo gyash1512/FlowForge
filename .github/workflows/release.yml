@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   release:
-    name: Publish flowforgejs to npm
+    name: Publish to npm
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -32,15 +32,12 @@ jobs:
       - run: pnpm run test:ci
 
       - name: Set version from tag
-        working-directory: packages/flowforge
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
-          jq --arg v "$VERSION" '.version = $v' package.json > tmp.json
-          mv tmp.json package.json
+          pnpm -r exec -- npm pkg set "version=$VERSION"
 
-      - name: Publish to npm
-        working-directory: packages/flowforge
-        run: pnpm publish --access public --no-git-checks
+      - name: Publish all packages to npm
+        run: pnpm -r publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true

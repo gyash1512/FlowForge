@@ -25,7 +25,7 @@ Generate text using any LLM supported by the Vercel AI SDK.
 **Output:** `{ text: string, usage?: { promptTokens, completionTokens }, finishReason?: string }`
 
 ```typescript
-import { generateTextNode } from '@flowforge/nodes';
+import { generateTextNode } from '@flowforgejs/nodes';
 
 workflow('generate')
   .trigger({ type: 'manual' })
@@ -59,7 +59,7 @@ Generate structured JSON output from an LLM. The output conforms to a schema you
 **Output:** `{ object: unknown, usage?: { promptTokens, completionTokens } }`
 
 ```typescript
-import { generateObjectNode } from '@flowforge/nodes';
+import { generateObjectNode } from '@flowforgejs/nodes';
 
 workflow('extract-entities')
   .trigger({ type: 'event', event: 'text.received' })
@@ -98,7 +98,7 @@ Generate vector embeddings for text, suitable for semantic search and RAG pipeli
 **Output:** `{ embedding: number[], usage?: { tokens: number } }`
 
 ```typescript
-import { embedNode } from '@flowforge/nodes';
+import { embedNode } from '@flowforgejs/nodes';
 
 workflow('index-document')
   .trigger({ type: 'event', event: 'document.created' })
@@ -138,7 +138,7 @@ Run a configurable agent loop with tool calling and iterative reasoning. The age
 **Output:** `{ result: unknown, toolsUsed: string[], iterations: number, text: string }`
 
 ```typescript
-import { agentNode } from '@flowforge/nodes';
+import { agentNode } from '@flowforgejs/nodes';
 
 workflow('research-agent')
   .trigger({ type: 'manual' })
@@ -195,7 +195,7 @@ Connect to an MCP (Model Context Protocol) server and interact with its tools an
 === "stdio transport"
 
     ```typescript
-    import { mcpClientNode } from '@flowforge/nodes';
+    import { mcpClientNode } from '@flowforgejs/nodes';
 
     // List tools from a local MCP server
     workflow('mcp-tools')
@@ -226,7 +226,7 @@ Connect to an MCP (Model Context Protocol) server and interact with its tools an
 === "HTTP transport"
 
     ```typescript
-    import { mcpClientNode } from '@flowforge/nodes';
+    import { mcpClientNode } from '@flowforgejs/nodes';
 
     workflow('mcp-remote')
       .trigger({ type: 'manual' })
@@ -247,11 +247,11 @@ MCP connections are cached by transport configuration. Multiple nodes using the 
 
 ## defineAgentNode()
 
-For building custom agent nodes with their own tool sets, use `defineAgentNode()` from `@flowforge/sdk`:
+For building custom agent nodes with their own tool sets, use `defineAgentNode()` from `@flowforgejs/sdk`:
 
 ```typescript
 import { z } from 'zod';
-import { defineAgentNode } from '@flowforge/sdk';
+import { defineAgentNode } from '@flowforgejs/sdk';
 
 const myAgent = defineAgentNode({
   name: 'custom/research-agent',
@@ -292,12 +292,12 @@ The agent node runs a loop: call the LLM, execute any tool calls, repeat until t
 
 ## Converting Nodes to Agent Tools
 
-Any existing `NodeDefinition` can be converted into an agent tool using `nodeAsAgentTool()` or `nodesToAgentTools()` from `@flowforge/engine`:
+Any existing `NodeDefinition` can be converted into an agent tool using `nodeAsAgentTool()` or `nodesToAgentTools()` from `@flowforgejs/engine`:
 
 ```typescript
-import { generateTextNode, embedNode } from '@flowforge/nodes';
-import { nodesToAgentTools } from '@flowforge/engine';
-import { defineAgentNode } from '@flowforge/sdk';
+import { generateTextNode, embedNode } from '@flowforgejs/nodes';
+import { nodesToAgentTools } from '@flowforgejs/engine';
+import { defineAgentNode } from '@flowforgejs/sdk';
 
 const tools = nodesToAgentTools({
   'generate-text': generateTextNode,

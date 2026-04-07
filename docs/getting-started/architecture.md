@@ -37,7 +37,7 @@ FlowForge/
 
 ```
 ┌─────────────┐
-│   @flowforge/shared   │  ← types, schemas, error classes
+│   @flowforgejs/shared   │  ← types, schemas, error classes
 └──────┬──────┘
        │
   ┌────┴────┐
@@ -60,10 +60,10 @@ FlowForge/
 
 Key relationships:
 
-- **`@flowforge/shared`** is the foundation. Every other package depends on it for types.
-- **`@flowforge/sdk`** depends only on `shared` and `zod`. It has no runtime dependencies on the engine.
-- **`@flowforge/engine`** depends only on `shared`. It receives AI, data, and integration providers through dependency injection.
-- **`@flowforge/nodes`** depends on both `sdk` and `shared`, plus third-party libraries for specific capabilities (Cheerio, Puppeteer, E2B, math.js, etc.).
+- **`@flowforgejs/shared`** is the foundation. Every other package depends on it for types.
+- **`@flowforgejs/sdk`** depends only on `shared` and `zod`. It has no runtime dependencies on the engine.
+- **`@flowforgejs/engine`** depends only on `shared`. It receives AI, data, and integration providers through dependency injection.
+- **`@flowforgejs/nodes`** depends on both `sdk` and `shared`, plus third-party libraries for specific capabilities (Cheerio, Puppeteer, E2B, math.js, etc.).
 
 ---
 

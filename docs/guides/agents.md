@@ -18,8 +18,8 @@ Agents are nodes, not a separate primitive. They compose with the rest of the wo
 The simplest way to add an agent to a workflow:
 
 ```typescript
-import { agentNode } from '@flowforge/nodes';
-import { workflow } from '@flowforge/sdk';
+import { agentNode } from '@flowforgejs/nodes';
+import { workflow } from '@flowforgejs/sdk';
 
 const wf = workflow('customer-support')
   .trigger({ type: 'event', event: 'ticket.created' })
@@ -57,7 +57,7 @@ For agents with typed tools and structured output, use `defineAgentNode()`:
 
 ```typescript
 import { z } from 'zod';
-import { defineAgentNode } from '@flowforge/sdk';
+import { defineAgentNode } from '@flowforgejs/sdk';
 
 const researchAgent = defineAgentNode({
   name: 'custom/research-agent',
@@ -128,8 +128,8 @@ Any existing `NodeDefinition` can be exposed as an agent tool. This is the core 
 Converts a single node:
 
 ```typescript
-import { nodeAsAgentTool } from '@flowforge/engine';
-import { postgresNode } from '@flowforge/nodes';
+import { nodeAsAgentTool } from '@flowforgejs/engine';
+import { postgresNode } from '@flowforgejs/nodes';
 
 const dbTool = nodeAsAgentTool(postgresNode);
 // dbTool.description = "Execute queries and mutations against a PostgreSQL database"
@@ -142,9 +142,9 @@ const dbTool = nodeAsAgentTool(postgresNode);
 Converts multiple nodes at once:
 
 ```typescript
-import { nodesToAgentTools } from '@flowforge/engine';
-import { httpNode, postgresNode, redisNode } from '@flowforge/nodes';
-import { defineAgentNode } from '@flowforge/sdk';
+import { nodesToAgentTools } from '@flowforgejs/engine';
+import { httpNode, postgresNode, redisNode } from '@flowforgejs/nodes';
+import { defineAgentNode } from '@flowforgejs/sdk';
 
 const tools = nodesToAgentTools({
   'http-request': httpNode,
@@ -174,7 +174,7 @@ The converted tools preserve:
 Use the `mcp-client` node to connect agents to external MCP servers, providing access to tools outside the FlowForge ecosystem:
 
 ```typescript
-import { mcpClientNode, agentNode } from '@flowforge/nodes';
+import { mcpClientNode, agentNode } from '@flowforgejs/nodes';
 
 const wf = workflow('mcp-agent')
   .trigger({ type: 'manual' })
@@ -215,7 +215,7 @@ const wf = workflow('mcp-agent')
 For agents that perform high-stakes actions, combine them with the `human-approval` node:
 
 ```typescript
-import { agentNode, humanApprovalNode, slackNode } from '@flowforge/nodes';
+import { agentNode, humanApprovalNode, slackNode } from '@flowforgejs/nodes';
 
 const wf = workflow('safe-deploy-agent')
   .trigger({ type: 'event', event: 'deploy.requested' })
@@ -299,9 +299,9 @@ A complete example combining multiple tool types:
 
 ```typescript
 import { z } from 'zod';
-import { defineAgentNode } from '@flowforge/sdk';
-import { nodesToAgentTools } from '@flowforge/engine';
-import { httpNode } from '@flowforge/nodes';
+import { defineAgentNode } from '@flowforgejs/sdk';
+import { nodesToAgentTools } from '@flowforgejs/engine';
+import { httpNode } from '@flowforgejs/nodes';
 
 const researchAgent = defineAgentNode({
   name: 'custom/full-research-agent',

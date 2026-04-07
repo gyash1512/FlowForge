@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
-import type { IntegrationRequest, IntegrationResponse } from '@flowforge/shared';
-import { FlowForgeError } from '@flowforge/shared';
+import type { IntegrationRequest, IntegrationResponse } from '@flowforgejs/shared';
+import { FlowForgeError } from '@flowforgejs/shared';
 import { AdaptorRegistry } from './adaptor-registry.js';
 import { RateLimiter } from './rate-limiter.js';
 import { CircuitBreaker } from './circuit-breaker.js';

@@ -1,6 +1,6 @@
 # Shared Types Reference
 
-All shared types are exported from `@flowforge/shared`. This page documents every public type, interface, and enum.
+All shared types are exported from `@flowforgejs/shared`. This page documents every public type, interface, and enum.
 
 ## Node Types
 

@@ -29,10 +29,10 @@ importers:
 
   examples/basic:
     dependencies:
-      '@flowforge/engine':
+      '@flowforgejs/engine':
         specifier: workspace:*
         version: link:../../packages/engine
-      '@flowforge/sdk':
+      '@flowforgejs/sdk':
         specifier: workspace:*
         version: link:../../packages/sdk
       zod:
@@ -57,13 +57,13 @@ importers:
 
   examples/real-workflow:
     dependencies:
-      '@flowforge/engine':
+      '@flowforgejs/engine':
         specifier: workspace:*
         version: link:../../packages/engine
-      '@flowforge/nodes':
+      '@flowforgejs/nodes':
         specifier: workspace:*
         version: link:../../packages/nodes
-      '@flowforge/sdk':
+      '@flowforgejs/sdk':
         specifier: workspace:*
         version: link:../../packages/sdk
       zod:
@@ -85,10 +85,10 @@ importers:
 
   packages/cli:
     dependencies:
-      '@flowforge/shared':
+      '@flowforgejs/shared':
         specifier: workspace:*
         version: link:../shared
-      '@flowforge/worker':
+      '@flowforgejs/worker':
         specifier: workspace:*
         version: link:../worker
       chalk:
@@ -116,7 +116,7 @@ importers:
 
   packages/dashboard:
     dependencies:
-      '@flowforge/shared':
+      '@flowforgejs/shared':
         specifier: workspace:*
         version: link:../shared
       hono:
@@ -141,7 +141,7 @@ importers:
 
   packages/engine:
     dependencies:
-      '@flowforge/shared':
+      '@flowforgejs/shared':
         specifier: workspace:*
         version: link:../shared
     devDependencies:
@@ -161,73 +161,12 @@ importers:
         specifier: 3.25.76
         version: 3.25.76
 
-  packages/flowforge:
-    dependencies:
-      '@composio/core':
-        specifier: ^0.6.8
-        version: 0.6.8(ws@8.20.0)(zod@3.25.76)
-      '@e2b/code-interpreter':
-        specifier: ^1.0.4
-        version: 1.5.1
-      ai:
-        specifier: ^4.0.0
-        version: 4.3.19(react@19.2.4)(zod@3.25.76)
-      cheerio:
-        specifier: ^1.0.0
-        version: 1.2.0
-      duck-duck-scrape:
-        specifier: ^2.2.5
-        version: 2.2.7
-      execa:
-        specifier: ^9.5.0
-        version: 9.6.1
-      mathjs:
-        specifier: ^14.0.0
-        version: 14.9.1
-      nanoid:
-        specifier: ^5.0.0
-        version: 5.1.7
-      pdf-parse:
-        specifier: ^1.1.1
-        version: 1.1.4
-      puppeteer-core:
-        specifier: ^24.0.0
-        version: 24.40.0
-      simple-git:
-        specifier: ^3.27.0
-        version: 3.35.1
-      zod:
-        specifier: 3.25.76
-        version: 3.25.76
-    devDependencies:
-      '@flowforge/engine':
-        specifier: workspace:*
-        version: link:../engine
-      '@flowforge/nodes':
-        specifier: workspace:*
-        version: link:../nodes
-      '@flowforge/sdk':
-        specifier: workspace:*
-        version: link:../sdk
-      '@flowforge/shared':
-        specifier: workspace:*
-        version: link:../shared
-      '@flowforge/test-utils':
-        specifier: workspace:*
-        version: link:../test-utils
-      tsup:
-        specifier: ^8.3.0
-        version: 8.5.1(postcss@8.5.8)(tsx@4.21.0)(typescript@5.9.3)
-      typescript:
-        specifier: ^5.5.0
-        version: 5.9.3
-
   packages/integration-service:
     dependencies:
       '@composio/core':
         specifier: ^0.6.8
         version: 0.6.8(ws@8.20.0)(zod@3.25.76)
-      '@flowforge/shared':
+      '@flowforgejs/shared':
         specifier: workspace:*
         version: link:../shared
       hono:
@@ -255,10 +194,10 @@ importers:
       '@e2b/code-interpreter':
         specifier: ^1.0.4
         version: 1.5.1
-      '@flowforge/sdk':
+      '@flowforgejs/sdk':
         specifier: workspace:*
         version: link:../sdk
-      '@flowforge/shared':
+      '@flowforgejs/shared':
         specifier: workspace:*
         version: link:../shared
       cheerio:
@@ -301,7 +240,7 @@ importers:
 
   packages/sdk:
     dependencies:
-      '@flowforge/shared':
+      '@flowforgejs/shared':
         specifier: workspace:*
         version: link:../shared
       ai:
@@ -348,10 +287,10 @@ importers:
 
   packages/test-utils:
     dependencies:
-      '@flowforge/sdk':
+      '@flowforgejs/sdk':
         specifier: workspace:*
         version: link:../sdk
-      '@flowforge/shared':
+      '@flowforgejs/shared':
         specifier: workspace:*
         version: link:../shared
       zod:
@@ -373,10 +312,10 @@ importers:
 
   packages/worker:
     dependencies:
-      '@flowforge/engine':
+      '@flowforgejs/engine':
         specifier: workspace:*
         version: link:../engine
-      '@flowforge/shared':
+      '@flowforgejs/shared':
         specifier: workspace:*
         version: link:../shared
       '@opentelemetry/api':

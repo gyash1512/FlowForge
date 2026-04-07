@@ -107,7 +107,7 @@ If `allowedCommands` is not set, **any command** is allowed (subject to the bloc
 ## Usage Example
 
 ```typescript
-import { shellNode } from '@flowforge/nodes';
+import { shellNode } from '@flowforgejs/nodes';
 
 const workflow = {
   nodes: [

@@ -1,7 +1,6 @@
 {
-  "name": "@flowforge/nodes",
+  "name": "@flowforgejs/nodes",
   "version": "0.1.1",
-  "private": true,
   "description": "Built-in node definitions for FlowForge workflow engine",
   "type": "module",
   "exports": {
@@ -25,8 +24,8 @@
   "dependencies": {
     "@composio/core": "^0.6.8",
     "@e2b/code-interpreter": "^1.0.4",
-    "@flowforge/shared": "workspace:*",
-    "@flowforge/sdk": "workspace:*",
+    "@flowforgejs/shared": "workspace:*",
+    "@flowforgejs/sdk": "workspace:*",
     "cheerio": "^1.0.0",
     "duck-duck-scrape": "^2.2.5",
     "execa": "^9.5.0",

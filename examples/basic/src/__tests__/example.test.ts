@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { z } from 'zod';
-import { defineNode, workflow, RunStatus } from '@flowforge/sdk';
-import { Engine, NoopLogger } from '@flowforge/engine';
+import { defineNode, workflow, RunStatus } from '@flowforgejs/sdk';
+import { Engine, NoopLogger } from '@flowforgejs/engine';
 
 describe('basic example', () => {
   it('runs a simple pipeline using defineNode and workflow().node()', async () => {

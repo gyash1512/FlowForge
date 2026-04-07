@@ -110,7 +110,7 @@ The `evaluate` action can evaluate arbitrary mathjs expressions, including matri
 ## Usage Example
 
 ```typescript
-import { mathNode } from '@flowforge/nodes';
+import { mathNode } from '@flowforgejs/nodes';
 
 const workflow = {
   nodes: [

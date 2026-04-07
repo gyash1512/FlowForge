@@ -7,7 +7,7 @@ export default defineConfig({
   clean: true,
   sourcemap: true,
   external: [
-    '@flowforge/shared',
+    '@flowforgejs/shared',
     'ai',
     '@ai-sdk/openai',
     '@ai-sdk/anthropic',

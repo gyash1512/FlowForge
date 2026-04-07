@@ -3,8 +3,8 @@ import chalk from 'chalk';
 import ora from 'ora';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { DEFAULT_WORKER_PORT } from '@flowforge/shared';
-import { Worker } from '@flowforge/worker';
+import { DEFAULT_WORKER_PORT } from '@flowforgejs/shared';
+import { Worker } from '@flowforgejs/worker';
 
 export interface DevOptions {
   port?: string;

@@ -1,5 +1,5 @@
 {
-  "name": "@flowforge/example-basic",
+  "name": "@flowforgejs/example-basic",
   "version": "0.1.1",
   "private": true,
   "description": "Basic example of FlowForge workflow definitions",
@@ -12,8 +12,8 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
-    "@flowforge/sdk": "workspace:*",
-    "@flowforge/engine": "workspace:*",
+    "@flowforgejs/sdk": "workspace:*",
+    "@flowforgejs/engine": "workspace:*",
     "zod": "3.25.76"
   },
   "devDependencies": {

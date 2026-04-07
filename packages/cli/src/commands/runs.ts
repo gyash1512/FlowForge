@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
 import ora from 'ora';
-import { DEFAULT_WORKER_PORT, type RunRecord, type StepRecord } from '@flowforge/shared';
+import { DEFAULT_WORKER_PORT, type RunRecord, type StepRecord } from '@flowforgejs/shared';
 
 export interface RunsListOptions {
   port?: string;

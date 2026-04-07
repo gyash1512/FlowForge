@@ -12,13 +12,13 @@ Build and run a complete workflow in five minutes.
 === "pnpm"
 
     ```bash
-    pnpm add @flowforge/sdk @flowforge/engine zod
+    pnpm add @flowforgejs/sdk @flowforgejs/engine zod
     ```
 
 === "npm"
 
     ```bash
-    npm install @flowforge/sdk @flowforge/engine zod
+    npm install @flowforgejs/sdk @flowforgejs/engine zod
     ```
 
 ## 2. Define a node
@@ -27,7 +27,7 @@ Every node is created with `defineNode()`. You declare Zod schemas for input, ou
 
 ```typescript
 import { z } from 'zod';
-import { defineNode } from '@flowforge/sdk';
+import { defineNode } from '@flowforgejs/sdk';
 
 const fetchUsers = defineNode({
   name: 'fetch-users',
@@ -87,7 +87,7 @@ const enrichUsers = defineNode({
 Use the `workflow()` builder to chain a trigger and one or more node steps. Each step can map its input from previous step outputs via `ctx.steps`.
 
 ```typescript
-import { workflow } from '@flowforge/sdk';
+import { workflow } from '@flowforgejs/sdk';
 
 const userPipeline = workflow('user-pipeline')
   .name('User Pipeline')
@@ -106,7 +106,7 @@ const userPipeline = workflow('user-pipeline')
 ## 5. Run with the Engine
 
 ```typescript
-import { Engine } from '@flowforge/engine';
+import { Engine } from '@flowforgejs/engine';
 
 const engine = new Engine();
 engine.register(userPipeline);

@@ -4,7 +4,7 @@ import type {
   WorkflowMetadata,
   AIContext,
   Logger,
-} from '@flowforge/shared';
+} from '@flowforgejs/shared';
 import { vi } from 'vitest';
 
 /**

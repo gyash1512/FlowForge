@@ -126,8 +126,8 @@ Never use `autoApprove: true` in production. It exists solely for development an
 ## Usage Example: Gating a Dangerous Operation
 
 ```typescript
-import { humanApprovalNode } from '@flowforge/nodes';
-import { gitNode } from '@flowforge/nodes';
+import { humanApprovalNode } from '@flowforgejs/nodes';
+import { gitNode } from '@flowforgejs/nodes';
 
 const workflow = {
   nodes: [

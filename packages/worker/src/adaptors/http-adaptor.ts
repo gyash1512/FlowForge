@@ -1,4 +1,4 @@
-import type { DataAdaptor } from '@flowforge/shared';
+import type { DataAdaptor } from '@flowforgejs/shared';
 
 // ────────────────────────────────────────────────────────────────
 // Types

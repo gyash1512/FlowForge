@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
-import type { RunRecord, StepRecord, RunFilter } from '@flowforge/shared';
-import { RunStatus, runFilterSchema } from '@flowforge/shared';
+import type { RunRecord, StepRecord, RunFilter } from '@flowforgejs/shared';
+import { RunStatus, runFilterSchema } from '@flowforgejs/shared';
 
 const runStore = new Map<string, RunRecord>();
 const stepStore = new Map<string, StepRecord[]>();

@@ -1,5 +1,5 @@
-import type { IntegrationAdaptor } from '@flowforge/shared';
-import { IntegrationError } from '@flowforge/shared';
+import type { IntegrationAdaptor } from '@flowforgejs/shared';
+import { IntegrationError } from '@flowforgejs/shared';
 
 /**
  * Composio SDK client interface.

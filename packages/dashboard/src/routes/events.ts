@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
-import type { EventRecord } from '@flowforge/shared';
-import { eventPayloadSchema, eventId } from '@flowforge/shared';
+import type { EventRecord } from '@flowforgejs/shared';
+import { eventPayloadSchema, eventId } from '@flowforgejs/shared';
 
 const eventStore: EventRecord[] = [];
 

@@ -6,9 +6,9 @@ import type {
   RunFilter,
   DataAdaptor,
   IntegrationAdaptor,
-} from '@flowforge/shared';
+} from '@flowforgejs/shared';
 import { createServer as createHttpServer } from 'node:http';
-import { Engine } from '@flowforge/engine';
+import { Engine } from '@flowforgejs/engine';
 import { createPinoLogger } from './pino-logger.js';
 import { WorkflowRegistry } from './registry.js';
 import { CronScheduler } from './cron-scheduler.js';

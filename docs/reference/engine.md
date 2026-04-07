@@ -1,13 +1,13 @@
 # Engine Reference
 
-The `@flowforge/engine` package provides the runtime for registering workflows, executing them, managing data and integration adaptors, and AI provider configuration.
+The `@flowforgejs/engine` package provides the runtime for registering workflows, executing them, managing data and integration adaptors, and AI provider configuration.
 
 ## Engine
 
 The central orchestrator. Register workflows and trigger them.
 
 ```typescript
-import { Engine } from '@flowforge/engine';
+import { Engine } from '@flowforgejs/engine';
 
 const engine = new Engine({ logger, ai });
 ```
@@ -108,7 +108,7 @@ Shorthand for `engine.integrations.register(adaptor)`.
 The `Runner` handles step-by-step execution of a workflow. It is used internally by the `Engine` but can be instantiated directly for testing or custom execution environments.
 
 ```typescript
-import { Runner } from '@flowforge/engine';
+import { Runner } from '@flowforgejs/engine';
 
 const runner = new Runner({
   logger,
@@ -152,7 +152,7 @@ Executes a workflow definition with the given input. Handles:
 Creates an `AIContext` from explicit AI SDK function references. No dynamic imports.
 
 ```typescript
-import { createAIProvider } from '@flowforge/engine';
+import { createAIProvider } from '@flowforgejs/engine';
 import { generateText, streamText, generateObject, embed } from 'ai';
 
 const ai = createAIProvider({ generateText, streamText, generateObject, embed });
@@ -182,7 +182,7 @@ interface AISDKFunctions {
 Manages AI model provider registrations. Accessible via engine (or instantiate directly).
 
 ```typescript
-import { ModelRegistry } from '@flowforge/engine';
+import { ModelRegistry } from '@flowforgejs/engine';
 
 const registry = new ModelRegistry();
 ```
@@ -240,7 +240,7 @@ Remove a provider registration.
 Convert a `NodeDefinition` into an `AgentToolDef` for use in agent nodes.
 
 ```typescript
-import { nodeAsAgentTool } from '@flowforge/engine';
+import { nodeAsAgentTool } from '@flowforgejs/engine';
 
 const tool = nodeAsAgentTool(myNode);
 // tool.description === myNode.description
@@ -253,7 +253,7 @@ const tool = nodeAsAgentTool(myNode);
 Convert multiple nodes at once.
 
 ```typescript
-import { nodesToAgentTools } from '@flowforge/engine';
+import { nodesToAgentTools } from '@flowforgejs/engine';
 
 const tools = nodesToAgentTools({
   search: searchNode,
@@ -305,7 +305,7 @@ The `execute` method validates that the named adaptor exists and that the reques
 Execute a function with retry logic.
 
 ```typescript
-import { withRetry } from '@flowforge/engine';
+import { withRetry } from '@flowforgejs/engine';
 
 const result = await withRetry(
   (attempt) => fetchData(attempt),

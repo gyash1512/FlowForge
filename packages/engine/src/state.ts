@@ -1,4 +1,4 @@
-import type { StateStore } from '@flowforge/shared';
+import type { StateStore } from '@flowforgejs/shared';
 
 export class InMemoryStateStore implements StateStore {
   private data = new Map<string, unknown>();

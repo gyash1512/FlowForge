@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { createApp } from '../app.js';
 import { registerWorkflow } from '../routes/workflows.js';
 import { addRun } from '../routes/runs.js';
-import type { WorkflowSummary, RunRecord } from '@flowforge/shared';
-import { RunStatus } from '@flowforge/shared';
+import type { WorkflowSummary, RunRecord } from '@flowforgejs/shared';
+import { RunStatus } from '@flowforgejs/shared';
 
 async function makeRequest(app: ReturnType<typeof createApp>, path: string, init?: RequestInit) {
   return app.request(path, init);

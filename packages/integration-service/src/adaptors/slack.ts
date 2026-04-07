@@ -1,5 +1,5 @@
-import type { IntegrationAdaptor } from '@flowforge/shared';
-import { IntegrationError } from '@flowforge/shared';
+import type { IntegrationAdaptor } from '@flowforgejs/shared';
+import { IntegrationError } from '@flowforgejs/shared';
 
 export interface SlackClient {
   postMessage(channel: string, text: string, opts?: Record<string, unknown>): Promise<unknown>;

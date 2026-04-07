@@ -117,7 +117,7 @@ An E2B API key is required. Without it, the tool throws immediately. Get a key a
 ## Usage Example
 
 ```typescript
-import { codeInterpreterNode } from '@flowforge/nodes';
+import { codeInterpreterNode } from '@flowforgejs/nodes';
 
 const workflow = {
   nodes: [

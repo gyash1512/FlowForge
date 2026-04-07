@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { defineNode, workflow } from '@flowforge/sdk';
-import { Engine } from '@flowforge/engine';
+import { defineNode, workflow } from '@flowforgejs/sdk';
+import { Engine } from '@flowforgejs/engine';
 
 // ── Node Definitions ──
 

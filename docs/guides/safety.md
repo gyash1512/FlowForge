@@ -15,7 +15,7 @@ Several tool nodes enforce directory scoping to prevent access outside designate
 The `tools/filesystem` node requires an `allowedDirectories` config:
 
 ```typescript
-import { filesystemNode } from '@flowforge/nodes';
+import { filesystemNode } from '@flowforgejs/nodes';
 
 workflow('file-processing')
   .trigger({ type: 'manual' })

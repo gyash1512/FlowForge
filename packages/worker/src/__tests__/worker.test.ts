@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { z } from 'zod';
 import { Worker } from '../worker.js';
-import type { WorkflowDefinition, WorkflowStep, NodeDefinition } from '@flowforge/shared';
-import { RunStatus } from '@flowforge/shared';
+import type { WorkflowDefinition, WorkflowStep, NodeDefinition } from '@flowforgejs/shared';
+import { RunStatus } from '@flowforgejs/shared';
 
 // ────────────────────────────────────────────────────────────────
 // Helpers

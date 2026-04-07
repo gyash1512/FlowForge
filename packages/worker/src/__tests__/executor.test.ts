@@ -8,8 +8,8 @@ import type {
   WorkflowEvent,
   WorkflowMetadata,
   AIContext,
-} from '@flowforge/shared';
-import { StepStatus } from '@flowforge/shared';
+} from '@flowforgejs/shared';
+import { StepStatus } from '@flowforgejs/shared';
 
 // ────────────────────────────────────────────────────────────────
 // Helpers

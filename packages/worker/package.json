@@ -1,7 +1,6 @@
 {
-  "name": "@flowforge/worker",
+  "name": "@flowforgejs/worker",
   "version": "0.1.1",
-  "private": true,
   "description": "BullMQ-based worker service with Hono HTTP API for FlowForge",
   "type": "module",
   "exports": {
@@ -23,8 +22,8 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
-    "@flowforge/shared": "workspace:*",
-    "@flowforge/engine": "workspace:*",
+    "@flowforgejs/shared": "workspace:*",
+    "@flowforgejs/engine": "workspace:*",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/exporter-trace-otlp-http": "^0.52.0",
     "@opentelemetry/resources": "^1.25.0",

@@ -1,5 +1,5 @@
-import type { Checkpoint, RunId, Logger } from '@flowforge/shared';
-import { CheckpointError } from '@flowforge/shared';
+import type { Checkpoint, RunId, Logger } from '@flowforgejs/shared';
+import { CheckpointError } from '@flowforgejs/shared';
 
 // ────────────────────────────────────────────────────────────────
 // Checkpoint Store Interface

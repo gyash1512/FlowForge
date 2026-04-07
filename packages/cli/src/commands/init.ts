@@ -24,8 +24,8 @@ export function generateProjectFiles(projectName: string): Record<string, string
           test: 'vitest run',
         },
         dependencies: {
-          '@flowforge/sdk': 'workspace:*',
-          '@flowforge/shared': 'workspace:*',
+          '@flowforgejs/sdk': 'workspace:*',
+          '@flowforgejs/shared': 'workspace:*',
           zod: '^3.23.0',
         },
         devDependencies: {

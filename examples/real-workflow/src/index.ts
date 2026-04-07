@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { defineNode, workflow } from '@flowforge/sdk';
-import { Engine, NoopLogger } from '@flowforge/engine';
+import { defineNode, workflow } from '@flowforgejs/sdk';
+import { Engine, NoopLogger } from '@flowforgejs/engine';
 
 // ── Schemas ──
 

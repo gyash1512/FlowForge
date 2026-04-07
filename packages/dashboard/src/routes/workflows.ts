@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import type { WorkflowSummary } from '@flowforge/shared';
+import type { WorkflowSummary } from '@flowforgejs/shared';
 
 const workflowStore = new Map<string, WorkflowSummary>();
 

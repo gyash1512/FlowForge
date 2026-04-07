@@ -32,14 +32,14 @@ FlowForge lets you define, execute, and monitor workflows entirely in TypeScript
 ## Quick Install
 
 ```bash
-npm install @flowforge/sdk @flowforge/engine
+npm install @flowforgejs/sdk @flowforgejs/engine
 ```
 
 ## Hello World
 
 ```typescript
-import { workflow } from '@flowforge/sdk';
-import { Engine } from '@flowforge/engine';
+import { workflow } from '@flowforgejs/sdk';
+import { Engine } from '@flowforgejs/engine';
 
 const wf = workflow('hello')
   .trigger({ type: 'manual' })
@@ -56,17 +56,17 @@ console.log(run.output); // { message: "Hello, FlowForge!" }
 
 ## Packages
 
-| Package                   | npm                       | Description                                               |
-| ------------------------- | ------------------------- | --------------------------------------------------------- |
-| `@flowforge/sdk`          | `@flowforge/sdk`          | Define nodes and build workflows                          |
-| `@flowforge/engine`       | `@flowforge/engine`       | Execute workflows with retry, timeout, and DAG resolution |
-| `@flowforge/nodes`        | `@flowforge/nodes`        | 80+ built-in node definitions                             |
-| `@flowforge/shared`       | `@flowforge/shared`       | Shared types, schemas, and utilities                      |
-| `@flowforge/cli`          | `@flowforge/cli`          | Developer CLI for scaffolding and running workflows       |
-| `@flowforge/worker`       | `@flowforge/worker`       | BullMQ-based distributed worker with Hono HTTP API        |
-| `@flowforge/dashboard`    | `@flowforge/dashboard`    | Monitoring dashboard API server                           |
-| `@flowforge/integrations` | `@flowforge/integrations` | Third-party integration service (Composio adaptor)        |
-| `@flowforge/test-utils`   | `@flowforge/test-utils`   | Testing utilities for node authors                        |
+| Package                     | npm                         | Description                                               |
+| --------------------------- | --------------------------- | --------------------------------------------------------- |
+| `@flowforgejs/sdk`          | `@flowforgejs/sdk`          | Define nodes and build workflows                          |
+| `@flowforgejs/engine`       | `@flowforgejs/engine`       | Execute workflows with retry, timeout, and DAG resolution |
+| `@flowforgejs/nodes`        | `@flowforgejs/nodes`        | 80+ built-in node definitions                             |
+| `@flowforgejs/shared`       | `@flowforgejs/shared`       | Shared types, schemas, and utilities                      |
+| `@flowforgejs/cli`          | `@flowforgejs/cli`          | Developer CLI for scaffolding and running workflows       |
+| `@flowforgejs/worker`       | `@flowforgejs/worker`       | BullMQ-based distributed worker with Hono HTTP API        |
+| `@flowforgejs/dashboard`    | `@flowforgejs/dashboard`    | Monitoring dashboard API server                           |
+| `@flowforgejs/integrations` | `@flowforgejs/integrations` | Third-party integration service (Composio adaptor)        |
+| `@flowforgejs/test-utils`   | `@flowforgejs/test-utils`   | Testing utilities for node authors                        |
 
 ---
 

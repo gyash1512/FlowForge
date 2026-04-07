@@ -8,7 +8,7 @@ import type {
   WorkflowEvent,
   WorkflowMetadata,
   AIContext,
-} from '@flowforge/shared';
+} from '@flowforgejs/shared';
 import {
   RunStatus,
   NodeExecutionError,
@@ -16,7 +16,7 @@ import {
   WorkflowTimeoutError,
   runId,
   eventId,
-} from '@flowforge/shared';
+} from '@flowforgejs/shared';
 import { resolveExecutionOrder } from './scheduler.js';
 import { withRetry } from './retry.js';
 import { InMemoryStateStore } from './state.js';

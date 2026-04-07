@@ -70,7 +70,7 @@ The factory function creates a `ComposioAdaptor` instance for every entry in `TO
 
 ```typescript
 import { Composio } from 'composio-core';
-import { createComposioAdaptors } from '@flowforge/integration-service';
+import { createComposioAdaptors } from '@flowforgejs/integration-service';
 
 const composioClient = new Composio({ apiKey: 'your-key' });
 const adaptors = createComposioAdaptors(composioClient);
@@ -103,7 +103,7 @@ Then create the corresponding node in `packages/nodes/src/communication/`:
 ```typescript
 // 2. Create the node (packages/nodes/src/communication/my-service.ts)
 import { z } from 'zod';
-import { defineNode } from '@flowforge/sdk';
+import { defineNode } from '@flowforgejs/sdk';
 
 const inputSchema = z.object({
   action: z.enum(['doThing', 'doOtherThing']),

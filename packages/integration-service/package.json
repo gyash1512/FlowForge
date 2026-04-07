@@ -1,7 +1,6 @@
 {
-  "name": "@flowforge/integrations",
+  "name": "@flowforgejs/integrations",
   "version": "0.1.1",
-  "private": true,
   "description": "Third-party integration service for FlowForge",
   "type": "module",
   "exports": {
@@ -24,7 +23,7 @@
   },
   "dependencies": {
     "@composio/core": "^0.6.8",
-    "@flowforge/shared": "workspace:*",
+    "@flowforgejs/shared": "workspace:*",
     "hono": "^4.4.0"
   },
   "devDependencies": {

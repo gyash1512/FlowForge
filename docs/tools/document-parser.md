@@ -136,7 +136,7 @@ Directory restrictions and file size checks only apply to `file` source type. Ba
 ## Usage Example
 
 ```typescript
-import { documentParserNode } from '@flowforge/nodes';
+import { documentParserNode } from '@flowforgejs/nodes';
 
 const workflow = {
   nodes: [

@@ -173,7 +173,7 @@ The `push` action is the only operation gated by its own dedicated config flag, 
 ## Usage Example
 
 ```typescript
-import { gitNode } from '@flowforge/nodes';
+import { gitNode } from '@flowforgejs/nodes';
 
 // Automated release workflow
 const workflow = {

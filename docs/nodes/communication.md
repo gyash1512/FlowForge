@@ -132,7 +132,7 @@ The engine routes these calls through registered `IntegrationAdaptor` instances.
 ## Usage Example
 
 ```typescript
-import { slackNode, githubNode } from '@flowforge/nodes';
+import { slackNode, githubNode } from '@flowforgejs/nodes';
 
 workflow('notify-on-pr')
   .trigger({ type: 'event', event: 'pr.merged' })

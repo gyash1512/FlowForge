@@ -110,7 +110,7 @@ The `maxResponseSize` check relies on the `Content-Length` header. If the server
 ## Usage Example
 
 ```typescript
-import { webScrapeNode } from '@flowforge/nodes';
+import { webScrapeNode } from '@flowforgejs/nodes';
 
 const workflow = {
   nodes: [

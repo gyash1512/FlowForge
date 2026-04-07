@@ -10,7 +10,7 @@ A node is a unit of work. It is defined by a `NodeDefinition` object that declar
 
 ```typescript
 import { z } from 'zod';
-import { defineNode } from '@flowforge/sdk';
+import { defineNode } from '@flowforgejs/sdk';
 
 const myNode = defineNode({
   name: 'my-node',
@@ -78,7 +78,7 @@ The handler receives a `NodeContext` and must return a value that conforms to th
 A workflow is a directed acyclic graph (DAG) of steps, initiated by a trigger. You build workflows with the fluent `workflow()` builder.
 
 ```typescript
-import { workflow } from '@flowforge/sdk';
+import { workflow } from '@flowforgejs/sdk';
 
 const myWorkflow = workflow('my-workflow')
   .name('My Workflow')
@@ -136,7 +136,7 @@ The builder exposes control flow methods that compose with regular node steps:
 The `Engine` is the runtime that registers workflows and executes them.
 
 ```typescript
-import { Engine } from '@flowforge/engine';
+import { Engine } from '@flowforgejs/engine';
 
 const engine = new Engine();
 

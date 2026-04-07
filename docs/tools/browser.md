@@ -133,7 +133,7 @@ The `evaluate` action executes arbitrary JavaScript in the page context. When us
 ## Usage Example
 
 ```typescript
-import { browserNode } from '@flowforge/nodes';
+import { browserNode } from '@flowforgejs/nodes';
 
 const workflow = {
   nodes: [
