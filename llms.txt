@@ -1,0 +1,76 @@
+# FlowForge — Code-First Workflow Engine
+
+> FlowForge is a TypeScript-native workflow engine for defining, executing, and monitoring workflows entirely in code.
+
+## Quick Start
+
+```bash
+npm install @flowforgejs/sdk @flowforgejs/engine
+```
+
+```typescript
+import { defineNode, workflow } from '@flowforgejs/sdk';
+import { Engine } from '@flowforgejs/engine';
+import { z } from 'zod';
+
+const greet = defineNode({
+  name: 'greet',
+  version: '1.0.0',
+  description: 'Greets a user',
+  category: 'custom',
+  inputSchema: z.object({ name: z.string() }),
+  outputSchema: z.string(),
+  configSchema: z.object({}),
+  handler: async (ctx) => `Hello, ${ctx.input.name}!`,
+});
+
+const wf = workflow('hello')
+  .trigger({ type: 'manual' })
+  .node('greet', greet)
+  .build();
+
+const engine = new Engine();
+engine.register(wf);
+const run = await engine.trigger('hello', { name: 'World' });
+console.log(run.output); // "Hello, World!"
+```
+
+## Packages
+
+- `@flowforgejs/sdk` — Workflow DSL: `defineNode()`, `defineAgentNode()`, `workflow()` builder
+- `@flowforgejs/engine` — In-memory execution engine with DAG scheduling, retry, event bus
+- `@flowforgejs/worker` — Production worker: BullMQ queues, Hono HTTP API, Drizzle/Postgres persistence
+- `@flowforgejs/nodes` — 34 built-in nodes: data, communication, AI, control flow, transform
+- `@flowforgejs/integrations` — Integration service: Slack, Email, Discord, GitHub, Notion, Telegram, Stripe, Webhook
+- `@flowforgejs/cli` — Developer CLI: init, dev, emit, runs, node validate/test/docs, secrets, deploy
+- `@flowforgejs/dashboard` — Monitoring API: workflows, runs, events, metrics, SSE streaming
+- `@flowforgejs/test-utils` — Testing: mock context, mock logger, test runner for node authors
+- `@flowforgejs/shared` — Shared types, errors, schemas, constants
+
+## Node Definition Interface
+
+Every node implements `NodeDefinition<TInput, TOutput, TConfig>`:
+- `name`, `version`, `description`, `category`
+- `inputSchema`, `outputSchema`, `configSchema` (Zod)
+- `handler(ctx: NodeContext)` — receives input, config, event, steps, logger, ai, pull/push/integrate/emit/wait/sleep/checkpoint
+
+## Workflow Builder
+
+```typescript
+workflow('pipeline')
+  .trigger({ type: 'event', event: 'order.created' })
+  .node('validate', validateNode)
+  .node('process', processNode, { input: (ctx) => ctx.steps['validate'] })
+  .parallel('fan-out', { items: (ctx) => ctx.event.data.items, concurrency: 10, pipeline: ... })
+  .if('check', { condition: ..., then: [...], else: [...] })
+  .build()
+```
+
+## Built-in Node Categories
+
+### Data (8): postgres, redis, mongodb, s3, http, elasticsearch, kafka, pinecone
+### Communication (9): slack, email-smtp, email-resend, discord, github, notion, telegram, webhook, stripe
+### AI (4): generate-text, generate-object, embed, agent
+### Control (8): delay, if, switch, parallel, forEach, while, wait-for-event, sub-workflow
+### Transform (4): map, filter, reduce, template
+### Log (1): console
