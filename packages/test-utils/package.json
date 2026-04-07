@@ -1,6 +1,7 @@
 {
   "name": "@flowforge/test-utils",
   "version": "0.1.0",
+  "private": true,
   "description": "Testing utilities for FlowForge node authors",
   "type": "module",
   "exports": {

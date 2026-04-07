@@ -1,0 +1,60 @@
+{
+  "name": "flowforge",
+  "version": "0.1.0",
+  "description": "FlowForge — Code-First Workflow Engine for TypeScript with 80+ nodes, 9 agentic tools, and AI-native agent support",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./nodes": {
+      "import": "./dist/nodes.js",
+      "types": "./dist/nodes.d.ts"
+    },
+    "./engine": {
+      "import": "./dist/engine.js",
+      "types": "./dist/engine.d.ts"
+    },
+    "./test-utils": {
+      "import": "./dist/test-utils.js",
+      "types": "./dist/test-utils.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@flowforge/sdk": "workspace:*",
+    "@flowforge/engine": "workspace:*",
+    "@flowforge/nodes": "workspace:*",
+    "@flowforge/shared": "workspace:*",
+    "@flowforge/test-utils": "workspace:*"
+  },
+  "keywords": [
+    "workflow",
+    "engine",
+    "automation",
+    "ai",
+    "agent",
+    "typescript",
+    "nodes",
+    "tools",
+    "composio",
+    "mcp"
+  ],
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.5.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gyash1512/FlowForge.git"
+  }
+}

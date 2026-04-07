@@ -161,6 +161,31 @@ importers:
         specifier: 3.25.76
         version: 3.25.76
 
+  packages/flowforge:
+    dependencies:
+      '@flowforge/engine':
+        specifier: workspace:*
+        version: link:../engine
+      '@flowforge/nodes':
+        specifier: workspace:*
+        version: link:../nodes
+      '@flowforge/sdk':
+        specifier: workspace:*
+        version: link:../sdk
+      '@flowforge/shared':
+        specifier: workspace:*
+        version: link:../shared
+      '@flowforge/test-utils':
+        specifier: workspace:*
+        version: link:../test-utils
+    devDependencies:
+      tsup:
+        specifier: ^8.3.0
+        version: 8.5.1(postcss@8.5.8)(tsx@4.21.0)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+
   packages/integration-service:
     dependencies:
       '@composio/core':

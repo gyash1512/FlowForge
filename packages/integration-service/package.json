@@ -1,6 +1,7 @@
 {
   "name": "@flowforge/integrations",
   "version": "0.1.0",
+  "private": true,
   "description": "Third-party integration service for FlowForge",
   "type": "module",
   "exports": {
